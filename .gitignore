@@ -1,0 +1,51 @@
+# ==== Python ====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+venv/
+.venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ==== İşletim sistemi ====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==== Editör / IDE ====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==== Güvenlik / gizli veri (repoya ASLA girmemeli) ====
+*.pem
+*.key
+*.p12
+*.pfx
+*.env
+.env.*
+secrets.*
+*_creds.*
+*.kdbx
+id_rsa*
+id_ed25519*
+
+# ==== Lab çıktıları / geçici ====
+*.pcap
+*.pcapng
+loot/
+scans/
+*.nmap
+*.gnmap
+*.tmp
