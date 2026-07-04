@@ -33,6 +33,8 @@ flowchart LR
 
 **Bellek hiyerarşisi** (hızlı+pahalı+küçük → yavaş+ucuz+büyük): `Register → L1/L2/L3 önbellek (cache) → RAM → SSD → HDD → ağ/bulut depolama`. Bu hiyerarşiyi bilmek, önbellek zamanlama saldırılarını (cache-timing) ve performans temelli yan kanalları anlamanın anahtarıdır.
 
+**Von Neumann darboğazı ve güvenlik sonucu:** Von Neumann mimarisinde komutlar ve veri **aynı bellekte** durur ve aynı veri yolunu paylaşır. Bu "darboğaz" (bottleneck) performans sınırı olduğu kadar bir güvenlik zayıflığının da köküdür: komut (kod) ile verinin fiziksel olarak ayrılmaması, "veri" olması gereken bir girdinin "kod" gibi çalıştırılabilmesine — yani bellek güvenliği zafiyetlerine — kapı aralar. Bu birleştirici tema (saldırganın kontrol ettiği verinin kod olarak yorumlanması) [03-isletim-sistemi-ici/bellek-zafiyetleri-giris.md](../03-isletim-sistemi-ici/bellek-zafiyetleri-giris.md)'de buffer overflow olarak, [04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md)'nde SQL/komut enjeksiyonu olarak tekrar tekrar karşımıza çıkacak — hepsi aynı kök nedenin farklı katmanlardaki hâlidir. Modern işlemciler bu darboğazı önbellek ve boru hattı (pipeline) ile aşmaya çalışır; ama bu hızlandırma mekanizmaları da **Spectre/Meltdown** gibi yan-kanal saldırılarının istismar ettiği yerdir ([03-isletim-sistemi-ici/surecler-ve-bellek.md](../03-isletim-sistemi-ici/surecler-ve-bellek.md)).
+
 ---
 
 ## 2. İkili (binary) ve onaltılık (hex) sistemler
@@ -86,7 +88,7 @@ Ham bitlerin bir *anlamı* yoktur; anlam, üzerinde anlaşılan bir **kodlamayla
 
 ### Karakter kodlama
 - **ASCII (7 bit):** İngilizce harf + rakam + kontrol karakterleri (0–127). `A` = 65 = `0x41`.
-- **UTF-8:** ASCII'yi kapsayan, değişken uzunluklu Unicode kodlaması. Bugünün web standardı. Türkçe karakterler (ç, ş, ğ) burada 2 byte'tır — bu, kötü yapılandırılmış sistemlerde kodlama karışıklığı (mojibake) ve bazı bypass tekniklerine yol açar.
+- **UTF-8:** ASCII'yi kapsayan, değişken uzunluklu (1–4 byte) Unicode kodlaması; ASCII karakterler tek byte, diğerleri çok byte ile temsil edilir (kaynak: [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629)). Bugünün web standardı. Türkçe karakterler (ç, ş, ğ) burada 2 byte'tır — bu, kötü yapılandırılmış sistemlerde kodlama karışıklığı (mojibake) ve bazı atlatma (bypass) tekniklerine yol açar. Bir güvenlik filtresi UTF-8 normalizasyonunu yanlış yaparsa, saldırgan aynı karakteri farklı byte dizileriyle yazıp filtreyi atlatabilir — bu, [04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md)'ndeki WAF atlatma tekniklerinin temelidir.
 
 ### Kodlama vs şifreleme vs hash — sık karıştırılan üçlü
 
@@ -96,7 +98,9 @@ Ham bitlerin bir *anlamı* yoktur; anlam, üzerinde anlaşılan bir **kodlamayla
 | **Şifreleme (encryption)** | Gizlilik | **Evet**, sadece anahtarla | Evet |
 | **Hash** | Bütünlük / parmak izi | **Hayır** (tek yönlü) | Hayır (ama HMAC'te evet) |
 
-> ⚠️ **En sık yapılan başlangıç hatası:** Base64'ü "şifreleme" sanmak. `Base64` sadece kodlamadır; `echo "gizli" | base64` çıktısını herkes `base64 -d` ile geri açar. Bir sistemde parolayı Base64 ile "koruyorsa", parola korunmuyor demektir. Detaylı ayrım → [05-kriptografi/temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md).
+> ⚠️ **En sık yapılan başlangıç hatası:** Base64'ü "şifreleme" sanmak. `Base64` sadece kodlamadır; `echo "gizli" | base64` çıktısını herkes `base64 -d` ile geri açar. Bir sistemde parolayı Base64 ile "koruyorsa", parola korunmuyor demektir. Bu üçlünün (kodlama/şifreleme/hash) kriptografik ayrıntısı [05-kriptografi/temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)'de işlenir.
+
+Bu üçlüden **hash**, repo boyunca en çok tekrar eden kavramlardan biridir çünkü üç farklı bağlamda karşımıza çıkar: (1) kriptografik parmak izi ve parola saklama olarak [05-kriptografi/temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)'de; (2) işletim sistemlerinin parolaları sakladığı yer olarak — Windows'ta SAM veritabanı, Linux'ta `/etc/shadow` — [02-linux-windows/linux-temelleri.md](../02-linux-windows/linux-temelleri.md)'de; (3) saldırganın bu hash'leri çalıp kırdığı (hashdump, John the Ripper, hashcat) [10-pentest-metodolojisi/somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md)'de. Aynı kavramın savunma (nasıl saklanır) ve saldırı (nasıl kırılır) yüzleri bu şekilde birbirine bağlanır.
 
 ```bash
 echo -n "parola123" | base64      # cGFyb2xhMTIz  (koruma DEĞİL!)
@@ -126,11 +130,31 @@ flowchart TD
 | **Mobil** | Android (Linux), iOS | Mobil uygulama güvenliği, MDM. |
 | **Gömülü/RTOS** | IoT, endüstriyel (ICS/SCADA) | Genellikle güncellenmez → kalıcı zafiyet yüzeyi. |
 
-**Kernel (çekirdek) modu vs user (kullanıcı) modu** ayrımı tüm modern güvenliğin temelidir: kullanıcı programları donanıma doğrudan erişemez, çekirdekten **sistem çağrısı (syscall)** ile rica eder. Bu sınırın aşılması = ayrıcalık yükseltme (privilege escalation). Derin anlatım → [03-isletim-sistemi-ici/kullanici-cekirdek-modu.md](../03-isletim-sistemi-ici/kullanici-cekirdek-modu.md).
+**Kernel (çekirdek) modu vs user (kullanıcı) modu** ayrımı tüm modern güvenliğin temelidir: kullanıcı programları donanıma doğrudan erişemez, çekirdekten **sistem çağrısı (syscall)** ile rica eder. Bu sınırın aşılması = ayrıcalık yükseltme (privilege escalation). Bu ayrımın tam mekanizması, CPU ayrıcalık halkaları (ring) ve syscall'ın nasıl bir "kontrollü geçit" olduğu [03-isletim-sistemi-ici/kullanici-cekirdek-modu.md](../03-isletim-sistemi-ici/kullanici-cekirdek-modu.md)'de derinlemesine işlenir; işletim sistemlerinin bu sınırı Linux ve Windows'ta nasıl somutlaştırdığı ise [02-linux-windows/linux-temelleri.md](../02-linux-windows/linux-temelleri.md)'de görülür.
 
 ---
 
-## 5. Saldırı–savunma kesişimi: neden bu temel önemli?
+## 5. Önyükleme (boot) süreci ve firmware güvenliği
+
+Bir bilgisayar açıldığında işletim sistemi hemen çalışmaz; önce bir **önyükleme (boot) zinciri** işler. Bu zincirin her halkası bir güven varsayımına dayanır ve saldırganlar en alttan (işletim sisteminin altından) tutunmaya çalışır — çünkü oradan ele geçirilen bir sistem, üstündeki tüm güvenlik kontrollerini (antivirüs, EDR, hatta çekirdek) atlatabilir.
+
+```mermaid
+flowchart LR
+    PWR["Güç"] --> FW["Firmware<br/>(UEFI / eski: BIOS)"]
+    FW --> BL["Önyükleyici<br/>(bootloader)"]
+    BL --> K["Çekirdek (kernel)"]
+    K --> OS["İşletim sistemi + uygulamalar"]
+```
+
+- **Firmware (UEFI/BIOS):** Anakarta gömülü, donanımı başlatan ilk yazılım. **UEFI**, eski BIOS'un yerini alan modern standarttır. Firmware'e yerleşen zararlı (firmware implant / **bootkit**), disk silinse veya işletim sistemi yeniden kurulsa bile hayatta kalır — bu yüzden en kalıcı (persistence) ve en gizli tehditlerdendir. Kalıcılık kavramının işletim sistemi düzeyindeki hâlleri (registry, cron, servis) [10-pentest-metodolojisi/somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md)'de işlenir; firmware düzeyi bunların en derini ve en zor tespit edilenidir.
+- **Secure Boot:** UEFI'nin bir özelliği; yalnızca **dijital olarak imzalanmış** (güvenilen bir anahtarla) önyükleyici ve çekirdeğin çalışmasına izin verir, imzasız/değiştirilmiş kodu reddeder. Bu doğrudan bir dijital imza uygulamasıdır — imzanın nasıl bütünlük ve kimlik kanıtladığı [05-kriptografi/anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md)'de anlatılır. Secure Boot, bootkit'lere karşı temel savunmadır.
+- **TPM (Trusted Platform Module):** Kriptografik anahtarları donanımda güvenli saklayan yardımcı yonga. Disk şifrelemenin (BitLocker/LUKS) anahtarını korur ve önyükleme bütünlüğünü ölçer (measured boot). Anahtarların donanımda korunması fikri, [06-kimlik-erisim-yonetimi-iam/aaa-ve-mfa.md](../06-kimlik-erisim-yonetimi-iam/aaa-ve-mfa.md)'deki FIDO2 donanım anahtarlarıyla aynı ilkeyi paylaşır: özel anahtar hiç donanımdan çıkmaz.
+
+> **Güven zinciri (chain of trust):** Secure Boot + TPM birlikte bir "ölçülü/imzalı güven zinciri" kurar — her aşama bir sonrakini doğrulayarak yükler. Aynı "güven zinciri" fikri, sertifikaların doğrulanmasında [05-kriptografi/pki-x509.md](../05-kriptografi/pki-x509.md)'de (kök CA → ara CA → sunucu) yeniden karşımıza çıkar; ikisi de "en tepedeki güvenilen bir çıpadan aşağı doğru güven aktarma" ilkesine dayanır.
+
+---
+
+## 6. Saldırı–savunma kesişimi: neden bu temel önemli?
 
 - **Bellek uçuculuğu (volatility):** RAM uçucu olduğu için, çalışan bir zararlının ve kimlik bilgilerinin kanıtı yalnızca makine açıkken RAM'dedir. Bu yüzden olay müdahalesinde (incident response) "önce fişi çekme, önce RAM imajını al" kuralı vardır.
 - **Veri temsili:** WAF (web application firewall) atlatma tekniklerinin çoğu, aynı saldırının farklı kodlamalarla (URL-encode, çift kodlama, Unicode normalizasyon) yazılıp filtre eşleşmesinden kaçınmasıdır. Kodlamayı bilmeyen, bu atlatmaları ne yapar ne tespit eder.

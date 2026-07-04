@@ -20,6 +20,18 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **Sıfır güven (zero trust)** | "Asla güvenme, her zaman doğrula." Ağ konumuna göre örtük güven vermeme. Bkz. [zero-trust.md](../06-kimlik-erisim-yonetimi-iam/zero-trust.md). |
 | **Reddedilemezlik (non-repudiation)** | Bir eylemi yapanın onu inkâr edememesi (ör. dijital imza ile). |
 
+## Sistem ve donanım temelleri
+
+| Terim | Tanım |
+|-------|-------|
+| **Von Neumann mimarisi** | Komut ve verinin aynı bellekte tutulduğu klasik bilgisayar tasarımı; "kod ile verinin ayrılmaması" bellek güvenliği zafiyetlerinin kök nedenidir. Bkz. [bilgisayar-temelleri.md](bilgisayar-temelleri.md). |
+| **Kernel / user modu** | Çekirdek (tam yetki) ve kullanıcı (kısıtlı) çalışma seviyeleri; aralarındaki sınır syscall ile geçilir. Bkz. [kullanici-cekirdek-modu.md](../03-isletim-sistemi-ici/kullanici-cekirdek-modu.md). |
+| **Firmware (UEFI/BIOS)** | Donanımı başlatan, anakarta gömülü ilk yazılım. UEFI, eski BIOS'un modern halefidir. Bkz. [bilgisayar-temelleri.md](bilgisayar-temelleri.md). |
+| **Bootkit** | Önyükleme zincirine/firmware'e yerleşen, işletim sistemi yeniden kurulsa bile hayatta kalan zararlı. En kalıcı tehdit türlerinden. |
+| **Secure Boot** | UEFI'nin yalnızca imzalı önyükleyici/çekirdeği çalıştıran özelliği; bootkit'lere karşı temel savunma. Dijital imza uygulamasıdır → [anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md). |
+| **TPM (Trusted Platform Module)** | Kriptografik anahtarları donanımda güvenli saklayan yonga; disk şifreleme anahtarını korur, önyükleme bütünlüğünü ölçer. |
+| **Kodlama / şifreleme / hash** | Sırasıyla taşınabilirlik / gizlilik / bütünlük için kullanılan, sık karıştırılan üç işlem. Kodlama ≠ şifreleme; hash tek yönlüdür. Bkz. [bilgisayar-temelleri.md](bilgisayar-temelleri.md), [temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md). |
+
 ## Zafiyet ve tehdit terminolojisi
 
 | Terim | Tanım |
