@@ -120,9 +120,9 @@ flowchart TD
 
 | Mekanizma | Ne doğrular | Nasıl | DNS kaydı |
 |-----------|-------------|-------|-----------|
-| **SPF** (Sender Policy Framework) | Gönderen **IP'sinin** alan adına ait olması | Alan adı, "bu sunucular benim adıma mail atabilir" der | TXT: `v=spf1 include:_spf.google.com ~all` |
-| **DKIM** (DomainKeys Identified Mail) | E-postanın **değiştirilmediği** + gerçekten o alandan geldiği | Gönderen sunucu e-postayı **imzalar** ([anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md)), alıcı açık anahtarla doğrular | TXT: DKIM açık anahtarı |
-| **DMARC** | SPF/DKIM'in **hizalı** olması + başarısızlık **politikası** | "SPF/DKIM başarısızsa ne yap: none/quarantine/reject" + rapor | TXT: `v=DMARC1; p=reject; rua=...` |
+| **SPF** (Sender Policy Framework) | Gönderen **IP'sinin** alan adına ait olması | Alan adı, "bu sunucular benim adıma mail atabilir" der | TXT: `v=spf1 include:_spf.google.com ~all` ([RFC 7208](https://www.rfc-editor.org/rfc/rfc7208)) |
+| **DKIM** (DomainKeys Identified Mail) | E-postanın **değiştirilmediği** + gerçekten o alandan geldiği | Gönderen sunucu e-postayı **imzalar** ([anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md) dijital imza), alıcı açık anahtarla doğrular | TXT: DKIM açık anahtarı ([RFC 6376](https://www.rfc-editor.org/rfc/rfc6376)) |
+| **DMARC** | SPF/DKIM'in **hizalı** olması + başarısızlık **politikası** | "SPF/DKIM başarısızsa ne yap: none/quarantine/reject" + rapor | TXT: `v=DMARC1; p=reject; rua=...` ([RFC 7489](https://www.rfc-editor.org/rfc/rfc7489)) |
 
 ### Nasıl birlikte çalışırlar
 - **SPF** IP'yi kontrol eder ama e-posta iletilirse (forward) bozulabilir.

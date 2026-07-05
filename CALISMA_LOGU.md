@@ -84,5 +84,10 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Kurulan ilişkiler (simetrik):** Windows Event 4625 ↔ Linux auth.log "Failed password" (02) [iki yönlü]; Event ID'ler ↔ Windows kimlik/oturum kavramları (02); Sysmon süreç ağacı ↔ süreç soy ağacı (03) zaten mevcuttu.
 - **Not:** Modül zaten TP/FP/FN, IR state diagram, 3-senaryolu lab ile derindi.
 
-### 12-sosyal-muhendislik-phishing
+### 12-sosyal-muhendislik-phishing ✅
+- **Değişen dosyalar:** `phishing-analizi.md`
+- **Dış kaynaklar (satır-içi):** SPF=RFC 7208, DKIM=RFC 6376, DMARC=RFC 7489.
+- **Not:** Simetrik bağlar zaten mevcuttu — DKIM↔dijital imza (05), SPF/DKIM/DMARC↔DNS TXT (01), phishing zinciri↔log-analizi Senaryo B (11), FIDO2↔AiTM (06 tarafından eklenmişti).
+
+### 13-guvenli-kodlama-devsecops
 - **Durum:** ⏳ sırada
