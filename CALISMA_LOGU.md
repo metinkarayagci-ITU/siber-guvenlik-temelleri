@@ -6,6 +6,18 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 
 ---
 
+## ✅ Tur tamamlandı — genel özet
+
+**16/16 modül işlendi.** Öne çıkan sonuçlar:
+
+- **En büyük düzeltme:** `owasp-top10-tam-rehber.md` **OWASP Top 10:2025**'e göre baştan yazıldı ve bu değişiklik repo genelinde 10+ dosyadaki OWASP numara atıflarına yansıtıldı (tutarlılık).
+- **PQC doğrulama (kariyer alanı):** FIPS 203/204/205 tarihleri, FIPS 206/FN-DSA taslak durumu, HQC seçimi (Mart 2025), CNSA 2.0 takvimi (2025/2030/2033) resmî kaynaklarla teyit edildi; tüm "doğrulanmalı" hedge'leri kaldırıldı.
+- **THM boşlukları dolduruldu:** ARP, DHCP (DORA), MAC adresi (Modül 01); parola hash saklama SAM/LSASS + /etc/shadow simetrik (Modül 02); önyükleme/Secure Boot/TPM (Modül 00).
+- **Satır-içi kaynaklar:** ~35 resmî kaynak (RFC 826/1034/1035/1918/2131/3021/4632/6376/6749/7208/7489/7519/8446/9110/9112/9293, NIST FIPS 203-206/CSF 2.0/SP 800-30/61/145/207, NSA CNSA 2.0, W3C WebAuthn, OWASP 2025/GenAI/ReDoS, MITRE, Lockheed, OASIS, FIRST CVSS, CISA, SLSA, ISO 27001).
+- **Simetrik bağlantı örnekleri:** hash (00↔02↔05↔10), von Neumann/kod-veri (00↔03↔04), Secure Boot/dijital imza (00↔05), FIDO2/TPM (00↔06), SSRF/shared-responsibility (04↔09), MITM/LAN protokolleri (01 içi + 05), prompt injection/enjeksiyon (04↔15), fail-securely/OWASP A10 (13↔04).
+
+---
+
 ## İlerleme
 
 ### 00-baslangic ✅
