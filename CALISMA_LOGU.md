@@ -66,5 +66,11 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Dış kaynaklar (satır-içi):** NIST CSF 2.0 (Şubat 2024), ISO/IEC 27001:2022, Microsoft STRIDE, NIST SP 800-30 (risk).
 - **Not:** Modül zaten kontrol matrisi ↔ CIA ↔ kill chain ↔ OWASP bağlantılarıyla güçlüydü; ana katkı resmî kaynaklar.
 
-### 09-cloud-virtualizasyon
+### 09-cloud-virtualizasyon ✅
+- **Değişen dosyalar:** `temel-kavramlar.md` (+ Modül 04'te container OWASP A03 düzeltmesi)
+- **Eklenen:** NIST SP 800-145 bulut tanımı kaynağı; Capital One 2019 ihlali (SSRF→meta-veri→S3) somut örnek olarak eklendi ve OWASP 2025 SSRF→A01 taşınmasına bağlandı.
+- **Kurulan ilişki (simetrik):** Cloud shared responsibility ↔ SSRF (04) [iki yönlü]; SSRF metadata ↔ A01 gerekçesi (04).
+- **Not:** Konteyner izolasyonu ↔ OS namespaces/cgroups (03) bağı zaten mevcuttu.
+
+### 10-pentest-metodolojisi
 - **Durum:** ⏳ sırada
