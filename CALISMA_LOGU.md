@@ -78,5 +78,11 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Kurulan ilişkiler (simetrik):** Nmap ↔ TCP handshake/port (01) + CIDR/RoE kapsam (01); CVSS ↔ risk önceliklendirme (08). Privesc/lateral ↔ SUID/sudo (02)/Kerberos (02) bağları zaten mevcuttu.
 - **Not:** Modül zaten shell diyagramları, privesc enumerasyonu ile derindi.
 
-### 11-soc-mavi-takim
+### 11-soc-mavi-takim ✅
+- **Değişen dosyalar:** `log-analizi.md`
+- **Dış kaynaklar (satır-içi):** Sysmon=Microsoft Sysinternals, NIST SP 800-61 (IR), Microsoft Security auditing events.
+- **Kurulan ilişkiler (simetrik):** Windows Event 4625 ↔ Linux auth.log "Failed password" (02) [iki yönlü]; Event ID'ler ↔ Windows kimlik/oturum kavramları (02); Sysmon süreç ağacı ↔ süreç soy ağacı (03) zaten mevcuttu.
+- **Not:** Modül zaten TP/FP/FN, IR state diagram, 3-senaryolu lab ile derindi.
+
+### 12-sosyal-muhendislik-phishing
 - **Durum:** ⏳ sırada

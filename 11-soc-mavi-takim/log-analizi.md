@@ -34,7 +34,7 @@ flowchart TD
 
 ## 2. Windows olay günlükleri (Event Logs) ve kritik Event ID'ler
 
-Windows, her olayı numaralı **Event ID**'lerle kaydeder. SOC analistinin ezbere bilmesi gereken kritik olanlar (özellikle **Security** logunda):
+Windows, her olayı numaralı **Event ID**'lerle kaydeder (tam referans: [Microsoft — Security auditing events](https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/basic-security-audit-policy-settings)). SOC analistinin ezbere bilmesi gereken kritik olanlar (özellikle **Security** logunda). Bu Event ID'lerin çoğu, [02-linux-windows/windows-temelleri.md](../02-linux-windows/windows-temelleri.md)'de anlatılan kimlik/oturum/servis kavramlarının log izidir; ör. 4625 (başarısız giriş), Linux'taki `/var/log/auth.log` "Failed password" satırının ([02-linux-windows/linux-temelleri.md](../02-linux-windows/linux-temelleri.md)) Windows karşılığıdır:
 
 | Event ID | Olay | Neden önemli |
 |----------|------|--------------|
@@ -58,7 +58,7 @@ Windows, her olayı numaralı **Event ID**'lerle kaydeder. SOC analistinin ezber
 
 ## 3. Sysmon — derin görünürlük
 
-Windows'un yerleşik logları sınırlıdır. **Sysmon** (System Monitor, Sysinternals), çok daha ayrıntılı telemetri sağlayan ücretsiz bir araçtır — tehdit avının ve EDR benzeri görünürlüğün temeli.
+Windows'un yerleşik logları sınırlıdır. **Sysmon** (System Monitor), Microsoft Sysinternals'ın çok daha ayrıntılı telemetri sağlayan ücretsiz aracıdır — tehdit avının ve EDR benzeri görünürlüğün temeli (kaynak: [Microsoft Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)).
 
 | Sysmon Event ID | Yakalar |
 |-----------------|---------|
@@ -115,7 +115,7 @@ flowchart TD
 
 ## 6. Olay müdahalesi (Incident Response) yaşam döngüsü
 
-Bir olay onaylandığında, yapılandırılmış bir müdahale süreci (NIST SP 800-61 / SANS PICERL) işler:
+Bir olay onaylandığında, yapılandırılmış bir müdahale süreci işler. İki yaygın referans: NIST SP 800-61 (kaynak: [NIST SP 800-61](https://csrc.nist.gov/pubs/sp/800/61/r2/final)) ve SANS'ın PICERL modeli:
 
 ```mermaid
 stateDiagram-v2
