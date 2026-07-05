@@ -8,7 +8,7 @@ DNS (Domain Name System), internetin "telefon rehberidir": insanların okuduğu 
 
 ## 1. Neden DNS var?
 
-İnsan `172.217.16.206` gibi sayıları hatırlayamaz; `google.com` hatırlar. Ayrıca IP adresleri değişebilir (sunucu taşınır, yük dengelenir) ama alan adı sabit kalır. DNS bu iki dünyayı ayırarak **dolaylılık (indirection)** sağlar: adı değiştirmeden arkasındaki IP'yi değiştirebilirsin. Bu esneklik, CDN, yük dengeleme ve failover'ın temelidir.
+İnsan `172.217.16.206` gibi sayıları hatırlayamaz; `google.com` hatırlar. Ayrıca IP adresleri değişebilir (sunucu taşınır, yük dengelenir) ama alan adı sabit kalır. DNS bu iki dünyayı ayırarak **dolaylılık (indirection)** sağlar: adı değiştirmeden arkasındaki IP'yi değiştirebilirsin. Bu esneklik, CDN, yük dengeleme ve failover'ın temelidir. DNS'in temel kavramları ve mimarisi [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034), uygulama ayrıntıları [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035)'te tanımlanır.
 
 ---
 

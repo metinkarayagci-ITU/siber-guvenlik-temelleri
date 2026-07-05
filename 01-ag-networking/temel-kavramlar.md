@@ -29,7 +29,52 @@ Bu karmaşayı yönetmek için ağ **katmanlara** bölünür. Her katman yalnız
 
 ---
 
-## 2. OSI 7 katman modeli
+## 2. Yerel ağın çalışması: MAC adresleri, ARP ve DHCP
+
+Bir cihazın yerel ağda (LAN) konuşabilmesi için iki adres türü ve iki yardımcı protokol devreye girer. Bunlar TryHackMe "Intro to LAN" düzeyinde çekirdek kavramlardır ve katman-2/3 saldırılarının (ARP zehirleme, sahte DHCP) neden mümkün olduğunu anlamanın temelidir.
+
+### MAC adresi (fiziksel adres)
+Her ağ arayüzü kartının (NIC) fabrikada verilmiş, 48-bit (6 byte), hex ile yazılan benzersiz bir **MAC adresi** (`00:1A:2B:3C:4D:5E`) vardır. MAC, katman-2'de (yerel ağ içinde) cihazı belirler; IP ise katman-3'te (ağlar arası) belirler. Ayrım kritik: **IP adresi "hangi ağdaki hangi mantıksal düğüm" (değişebilir, yönlendirilebilir); MAC "hangi fiziksel kart" (yerel, yönlendirilemez).** Bir paket bir yönlendiriciden (router) her geçtiğinde IP başlığı korunur ama MAC başlığı **her adımda yenilenir** (o segmentteki bir sonraki cihazın MAC'iyle). MAC neden hex yazılır sorusunun cevabı [00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md)'de (1 byte = 2 hex karakter) verilmişti.
+
+> **Kesişim:** MAC adresleri yazılımla değiştirilebilir (**MAC spoofing**) — MAC tabanlı erişim kontrolü (MAC filtering) bu yüzden tek başına zayıf bir savunmadır. Ayrıca switch'in MAC tablosunu taşırmak (CAM overflow, yukarıdaki tabloda), switch'i "hub gibi" davranıp tüm trafiği yaymaya zorlar ve dinlemeyi (sniffing) mümkün kılar.
+
+### ARP — IP'yi MAC'e çevirme
+Yerel ağda bir cihaz veri gönderirken hedefin IP'sini bilir ama çerçeveyi (frame) teslim etmek için hedefin **MAC'ine** ihtiyaç duyar. Bu ikisi arasındaki köprü **ARP** (Address Resolution Protocol) protokolüdür (kaynak: [RFC 826](https://www.rfc-editor.org/rfc/rfc826)):
+
+```mermaid
+sequenceDiagram
+    participant A as Cihaz A (192.168.1.5)
+    participant Ağ as Yayın (broadcast)
+    participant B as Cihaz B (192.168.1.9)
+    A->>Ağ: ARP Request — "192.168.1.9'un MAC'i kimde?" (herkese)
+    B->>A: ARP Reply — "O benim, MAC'im 00:1A:2B:..." (sadece A'ya)
+    Note over A: Cevabı ARP önbelleğine (cache) kaydeder
+```
+
+ARP cevapları bir **ARP önbelleğinde** (arp cache) tutulur (`arp -a` ile görülür). Sorun: ARP kimlik doğrulaması yapmaz — bir cihaz, sorulmadan da "sahte" ARP cevabı gönderebilir ve kurbanın önbelleğini zehirleyebilir.
+
+> **Kesişim — ARP zehirleme (ARP poisoning/spoofing):** Saldırgan, "yönlendiricinin IP'si benim MAC'imde" diyen sahte ARP cevapları yollayarak kurbanın trafiğini kendi üzerinden geçmeye zorlar — klasik bir **ortadaki adam (man-in-the-middle, MITM)** saldırısı. Bu, [05-kriptografi/anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md)'de anlatılan MITM tehdidinin katman-2'deki somut hâlidir ve TLS'in ([05-kriptografi/pki-x509.md](../05-kriptografi/pki-x509.md)) neden gerekli olduğunu gösterir: trafik şifreliyse, saldırgan araya girse bile içeriği okuyamaz. Savunma: Dynamic ARP Inspection (DAI), statik ARP girdileri, port güvenliği.
+
+### DHCP — otomatik IP dağıtımı
+Bir cihaz ağa bağlandığında IP adresini elle değil, genellikle **DHCP** (Dynamic Host Configuration Protocol) ile otomatik alır (kaynak: [RFC 2131](https://www.rfc-editor.org/rfc/rfc2131)). Süreç dört adımlıdır — **DORA**:
+
+```mermaid
+sequenceDiagram
+    participant C as İstemci (yeni cihaz)
+    participant S as DHCP Sunucusu
+    C->>S: 1. DISCOVER — "ağda DHCP sunucusu var mı?" (broadcast)
+    S->>C: 2. OFFER — "şu IP'yi kullanabilirsin"
+    C->>S: 3. REQUEST — "o IP'yi istiyorum"
+    S->>C: 4. ACK — "onaylandı, senin (kira/lease süresince)"
+```
+
+DHCP, IP'nin yanında ağ geçidi (gateway), DNS sunucusu ([dns-derinlemesine.md](dns-derinlemesine.md)) ve alt ağ maskesi ([subnetting-cidr.md](subnetting-cidr.md)) gibi kritik bilgileri de dağıtır. DHCP başarısız olursa cihaz kendine `169.254.x.x` (APIPA) adresi verir — bu adresi görmek genelde DHCP arızasının işaretidir ([subnetting-cidr.md](subnetting-cidr.md)).
+
+> **Kesişim — sahte DHCP (rogue DHCP):** DHCP de kimlik doğrulamaz; saldırgan ağa sahte bir DHCP sunucusu koyup kurbanlara kendi IP'sini "ağ geçidi" veya "DNS sunucusu" olarak dağıtabilir → trafiği ele geçirir (MITM) veya kurbanı zararlı bir DNS'e yönlendirir ([dns-derinlemesine.md](dns-derinlemesine.md) DNS spoofing). Savunma: DHCP snooping. IPv6'da bunun karşılığı sahte Router Advertisement saldırısıdır ([tcp-ip-protokoller.md](tcp-ip-protokoller.md)).
+
+---
+
+## 3. OSI 7 katman modeli
 
 OSI (Open Systems Interconnection), ağ iletişimini 7 kavramsal katmana ayıran referans modeldir. Gerçekte internet TCP/IP modelini kullanır, ama OSI **düşünme ve sorun giderme dili** olarak standarttır: "bu bir katman 3 sorunu mu, katman 7 mi?" sorusu, hem ağ arızasını hem saldırıyı sınıflandırır.
 
@@ -75,7 +120,7 @@ flowchart LR
 
 ---
 
-## 3. Nüans: OSI vs TCP/IP modeli
+## 4. Nüans: OSI vs TCP/IP modeli
 
 Sık karıştırılır. OSI 7 katmanlı *teorik* modeldir; TCP/IP 4 katmanlı *uygulanan* modeldir. Eşleme:
 
@@ -90,7 +135,7 @@ Pratikte mühendisler ikisini karıştırıp konuşur ("katman 7 firewall'u", "k
 
 ---
 
-## 4. Saldırı–savunma kesişimi
+## 5. Saldırı–savunma kesişimi
 
 - **Segmentasyon = katmanlı savunma:** Ağı VLAN'lar ve firewall'larla bölmek, bir katmandaki ihlalin tüm ağa yayılmasını engeller ([routing-nat-vpn.md](routing-nat-vpn.md)). Bu, [zero-trust](../06-kimlik-erisim-yonetimi-iam/zero-trust.md) ve mikro-segmentasyonun temelidir.
 - **Katman farkındalığı tespitte:** Bir SOC analisti "bu bir L3 DDoS mu yoksa L7 uygulama saldırısı mı?" ayrımını yapmak zorundadır çünkü savunma tamamen farklıdır (biri hacim filtreleme, diğeri WAF/rate limit).

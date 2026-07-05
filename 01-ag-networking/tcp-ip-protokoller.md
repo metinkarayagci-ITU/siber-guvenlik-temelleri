@@ -24,7 +24,7 @@ Taşıma katmanı (L4), uygulamalar arası uçtan uca iletişimi sağlar. İki a
 
 ## 2. TCP üçlü el sıkışması (three-way handshake)
 
-TCP, veri göndermeden önce iki taraf arasında bir bağlantı kurar. Bu, üç adımlı bir el sıkışmasıdır ve TCP'nin güvenilirliğinin temelidir.
+TCP, veri göndermeden önce iki taraf arasında bir bağlantı kurar. Bu, üç adımlı bir el sıkışmasıdır ve TCP'nin güvenilirliğinin temelidir. TCP'nin güncel resmî belirtimi, 1981 tarihli RFC 793'ün yerini alan [RFC 9293](https://www.rfc-editor.org/rfc/rfc9293)'tür.
 
 ```mermaid
 sequenceDiagram
@@ -126,10 +126,10 @@ IPv4 adresleri (32 bit ≈ 4.3 milyar) tükendi. IPv6 (128 bit) bu problemi çö
 - **`::1`** = loopback (IPv4'teki `127.0.0.1`), **`fe80::/10`** = link-local (her IPv6 arayüzünde otomatik var).
 
 ### SLAAC (Stateless Address Autoconfiguration)
-IPv6'da bir cihaz, DHCP sunucusuna gerek kalmadan router'ın gönderdiği ağ önekini (prefix) alıp kendi adresini üretebilir. Bu kolaylık, güvenlikte bir yüzey de açar.
+IPv6'da bir cihaz, DHCP sunucusuna gerek kalmadan router'ın gönderdiği ağ önekini (prefix) alıp kendi adresini üretebilir. IPv4'te bu işi merkezî bir sunucu üzerinden DHCP/DORA süreci yapıyordu ([temel-kavramlar.md](temel-kavramlar.md)); IPv6'da cihaz büyük ölçüde kendi kendine yeter. Bu kolaylık, güvenlikte bir yüzey de açar.
 
 ### Saldırı–savunma kesişimi: IPv6'nın gizli riski
-IPv6 çoğu modern işletim sisteminde **varsayılan açıktır** ama birçok ağ yöneticisi yalnızca IPv4'ü izler/filtreler. Sonuç: **kör nokta**. Saldırganlar SLAAC'ı kötüye kullanıp sahte router ilanı (RA — Router Advertisement) ile ortadaki-adam (man-in-the-middle) konumuna geçebilir (araç: `mitm6`). Savunma: RA Guard, IPv6'yı ya bilinçli yönet ya da bilinçli kapat — "görmezden gelme".
+IPv6 çoğu modern işletim sisteminde **varsayılan açıktır** ama birçok ağ yöneticisi yalnızca IPv4'ü izler/filtreler. Sonuç: **kör nokta**. Saldırganlar SLAAC'ı kötüye kullanıp sahte router ilanı (RA — Router Advertisement) ile ortadaki-adam (man-in-the-middle) konumuna geçebilir (araç: `mitm6`). Bu saldırı, IPv4 dünyasındaki sahte DHCP (rogue DHCP) ve ARP zehirleme saldırılarının ([temel-kavramlar.md](temel-kavramlar.md)) IPv6'daki tam karşılığıdır — üçü de "kimlik doğrulamayan bir yerel ağ protokolünü istismar ederek MITM konumuna geçme" temasını paylaşır. Savunma: RA Guard, IPv6'yı ya bilinçli yönet ya da bilinçli kapat — "görmezden gelme".
 
 ---
 

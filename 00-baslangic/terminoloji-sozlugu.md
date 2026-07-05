@@ -52,6 +52,10 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | Terim | Tanım |
 |-------|-------|
 | **OSI modeli** | Ağ iletişimini 7 katmana ayıran referans model. Bkz. [temel-kavramlar.md](../01-ag-networking/temel-kavramlar.md). |
+| **MAC adresi** | Ağ kartının 48-bit fiziksel adresi; katman-2'de cihazı belirler (IP katman-3'te belirler). Değiştirilebilir (MAC spoofing). Bkz. [temel-kavramlar.md](../01-ag-networking/temel-kavramlar.md). |
+| **ARP** | IP adresini yerel ağda MAC adresine çeviren protokol; kimlik doğrulamadığı için ARP zehirlemeye açıktır. Bkz. [temel-kavramlar.md](../01-ag-networking/temel-kavramlar.md). |
+| **DHCP** | Cihazlara IP/ağ geçidi/DNS bilgisini otomatik dağıtan protokol (DORA süreci). Sahte DHCP saldırılarına açık. Bkz. [temel-kavramlar.md](../01-ag-networking/temel-kavramlar.md). |
+| **MITM (ortadaki adam)** | Saldırganın iki taraf arasına girip trafiği okuduğu/değiştirdiği saldırı; ARP/DHCP/RA istismarı veya sahte AP ile. Savunma: şifreli kanal (TLS). Bkz. [anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md). |
 | **Paket / çerçeve / segment** | Sırasıyla katman-3 (IP), katman-2 (Ethernet), katman-4 (TCP) veri birimleri. |
 | **TCP / UDP** | Güvenilir-bağlantılı (TCP) vs hızlı-bağlantısız (UDP) taşıma protokolleri. Bkz. [tcp-ip-protokoller.md](../01-ag-networking/tcp-ip-protokoller.md). |
 | **Port** | Bir IP adresindeki servisi belirleyen 16-bit numara (0–65535). |

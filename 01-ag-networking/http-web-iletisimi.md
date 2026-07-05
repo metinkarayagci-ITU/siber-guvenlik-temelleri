@@ -1,6 +1,6 @@
 # 🌍 HTTP ve Web İletişimi
 
-HTTP (HyperText Transfer Protocol), web'in konuştuğu dildir. Bir tarayıcıya adres yazmakla bir sayfanın gelmesi arasında geçen her şey HTTP'dir. Web güvenliğinin tamamı ([04-web-guvenligi](../04-web-guvenligi/web-mimarisi.md)) bu protokolün üstüne kurulduğu için, mekanizmasını iyi anlamak şart.
+HTTP (HyperText Transfer Protocol), web'in konuştuğu dildir. Bir tarayıcıya adres yazmakla bir sayfanın gelmesi arasında geçen her şey HTTP'dir. Web güvenliğinin tamamı ([04-web-guvenligi](../04-web-guvenligi/web-mimarisi.md)) bu protokolün üstüne kurulduğu için, mekanizmasını iyi anlamak şart. HTTP'nin güncel belirtimi, eski RFC 2616/7230 serisinin yerini alan [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110) (anlambilim) ve [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112) (HTTP/1.1 sözdizimi) belgelerinde tanımlıdır.
 
 > Ön koşul: [tcp-ip-protokoller.md](tcp-ip-protokoller.md) (port 80/443). Devamı: [04-web-guvenligi](../04-web-guvenligi/web-mimarisi.md).
 

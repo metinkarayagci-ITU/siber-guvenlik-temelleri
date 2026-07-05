@@ -19,7 +19,7 @@ Bir kuruluşa `172.16.0.0/16` gibi büyük bir adres bloğu verildiğini düşü
 
 ## 2. CIDR gösterimi ve maske
 
-**CIDR** (Classless Inter-Domain Routing) `IP/önek` biçiminde yazılır: `192.168.1.0/24`. Buradaki `/24`, adresin soldan itibaren **24 bitinin "ağ" (network) kısmı** olduğunu, kalan `32 − 24 = 8` bitin **"host" kısmı** olduğunu söyler.
+**CIDR** (Classless Inter-Domain Routing) `IP/önek` biçiminde yazılır: `192.168.1.0/24`. Buradaki `/24`, adresin soldan itibaren **24 bitinin "ağ" (network) kısmı** olduğunu, kalan `32 − 24 = 8` bitin **"host" kısmı** olduğunu söyler. CIDR, eski sınıf-temelli (classful) adreslemenin yerini alarak adres uzayının verimli kullanımını ve yönlendirme tablolarının küçülmesini sağlayan standarttır (kaynak: [RFC 4632](https://www.rfc-editor.org/rfc/rfc4632)).
 
 ```mermaid
 flowchart LR
@@ -65,7 +65,7 @@ Bir alt ağ verildiğinde her şey bu dört formülden çıkar. `p` = önek uzun
 **Neden `−2`?** Her alt ağda ilk adres (host bitleri tümü 0) = **ağ adresi**, son adres (tümü 1) = **broadcast adresi**. İkisi de bir host'a atanamaz.
 
 **İki bilinçli istisna:**
-- **/31** (RFC 3021): Nokta-nokta (point-to-point) linklerde broadcast anlamsızdır; 2 adresin ikisi de host olur. Router-router bağlantılarında adres tasarrufu sağlar.
+- **/31** ([RFC 3021](https://www.rfc-editor.org/rfc/rfc3021)): Nokta-nokta (point-to-point) linklerde broadcast anlamsızdır; 2 adresin ikisi de host olur. Router-router bağlantılarında adres tasarrufu sağlar.
 - **/32**: Tek bir spesifik host. Firewall kuralı, host route, ACL eşleşmesinde kullanılır.
 
 ---
@@ -253,7 +253,7 @@ Bu yöntemi aşağıdaki problemlerde tekrar tekrar uygulayacağız — "kas haf
 
 | Blok | Ad | Anlam |
 |------|-----|-------|
-| `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` | RFC 1918 özel | İnternette yönlendirilmez; iç ağda serbest, NAT ile dışa çıkar. |
+| `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` | RFC 1918 özel ([kaynak](https://www.rfc-editor.org/rfc/rfc1918)) | İnternette yönlendirilmez; iç ağda serbest, NAT ile dışa çıkar. |
 | `169.254.0.0/16` | APIPA / link-local | DHCP başarısız olunca cihaz kendine verir; **DHCP arızası işareti**. |
 | `127.0.0.0/8` | Loopback | Paketi ağa çıkarmadan makineye döndürür (`127.0.0.1`). |
 | `100.64.0.0/10` | CGNAT | Operatör düzeyi NAT. |

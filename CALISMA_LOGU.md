@@ -16,5 +16,12 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Sözlük:** "Sistem ve donanım temelleri" kategorisi eklendi (7 yeni terim).
 - **Not:** Simetrik ters bağlantılar (ör. 03'te von Neumann'a, 05'te Secure Boot'a geri değinme) ilgili modüller işlenirken tamamlanacak.
 
-### 01-ag-networking
+### 01-ag-networking ✅
+- **Değişen dosyalar:** `temel-kavramlar.md`, `tcp-ip-protokoller.md`, `subnetting-cidr.md`, `dns-derinlemesine.md`, `http-web-iletisimi.md`, `terminoloji-sozlugu.md`
+- **Eklenen kavramlar (THM "Intro to LAN" boşlukları):** MAC adresi (IP vs MAC ayrımı, MAC spoofing), ARP (IP→MAC çözümleme, ARP request/reply sequence diyagramı, ARP zehirleme), DHCP (DORA süreci sequence diyagramı, sahte DHCP). MITM kavramı merkezî olarak tanımlandı ve ağ katmanı saldırılarına bağlandı.
+- **Kurulan ilişkiler (simetrik):** ARP zehirleme ↔ MITM ↔ TLS/PKI (05); rogue DHCP ↔ rogue RA/IPv6 (aynı "kimlik doğrulamayan LAN protokolü istismarı" teması); MAC hex ↔ bilgisayar-temelleri (00); DHCP ↔ DNS/subnetting; SLAAC ↔ DHCP.
+- **Dış kaynaklar (satır-içi):** TCP=RFC 9293, ARP=RFC 826, DHCP=RFC 2131, /31=RFC 3021, RFC 1918, CIDR=RFC 4632, DNS=RFC 1034/1035, HTTP=RFC 9110/9112.
+- **Sözlük:** MAC, ARP, DHCP, MITM eklendi.
+
+### 02-linux-windows
 - **Durum:** ⏳ sırada
