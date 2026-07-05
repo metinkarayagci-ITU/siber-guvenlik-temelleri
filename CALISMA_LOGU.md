@@ -100,5 +100,8 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Dış kaynak (satır-içi):** OWASP ReDoS.
 - **Not:** Modül pratik ve büyük ölçüde kendine yeterliydi (çalışan örnek scriptler, Python/Bash/Git/Regex). Scriptler değiştirilmedi. Git sır sızıntısı ↔ secrets management (13), regex ↔ log analizi (11)/enjeksiyon allow-list (04) bağları zaten mevcuttu.
 
-### 15-projeler
-- **Durum:** ⏳ sırada
+### 15-projeler ✅
+- **Değişen dosyalar:** `spesifikasyon-sonrasi-yol-haritasi.md`, `04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md`
+- **Kurulan ilişki (simetrik):** Prompt injection ↔ enjeksiyon ailesi kök nedeni (04) [iki yönlü — hem 15'te hem 04'te açıklandı]; AI Security ↔ enjeksiyon refleksi transferi.
+- **Dış kaynak (satır-içi):** OWASP GenAI/LLM Top 10.
+- **Not:** PQC→Architect yol haritası zaten 05'e derinlemesine bağlıydı.

@@ -105,6 +105,7 @@ flowchart TD
 - Bir pentester bir uygulamaya baktığında, "girdi nereye gidiyor?" diye sorar: bir sorguya mı (SQLi), bir komuta mı (cmd injection), sayfaya mı (XSS), dosya yoluna mı (LFI)? Kök neden aynı olduğu için **test refleksi de aynıdır**: özel karakter (`'`, `;`, `<`, `../`, `{{`) koy, davranış değişikliğini gözle.
 - Bir savunmacı/geliştirici için ödül daha büyük: kök nedeni içselleştiren biri, hiç duymadığı yeni bir enjeksiyon türüyle (yeni bir yorumlayıcı) karşılaşınca bile doğru refleksi (ayır, allow-list, en az ayrıcalık) uygular.
 - Bu birleşik bakış, [bellek zafiyetlerine](../../03-isletim-sistemi-ici/bellek-zafiyetleri-giris.md) kadar uzanır: buffer overflow da "veri (girdi) kod (dönüş adresi/komut) gibi yorumlanıyor" temasının bellek katmanındaki hâlidir.
+- **Ailenin en yeni üyesi — prompt injection:** Aynı kök neden, büyük dil modellerinde (LLM) **prompt injection** olarak karşımıza çıkar: model, geliştiricinin "talimatı" (kod) ile kullanıcının/harici verinin (data) arasındaki sınırı ayıramaz, saldırgan da veriye gizlediği talimatla modeli kaçırır. OWASP bunu "GenAI/LLM Top 10"un bir numaralı riski yaptı; AI güvenliğine geçmek isteyenler için buradaki enjeksiyon refleksi doğrudan transfer olur → [15-projeler/spesifikasyon-sonrasi-yol-haritasi.md](../../15-projeler/spesifikasyon-sonrasi-yol-haritasi.md) (AI Security).
 
 ---
 

@@ -78,7 +78,7 @@ Hiçbir dal çekirdeği "geride bırakmaz" — hepsi bu temelin üstüne inşa e
 **Bu repodaki temeli:** [04-web](../04-web-guvenligi/owasp-top10-tam-rehber.md) (LLM uygulamaları web'dir), [13-güvenli-kodlama](../13-guvenli-kodlama-devsecops/guvenli-kodlama-ilkeleri.md), [enjeksiyon-aileleri](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md) (prompt injection = enjeksiyon ailesinin yeni üyesi!).
 
 **Derinleşme yolu:**
-- **OWASP Top 10 for LLM Applications** — prompt injection, veri sızıntısı, güvensiz çıktı işleme.
+- **OWASP Top 10 for LLM Applications** — prompt injection, veri sızıntısı, güvensiz çıktı işleme (kaynak: [OWASP GenAI/LLM Top 10](https://genai.owasp.org/)). Bu listenin bir numaralı riski **prompt injection**'dır ve tam olarak [enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md)'deki "kod/veri karışması" kök nedeninin LLM'lerdeki hâlidir: modelin "talimat" (kod) ile "veri"yi ayıramaması. Bu yüzden çekirdek enjeksiyon bilgin doğrudan bu yeni alana transfer olur — savunma refleksi de benzerdir (güvenilmeyen girdiyi ayır, çıktıyı doğrula).
 - Adversarial ML (model kandırma), veri zehirleme, model çalma.
 - AI'yı savunmada kullanma (anomali tespiti, otomatik triyaj).
 - **Not:** Bu alan hızla olgunlaşıyor; matematik arka planın ([post-kuantum](../05-kriptografi/post-kuantum-kriptografi.md) ile aynı avantaj) burada da değerli.
