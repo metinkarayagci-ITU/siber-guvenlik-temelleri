@@ -29,5 +29,11 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Kurulan ilişkiler (task'ın "hash" örneği — 3 modül simetrik):** `/etc/shadow` ↔ SAM/LSASS ↔ hash tanımı (00) ↔ kripto salt/KDF (05) ↔ hashdump/John kırma (10) + hash_kirma lab (05). NTLM salt'sızlığı ↔ rainbow table (05). LSASS dump ↔ SeDebugPrivilege (03).
 - **Sözlük:** SAM/LSASS, NTLM hash, Pass-the-Hash eklendi.
 
-### 03-isletim-sistemi-ici
+### 03-isletim-sistemi-ici ✅
+- **Değişen dosyalar:** `surecler-ve-bellek.md`, `bellek-zafiyetleri-giris.md`
+- **Kurulan ilişkiler (simetrik, 00 ile):** Spectre/Meltdown ↔ von Neumann darboğazı/bellek hiyerarşisi (00) — performans optimizasyonunun güvenlik zayıflığına dönüşmesi; buffer overflow "kod/veri karışması" ↔ von Neumann mimarisi (00) + enjeksiyon (04). Bellek-güvenli dil ↔ güvenli kodlama (13).
+- **Dış kaynak:** CISA/NSA "Memory Safe Roadmaps" satır-içi alıntılandı.
+- **Not:** Modül zaten derindi; ana katkı simetrik ters bağlantılar ve kaynak.
+
+### 04-web-guvenligi
 - **Durum:** ⏳ sırada

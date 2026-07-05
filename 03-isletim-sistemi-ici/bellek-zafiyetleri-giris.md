@@ -8,7 +8,7 @@ Bellek güvenliği zafiyetleri (memory safety bugs), yazılım güvenliğinin en
 
 ## 1. Ortak kök neden: kod ile verinin karışması
 
-Neredeyse tüm ciddi zafiyetlerin altında tek bir tema yatar: **saldırganın kontrol ettiği verinin, program tarafından "kod/komut" gibi yorumlanması.** Buffer overflow bunun bellek düzeyindeki hâlidir; SQLi, XSS, command injection ise üst katmanlardaki kardeşleridir → [enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md).
+Neredeyse tüm ciddi zafiyetlerin altında tek bir tema yatar: **saldırganın kontrol ettiği verinin, program tarafından "kod/komut" gibi yorumlanması.** Buffer overflow bunun bellek düzeyindeki hâlidir; SQLi, XSS, command injection ise üst katmanlardaki kardeşleridir → [enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md). Bu temanın en derin kökü donanım mimarisindedir: von Neumann mimarisinde kod ve veri aynı bellekte durduğu için ([00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md)), "veri" olması gereken bir girdinin çalıştırılabilir "kod"a dönüşmesi fiziksel olarak mümkündür — buffer overflow tam olarak bu olanağı istismar eder.
 
 Bellek güvenliği bağlamında spesifik kök neden: **sınır kontrolü yapılmayan bellek işlemleri.** Program, bir tampona (buffer) yazarken "bu veri tamponun boyutunu aşıyor mu?" diye kontrol etmezse, fazla veri **komşu belleğe taşar** ve orayı bozar.
 
@@ -110,7 +110,7 @@ Bunca savunmaya rağmen bellek zafiyetleri her yıl ciddi CVE'lerin büyük kıs
 - Savunmalar exploit'i **zorlaştırır, imkânsız kılmaz** (leak + ROP kombinasyonuyla atlatılır).
 - Milyarlarca satır eski C/C++ kodu (işletim sistemleri, tarayıcılar) hâlâ çalışıyor.
 
-**Kökten çözüm — bellek-güvenli diller:** Rust, Go, Java, C# gibi diller sınır kontrolünü ve bellek yönetimini **dilin kendisi** garanti eder; tüm bir zafiyet sınıfını ortadan kaldırır. Bu yüzden ABD siber güvenlik kurumları (CISA/NSA) yeni projelerde bellek-güvenli dillere geçişi resmen tavsiye ediyor. Rust'ın "ownership" modeli use-after-free'yi derleme zamanında imkânsız kılar.
+**Kökten çözüm — bellek-güvenli diller:** Rust, Go, Java, C# gibi diller sınır kontrolünü ve bellek yönetimini **dilin kendisi** garanti eder; tüm bir zafiyet sınıfını ortadan kaldırır. Bu yüzden ABD siber güvenlik kurumları (CISA/NSA) yeni projelerde bellek-güvenli dillere geçişi resmen tavsiye ediyor (kaynak: CISA/NSA "The Case for Memory Safe Roadmaps", [cisa.gov](https://www.cisa.gov/resources-tools/resources/case-memory-safe-roadmaps)). Rust'ın "ownership" (sahiplik) modeli use-after-free'yi derleme zamanında imkânsız kılar. Bu dil seçimi bir güvenlik kararıdır ve güvenli kodlamanın temel ilkelerinden biridir ([13-guvenli-kodlama-devsecops/guvenli-kodlama-ilkeleri.md](../13-guvenli-kodlama-devsecops/guvenli-kodlama-ilkeleri.md)).
 
 > Dil seçimi bir güvenlik kararıdır → [13-guvenli-kodlama-devsecops/guvenli-kodlama-ilkeleri.md](../13-guvenli-kodlama-devsecops/guvenli-kodlama-ilkeleri.md).
 

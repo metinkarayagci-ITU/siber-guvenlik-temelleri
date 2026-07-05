@@ -54,7 +54,7 @@ flowchart LR
 2. **Esneklik:** RAM'den büyük programlar çalışabilir (kullanılmayan sayfalar diske "swap" edilir).
 3. **Güvenlik:** Her sayfaya izin verilir (okunabilir/yazılabilir/çalıştırılabilir). Bu, **DEP/NX** (aşağıda) savunmasının temelidir.
 
-> **Kesişim:** Sanal bellek çevirisi zamanlaması, **Meltdown/Spectre** gibi yan kanal (side-channel) saldırılarının istismar ettiği yerdir — MMU/önbellek davranışından, izin verilmeyen belleğin içeriği dolaylı olarak sızdırılabilir.
+> **Kesişim:** Sanal bellek çevirisi zamanlaması, **Meltdown/Spectre** gibi yan kanal (side-channel) saldırılarının istismar ettiği yerdir — MMU/önbellek davranışından, izin verilmeyen belleğin içeriği dolaylı olarak sızdırılabilir. Bu saldırılar, işlemcinin performans için kullandığı önbellek (cache) ve spekülatif yürütme mekanizmalarını hedefler; bu mekanizmaların neden var olduğu (von Neumann darboğazını aşma) [00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md)'de anlatılan bellek hiyerarşisiyle doğrudan ilişkilidir — yani bir performans optimizasyonu, bir güvenlik zayıflığına dönüşmüştür.
 
 ---
 
