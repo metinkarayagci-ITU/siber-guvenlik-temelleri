@@ -89,5 +89,11 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Dış kaynaklar (satır-içi):** SPF=RFC 7208, DKIM=RFC 6376, DMARC=RFC 7489.
 - **Not:** Simetrik bağlar zaten mevcuttu — DKIM↔dijital imza (05), SPF/DKIM/DMARC↔DNS TXT (01), phishing zinciri↔log-analizi Senaryo B (11), FIDO2↔AiTM (06 tarafından eklenmişti).
 
-### 13-guvenli-kodlama-devsecops
+### 13-guvenli-kodlama-devsecops ✅
+- **Değişen dosyalar:** `guvenli-kodlama-ilkeleri.md`, `devsecops-ssdlc.md` (OWASP numaraları Modül 04'te düzeltilmişti)
+- **Kurulan ilişki (simetrik, yeni 2025 kategorisi):** "Güvenli başarısızlık (fail securely)" ilkesi ↔ OWASP Top 10:2025 A10 Mishandling of Exceptional Conditions (04) [iki yönlü — owasp dosyası A10→guvenli-kodlama bağlıyordu].
+- **Dış kaynak (satır-içi):** SLSA (slsa.dev) tedarik zinciri çerçevesi.
+- **Not:** Bellek-güvenli dil ↔ 03 bağı zaten mevcuttu.
+
+### 14-scripting-otomasyon
 - **Durum:** ⏳ sırada

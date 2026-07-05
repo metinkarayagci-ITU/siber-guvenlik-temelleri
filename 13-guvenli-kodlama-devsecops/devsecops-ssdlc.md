@@ -79,7 +79,7 @@ flowchart TD
 
 ## 4. Tedarik zinciri güvenliği (supply chain security)
 
-Modern uygulamaların kodunun büyük kısmı **üçüncü taraf bağımlılıklardan** gelir. Bu, devasa bir güven ve saldırı yüzeyi yaratır — son yılların en kritik tehdit alanı (OWASP Top 10:2025'te [A03 Software Supply Chain Failures](../04-web-guvenligi/owasp-top10-tam-rehber.md) olarak öne çıkarıldı).
+Modern uygulamaların kodunun büyük kısmı **üçüncü taraf bağımlılıklardan** gelir. Bu, devasa bir güven ve saldırı yüzeyi yaratır — son yılların en kritik tehdit alanı (OWASP Top 10:2025'te [A03 Software Supply Chain Failures](../04-web-guvenligi/owasp-top10-tam-rehber.md) olarak öne çıkarıldı). Tedarik zinciri bütünlüğü için endüstri çerçevesi **SLSA** (Supply-chain Levels for Software Artifacts) olgunlaşmaktadır (kaynak: [slsa.dev](https://slsa.dev/)).
 
 ```mermaid
 flowchart TD

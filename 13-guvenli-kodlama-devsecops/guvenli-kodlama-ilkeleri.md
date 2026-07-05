@@ -44,7 +44,7 @@ Kod, veritabanı kullanıcısı, servis hesabı — her biri minimum yetkiyle ç
 Tek bir kontrole güvenme. Girdi doğrulama + parametreli sorgu + en az ayrıcalık + WAF — biri başarısız olsa diğeri tutar.
 
 ### İlke 5: Güvenli başarısızlık (fail securely)
-Hata durumunda **güvenli** tarafa düş: erişimi reddet (fail closed), varsayılan olarak izin verme. Ayrıca:
+Hata durumunda **güvenli** tarafa düş: erişimi reddet (fail closed), varsayılan olarak izin verme. Bu ilke o kadar kritik ki, OWASP Top 10:2025'te "**A10 Mishandling of Exceptional Conditions**" olarak ayrı bir kategori hâline geldi ([04-web-guvenligi/owasp-top10-tam-rehber.md](../04-web-guvenligi/owasp-top10-tam-rehber.md)): bir erişim kontrolü hata anında "reddet" yerine "izin ver"e düşerse (fail open), tüm koruma çöker. Ayrıca:
 ```python
 # KÖTÜ — hata mesajı bilgi sızdırır (bkz. A05, error-based SQLi)
 except Exception as e:
