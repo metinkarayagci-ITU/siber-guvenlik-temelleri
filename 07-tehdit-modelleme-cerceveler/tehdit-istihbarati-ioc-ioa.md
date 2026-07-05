@@ -77,7 +77,7 @@ Ham veri (feed) tek başına istihbarat değildir; **bağlam** kazanınca (bu IO
 - **Açık kaynak (OSINT):** VirusTotal, AbuseIPDB, açık IOC beslemeleri, güvenlik araştırmacı raporları.
 - **Ticari:** Kurumsal tehdit istihbaratı sağlayıcıları.
 - **Topluluk/sektörel:** ISAC'ler (sektöre özel paylaşım toplulukları), CERT/CSIRT bültenleri.
-- **Paylaşım standartları:** **STIX** (istihbaratı yapılandırma dili) ve **TAXII** (paylaşım protokolü) — istihbaratın makineler arası otomatik paylaşımını sağlar.
+- **Paylaşım standartları:** **STIX** (istihbaratı yapılandırma dili) ve **TAXII** (paylaşım protokolü) — istihbaratın makineler arası otomatik paylaşımını sağlar; ikisi de OASIS tarafından standartlaştırılmıştır (kaynak: [OASIS STIX/TAXII](https://oasis-open.github.io/cti-documentation/)).
 
 > **Nüans — beslemenin (feed) tuzağı:** Bağlamsız IOC feed'i "gürültü" üretir: binlerce IP/hash, çoğu senin ortamınla alakasız veya güncelliğini yitirmiş → yanlış pozitif ([log-analizi.md](../11-soc-mavi-takim/log-analizi.md)) seli. İyi istihbarat, hacim değil **ilgililik ve bağlamdır**.
 

@@ -1,6 +1,6 @@
 # ⛓️ Cyber Kill Chain ve Unified Kill Chain
 
-Cyber Kill Chain, bir siber saldırının aşamalarını sıralı bir zincir olarak modelleyen, Lockheed Martin tarafından geliştirilmiş klasik çerçevedir. Askeri "öldürme zinciri" kavramından uyarlanmıştır. Temel öğretisi: **saldırı bir süreçtir ve zincirin herhangi bir halkasını kırmak saldırıyı durdurur.**
+Cyber Kill Chain, bir siber saldırının aşamalarını sıralı bir zincir olarak modelleyen, Lockheed Martin tarafından 2011'de geliştirilmiş klasik çerçevedir (kaynak: [Lockheed Martin Cyber Kill Chain](https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html)). Askeri "öldürme zinciri" kavramından uyarlanmıştır. Temel öğretisi: **saldırı bir süreçtir ve zincirin herhangi bir halkasını kırmak saldırıyı durdurur.**
 
 > Kardeş çerçeveler: [mitre-attck.md](mitre-attck.md) (daha ayrıntılı davranış), [pyramid-of-pain-diamond-model.md](pyramid-of-pain-diamond-model.md).
 

@@ -1,6 +1,6 @@
 # 🎯 MITRE ATT&CK
 
-MITRE ATT&CK, gerçek saldırganların kullandığı davranışların (taktik, teknik, prosedür) küresel, sürekli güncellenen bir bilgi tabanıdır. Savunma dünyasının "ortak dili" hâline gelmiştir: bir tehdit avcısı, SOC analisti veya kırmızı takımcı ATT&CK terimleriyle konuşur. Bu dosya çerçeveyi ve pratik kullanımını kurar.
+MITRE ATT&CK (Adversarial Tactics, Techniques, and Common Knowledge), gerçek saldırganların kullandığı davranışların (taktik, teknik, prosedür) küresel, sürekli güncellenen bir bilgi tabanıdır (resmî kaynak: [attack.mitre.org](https://attack.mitre.org/)). Savunma dünyasının "ortak dili" hâline gelmiştir: bir tehdit avcısı, SOC analisti veya kırmızı takımcı ATT&CK terimleriyle konuşur. Bu dosya çerçeveyi ve pratik kullanımını kurar.
 
 > Kardeş çerçeveler: [cyber-kill-chain.md](cyber-kill-chain.md), [pyramid-of-pain-diamond-model.md](pyramid-of-pain-diamond-model.md). Uygulama: [tehdit-istihbarati-ioc-ioa.md](tehdit-istihbarati-ioc-ioa.md), [11-soc](../11-soc-mavi-takim/log-analizi.md).
 

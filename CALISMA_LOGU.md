@@ -55,5 +55,11 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Dış kaynaklar (satır-içi):** WebAuthn=W3C, OAuth 2.0=RFC 6749, JWT=RFC 7519, Zero Trust=NIST SP 800-207.
 - **Not:** Modül zaten derindi (OAuth akış diyagramı, RBAC/ABAC karşılaştırması mevcut); ana katkı simetrik bağlantı + kaynak.
 
-### 07-tehdit-modelleme-cerceveler
+### 07-tehdit-modelleme-cerceveler ✅
+- **Değişen dosyalar:** `mitre-attck.md`, `cyber-kill-chain.md`, `pyramid-of-pain-diamond-model.md`, `tehdit-istihbarati-ioc-ioa.md`
+- **Eklenen:** Çerçevelerin resmî köken/kaynak atıfları (ATT&CK'in açılımı da eklendi).
+- **Dış kaynaklar (satır-içi):** MITRE (attack.mitre.org), Lockheed Kill Chain, Bianco Pyramid of Pain orijinal blog, OASIS STIX/TAXII.
+- **Not:** Modül zaten iç-çapraz bağlantıları güçlüydü (4 çerçeve birbirine + SOC/pentest'e bağlı); ana katkı doğru atıf/kaynak.
+
+### 08-grc-yonetisim-risk-uyum
 - **Durum:** ⏳ sırada
