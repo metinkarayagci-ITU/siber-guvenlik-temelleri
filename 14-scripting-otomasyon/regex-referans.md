@@ -108,7 +108,7 @@ grep -oE '\b([0-9]{4}[ -]?){4}\b' cikti.txt
 ## 5. Nüans: regex ve güvenlik tuzakları
 
 ### ReDoS (Regular Expression Denial of Service)
-Kötü yazılmış bir regex, belirli girdilerde **katlanarak yavaşlayabilir** (catastrophic backtracking) → bir DoS zafiyeti ([stride](../08-grc-yonetisim-risk-uyum/stride-tehdit-modelleme.md) D). Örnek tehlikeli desen: `(a+)+$`. Kötü niyetli bir girdi CPU'yu kilitler.
+Kötü yazılmış bir regex, belirli girdilerde **katlanarak yavaşlayabilir** (catastrophic backtracking) → bir DoS zafiyeti ([stride](../08-grc-yonetisim-risk-uyum/stride-tehdit-modelleme.md) D — hizmet reddi; kaynak: [OWASP ReDoS](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS)). Örnek tehlikeli desen: `(a+)+$`. Kötü niyetli bir girdi CPU'yu kilitler.
 > **Savunma:** İç içe niceleyicilerden (`(a+)+`) kaçın, girdi uzunluğunu sınırla, güvenli regex motorları (RE2 gibi backtracking'siz) kullan.
 
 ### Regex ile güvenlik filtresi yazma tehlikesi

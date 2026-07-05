@@ -95,5 +95,10 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Dış kaynak (satır-içi):** SLSA (slsa.dev) tedarik zinciri çerçevesi.
 - **Not:** Bellek-güvenli dil ↔ 03 bağı zaten mevcuttu.
 
-### 14-scripting-otomasyon
+### 14-scripting-otomasyon ✅
+- **Değişen dosyalar:** `regex-referans.md` (git-temelleri OWASP numarası Modül 04'te düzeltilmişti)
+- **Dış kaynak (satır-içi):** OWASP ReDoS.
+- **Not:** Modül pratik ve büyük ölçüde kendine yeterliydi (çalışan örnek scriptler, Python/Bash/Git/Regex). Scriptler değiştirilmedi. Git sır sızıntısı ↔ secrets management (13), regex ↔ log analizi (11)/enjeksiyon allow-list (04) bağları zaten mevcuttu.
+
+### 15-projeler
 - **Durum:** ⏳ sırada
