@@ -4,7 +4,7 @@
 
 **Ön koşul zinciri:** [temel-kavramlar.md](temel-kavramlar.md) → [anahtar-degisimi-ve-imza.md](anahtar-degisimi-ve-imza.md) → [zorluk-varsayimlari.md](zorluk-varsayimlari.md) → **buradasın**.
 
-> 📌 **Doğrulama notu:** Standart numaraları (FIPS 203/204/205) ve NSA CNSA 2.0 tarihleri, resmî belgelere (NIST, NSA) dayanır; kritik bir karar öncesi **nist.gov ve NSA CNSA 2.0 dokümanından güncel hâli doğrulanmalıdır** çünkü takvim ve eklenen algoritmalar zaman içinde güncellenir.
+> 📌 **Güncellik notu:** Bu dosyadaki standart numaraları (FIPS 203/204/205 sonlandı; FIPS 206/FN-DSA taslak; HQC ek KEM) ve NSA CNSA 2.0 tarihleri resmî NIST/NSA belgeleriyle doğrulanmıştır (satır-içi kaynaklar verildi). Yine de bu alan hızla gelişmektedir; kritik bir mimari karar öncesi [nist.gov PQC](https://csrc.nist.gov/projects/post-quantum-cryptography) sayfasından en güncel durum teyit edilmelidir.
 
 ---
 
@@ -106,13 +106,13 @@ Hata düzeltme kodlarını çözmenin zorluğuna dayanır (McEliece, 1978'den be
 
 ## 5. NIST standartları: FIPS 203, 204, 205
 
-NIST, yıllarca süren bir yarışmayla (2016–2024) ilk PQC standartlarını 2024'te yayınladı. **Ezberlenmesi gereken üçlü:**
+NIST, yıllarca süren bir yarışmayla (2016–2024) ilk üç PQC standardını **13 Ağustos 2024'te** sonlandırdı; standartlar 14 Ağustos 2024'te yürürlüğe girdi (kaynak: [NIST CSRC PQC FIPS Approved](https://csrc.nist.gov/news/2024/postquantum-cryptography-fips-approved)). **Ezberlenmesi gereken üçlü:**
 
 | Standart | Algoritma adı | Ne için | Matematik ailesi |
 |----------|---------------|---------|------------------|
-| **FIPS 203** | **ML-KEM** (eski adı Kyber) | Anahtar kapsülleme (KEM) — RSA/ECDH yerine anahtar değişimi | Kafes (lattice) |
-| **FIPS 204** | **ML-DSA** (eski adı Dilithium) | Dijital imza — RSA/ECDSA yerine | Kafes (lattice) |
-| **FIPS 205** | **SLH-DSA** (eski adı SPHINCS+) | Dijital imza (yedek/muhafazakâr) | **Hash** tabanlı |
+| **[FIPS 203](https://csrc.nist.gov/pubs/fips/203/final)** | **ML-KEM** (eski adı CRYSTALS-Kyber) | Anahtar kapsülleme (KEM) — RSA/ECDH yerine anahtar değişimi | Kafes (lattice) |
+| **[FIPS 204](https://csrc.nist.gov/pubs/fips/204/final)** | **ML-DSA** (eski adı CRYSTALS-Dilithium) | Dijital imza — RSA/ECDSA yerine | Kafes (lattice) |
+| **[FIPS 205](https://csrc.nist.gov/pubs/fips/205/final)** | **SLH-DSA** (eski adı SPHINCS+) | Dijital imza (yedek/muhafazakâr) | **Hash** tabanlı |
 
 ### Neden iki imza standardı (204 ve 205)?
 Bu, kripto çevikliğinin ta kendisidir: **ML-DSA (204)** kafes tabanlıdır — hızlı, verimli, ama güvenliği (nispeten yeni) kafes varsayımına dayanır. **SLH-DSA (205)** hash tabanlıdır — daha yavaş/büyük ama güvenliği **kafes zorluğundan tamamen bağımsızdır**. Eğer bir gün kafes problemlerinde beklenmedik bir kırılma olursa, hash tabanlı imza hâlâ ayakta kalır. **Tek yumurtayı tek sepete koymama** ilkesi.
@@ -121,14 +121,16 @@ Bu, kripto çevikliğinin ta kendisidir: **ML-DSA (204)** kafes tabanlıdır —
 - **ML-DSA (204):** Günlük imzalama için birincil seçim.
 - **SLH-DSA (205):** Uzun ömürlü/yüksek güvence gereken imzalar ve çeşitlilik sigortası.
 
-> Ayrıca **FN-DSA (FALCON)** gibi ek imza standartları da süreçte; anahtar değişiminde çeşitlilik için **HQC** (kod tabanlı) NIST tarafından ek KEM olarak seçildi *(güncel liste doğrulanmalı)*.
+Bu üçlünün ötesinde standartlaşma sürüyor ve bir kurucu/mimar için takip edilmesi gereken iki gelişme var:
+- **FN-DSA (FALCON) → FIPS 206:** Kafes tabanlı (NTRU kafesleri), ML-DSA'dan daha küçük imza üreten ama uygulaması daha hassas (kayan nokta) bir imza şeması. NIST taslağı (Initial Public Draft) 2025'te sunuldu; nihai standardın 2026 sonu–2027 başı civarında beklenmesi öngörülüyor (kaynak: [DigiCert — FN-DSA/FIPS 206](https://www.digicert.com/blog/quantum-ready-fndsa-nears-draft-approval-from-nist)).
+- **HQC (kod tabanlı) → ek KEM:** NIST, ML-KEM'e **matematiksel çeşitlilik sigortası** olarak, kafesten bağımsız (kod tabanlı) bir yedek anahtar kapsülleme algoritması olan **HQC**'yi **Mart 2025'te** seçti (kaynak: [NIST PQC additional KEM](https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards)). Bu seçim, tıpkı iki imza standardı (204 kafes + 205 hash) gibi, "tek matematiksel varsayıma bel bağlama" ilkesinin KEM tarafındaki uygulamasıdır.
 
 ---
 
 ## 6. Geçiş stratejisi ve CNSA 2.0
 
 ### NSA CNSA 2.0 — takvim
-**NSA'nın Commercial National Security Algorithm Suite 2.0**, ulusal güvenlik sistemleri için PQC geçiş takvimini koyar. Kilit hedef: **2030'a kadar** kuantuma dayanıklı algoritmalara geçiş (bazı sınıflar için daha erken; yazılım/firmware imzalamada öncelik). *(Kesin tarihler için CNSA 2.0 belgesi doğrulanmalı.)*
+**NSA'nın Commercial National Security Algorithm Suite 2.0**, ulusal güvenlik sistemleri (NSS) için PQC geçiş takvimini koyar (kaynak: [NSA CNSA 2.0](https://media.defense.gov/2022/Sep/07/2003071834/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS_.PDF)). Öne çıkan tarihler: yazılım/firmware imzalamada PQC'ye **öncelik en geç 2025**, çoğu sistem sınıfı için geçişin **2030'a kadar** tamamlanması ve tüm NSS'te klasik algoritmaların **2033'e kadar** emekliye ayrılması hedeflenir. Firmware/yazılım imzalamanın öncelikli olması anlamlıdır: imzalar uzun ömürlüdür ve bugün üretilen imzalı yazılım yıllarca sahada kalır ([00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md) Secure Boot).
 
 ```mermaid
 timeline

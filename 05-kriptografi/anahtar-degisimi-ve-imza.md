@@ -68,7 +68,7 @@ flowchart LR
 
 **Standartlar:** RSA imza, **ECDSA** (eliptik eğri), EdDSA (Ed25519).
 
-**Kullanım:** TLS sertifikaları ([pki-x509.md](pki-x509.md)), yazılım/güncelleme imzalama ([A08 bütünlük](../04-web-guvenligi/owasp-top10-tam-rehber.md), SolarWinds dersi), kod imzalama, e-posta (S/MIME, PGP).
+**Kullanım:** TLS sertifikaları ([pki-x509.md](pki-x509.md)), yazılım/güncelleme imzalama ([A08 bütünlük](../04-web-guvenligi/owasp-top10-tam-rehber.md), SolarWinds dersi), kod imzalama, e-posta (S/MIME, PGP) ve **Secure Boot** — UEFI'nin yalnızca imzalı önyükleyici/çekirdeği çalıştırması ([00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md)) doğrudan bir dijital imza doğrulamasıdır. Dijital imzanın kuantum tehdidi altında olması (Shor RSA/ECDSA'yı kırar) ve bu yüzden PQC imza standartlarına (ML-DSA, SLH-DSA) geçiş gereği [post-kuantum-kriptografi.md](post-kuantum-kriptografi.md)'de işlenir; özellikle uzun ömürlü firmware imzaları CNSA 2.0'da öncelikli geçiş kalemidir.
 
 ---
 
@@ -107,7 +107,7 @@ AEAD ayrıca "associated data" ile şifrelenmeyen ama **bütünlüğü korunan**
 
 ## 5. Hepsi birlikte: TLS el sıkışması (bütünsel örnek)
 
-Yukarıdaki tüm parçalar TLS'te (HTTPS'in temeli) birleşir:
+Yukarıdaki tüm parçalar TLS'te (HTTPS'in temeli) birleşir. Aşağıdaki akış, güncel sürüm olan **TLS 1.3**'e dayanır; TLS 1.3 el sıkışmayı tek gidiş-dönüşe (1-RTT) indirir ve yalnızca ileri gizlilik sağlayan (efemeral) anahtar değişimini zorunlu kılar (kaynak: [RFC 8446](https://www.rfc-editor.org/rfc/rfc8446)):
 
 ```mermaid
 sequenceDiagram

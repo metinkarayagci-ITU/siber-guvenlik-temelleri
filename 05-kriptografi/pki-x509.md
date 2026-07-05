@@ -56,6 +56,8 @@ flowchart TD
 
 > **Nüans — güven neye dayanır?** Tüm sistem, tarayıcı/OS'a gömülü **kök CA listesine** güvenmeye dayanır. Bir kök CA ele geçirilir veya kötü niyetli davranırsa (geçmişte oldu: DigiNotar 2011), sahte ama "geçerli" sertifikalar üretilebilir. Bu yüzden CA'lar denetlenir ve kötü davrananlar listeden çıkarılır (distrust).
 
+> **Kesişim — aynı fikir başka yerde:** "En tepedeki güvenilen bir çıpadan aşağıya doğru güven aktarma" mantığı yalnızca sertifikalara özgü değildir. Aynı güven zinciri, bir bilgisayarın önyüklemesinde **Secure Boot** olarak karşımıza çıkar ([00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md)): UEFI firmware'ine gömülü bir imzalama anahtarı (çıpa), önyükleyiciyi, o da çekirdeği imza doğrulayarak yükler. PKI'da çıpa "kök CA sertifikası", Secure Boot'ta "firmware'e gömülü platform anahtarı"dır; ikisi de en alttaki bir güven kararına dayanır ve o çıpa ele geçirilirse tüm zincir çöker.
+
 ---
 
 ## 4. Sertifika yaşam döngüsü

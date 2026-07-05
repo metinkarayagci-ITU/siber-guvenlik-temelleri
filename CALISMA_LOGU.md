@@ -42,5 +42,12 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Sözlük:** OWASP Top 10 / SQLi / XSS / SSRF girişleri 2025'e güncellendi.
 - **Not:** Web deep-dive dosyaları (sqli/xss/csrf-ssrf/idor/enjeksiyon) zaten PoC+önleme koduyla derindi; içerik korundu, yalnızca OWASP eşlemesi güncellendi.
 
-### 05-kriptografi
+### 05-kriptografi ✅
+- **Değişen dosyalar:** `post-kuantum-kriptografi.md`, `anahtar-degisimi-ve-imza.md`, `pki-x509.md`, `terminoloji-sozlugu.md`
+- **Doğrulanan/güncellenen gerçekler (kariyer alanı — yüksek özen):** FIPS 203/204/205 (13 Ağu 2024 sonlandı, yürürlük 14 Ağu 2024); FIPS 206/FN-DSA (FALCON, taslak 2025, final ~2026-27); HQC (Mart 2025 ek/yedek KEM, kod tabanlı); CNSA 2.0 (öncelik 2025, geçiş 2030, emeklilik 2033). Tüm "doğrulanmalı" hedge'leri kesin satır-içi kaynaklarla değiştirildi.
+- **Dış kaynaklar (satır-içi):** NIST CSRC (FIPS 203/204/205 final sayfaları), DigiCert (FN-DSA), NIST PQC, NSA CNSA 2.0 PDF, RFC 8446 (TLS 1.3).
+- **Kurulan ilişkiler (simetrik, 00 ile tamamlandı):** Dijital imza ↔ Secure Boot (00) [iki yönlü]; PKI güven zinciri ↔ Secure Boot güven zinciri (00); firmware imzalama ↔ CNSA 2.0 öncelik; TLS 1.3 forward secrecy ↔ HNDL.
+- **Sözlük:** ML-KEM/ML-DSA/SLH-DSA, Shor/Grover, HNDL eklendi; PQC/crypto-agility güncellendi.
+
+### 06-kimlik-erisim-yonetimi-iam
 - **Durum:** ⏳ sırada

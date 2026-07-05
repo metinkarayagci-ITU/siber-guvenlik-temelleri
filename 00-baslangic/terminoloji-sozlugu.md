@@ -83,8 +83,11 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **DH / ECDH** | Diffie-Hellman anahtar değişimi — güvensiz kanalda ortak sır üretme. Bkz. [anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md). |
 | **PKI / X.509** | Açık anahtar altyapısı ve sertifika standardı. Bkz. [pki-x509.md](../05-kriptografi/pki-x509.md). |
 | **CA** | Sertifika Yetkilisi (Certificate Authority) — sertifikaları imzalayan güvenilen taraf. |
-| **PQC** | Post-kuantum kriptografi — kuantum bilgisayara dayanıklı algoritmalar. Bkz. [post-kuantum-kriptografi.md](../05-kriptografi/post-kuantum-kriptografi.md). |
-| **Kripto çevikliği (crypto-agility)** | Kullanılan algoritmayı sistemi baştan yazmadan değiştirebilme yeteneği. |
+| **PQC** | Post-kuantum kriptografi — klasik donanımda çalışan, kuantum bilgisayara da dayanıklı algoritmalar. İlk standartlar: FIPS 203 (ML-KEM), 204 (ML-DSA), 205 (SLH-DSA). Bkz. [post-kuantum-kriptografi.md](../05-kriptografi/post-kuantum-kriptografi.md). |
+| **ML-KEM / ML-DSA / SLH-DSA** | Sırasıyla FIPS 203/204/205 PQC standartları: kafes tabanlı anahtar kapsülleme, kafes tabanlı imza, hash tabanlı imza. Bkz. [post-kuantum-kriptografi.md](../05-kriptografi/post-kuantum-kriptografi.md). |
+| **Shor / Grover** | Kuantum algoritmaları: Shor asimetriği (RSA/ECC) kırar, Grover simetriği yalnızca zayıflatır (karekök). |
+| **Kripto çevikliği (crypto-agility)** | Kullanılan algoritmayı sistemi baştan yazmadan değiştirebilme yeteneği; PQC geçişinin ön koşulu. |
+| **HNDL (harvest now, decrypt later)** | Bugün şifreli trafiği kaydedip gelecekte kuantumla çözme tehdidi; uzun-ömürlü verinin bugün PQC ile korunmasını gerektirir. |
 
 ## Kimlik ve erişim (IAM)
 
