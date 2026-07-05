@@ -22,7 +22,7 @@ Sık karıştırılan üç kavram:
 
 ## 2. NIST Siber Güvenlik Çerçevesi (CSF 2.0)
 
-**NIST CSF**, ABD merkezli ama küresel kabul görmüş, esnek ve sektörden bağımsız bir çerçevedir. En büyük gücü, güvenliği anlaşılır **fonksiyonlara** ayırmasıdır. **CSF 2.0** (2024), önceki 5 fonksiyona **"Govern"** ekleyerek 6 fonksiyona çıktı.
+**NIST CSF**, ABD merkezli ama küresel kabul görmüş, esnek ve sektörden bağımsız bir çerçevedir. En büyük gücü, güvenliği anlaşılır **fonksiyonlara** ayırmasıdır. Şubat 2024'te yayınlanan **CSF 2.0**, önceki 5 fonksiyona **"Govern" (Yönetişim)** ekleyerek 6 fonksiyona çıktı (kaynak: [NIST CSF 2.0](https://www.nist.gov/cyberframework)).
 
 ```mermaid
 flowchart LR
@@ -50,7 +50,7 @@ flowchart LR
 
 ## 3. ISO/IEC 27001 — sertifikalanabilir standart
 
-**ISO 27001**, bir **Bilgi Güvenliği Yönetim Sistemi (ISMS)** kurmak için uluslararası standarttır. NIST CSF bir rehberken, ISO 27001 **sertifikalanabilir** — bağımsız denetçi onaylar, kuruluş "ISO 27001 sertifikalı" olur.
+**ISO 27001** (güncel sürüm ISO/IEC 27001:2022), bir **Bilgi Güvenliği Yönetim Sistemi (ISMS)** kurmak için uluslararası standarttır (kaynak: [ISO/IEC 27001](https://www.iso.org/standard/27001)). NIST CSF bir rehberken, ISO 27001 **sertifikalanabilir** — bağımsız denetçi onaylar, kuruluş "ISO 27001 sertifikalı" olur.
 
 - **Odak:** Süreç ve yönetim. Güvenliği bir kerelik proje değil, **sürekli iyileşen bir sistem** (PDCA: Planla-Uygula-Kontrol et-Önlem al) olarak kurar.
 - **Ek A kontrolleri:** Uygulanabilir kontrollerin bir kataloğu (erişim kontrolü, kriptografi, fiziksel güvenlik, tedarikçi ilişkileri vb.).

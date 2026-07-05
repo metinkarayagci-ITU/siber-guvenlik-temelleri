@@ -53,7 +53,7 @@ flowchart TD
 
 ## 3. Nicel (quantitative) risk değerlendirmesi: SLE / ARO / ALE
 
-Parasal değerlerle **sayısal** risk hesabı. Bütçe kararlarını ve kontrol yatırımını gerekçelendirmek için kritik. Üç formül:
+Parasal değerlerle **sayısal** risk hesabı. Bütçe kararlarını ve kontrol yatırımını gerekçelendirmek için kritik. Risk değerlendirmesinin resmî metodolojik referansı NIST SP 800-30'dur (kaynak: [NIST SP 800-30](https://csrc.nist.gov/pubs/sp/800/30/r1/final)). Üç formül:
 
 | Terim | Açılım | Anlam | Formül |
 |-------|--------|-------|--------|

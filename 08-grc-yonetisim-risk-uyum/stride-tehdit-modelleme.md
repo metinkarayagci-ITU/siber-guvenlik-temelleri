@@ -25,7 +25,7 @@ Tehdit modelleme, güvenliği **tasarım aşamasına** taşır (shift-left → [
 
 ## 2. STRIDE — altı tehdit kategorisi
 
-STRIDE, altı tehdit türünün baş harflerinden oluşur. Her biri, bir güvenlik hedefinin ([CIA + ek](guvenlik-kontrolleri-matrisi.md)) ihlalidir:
+STRIDE, altı tehdit türünün baş harflerinden oluşur ve Microsoft tarafından geliştirilmiştir (kaynak: [Microsoft STRIDE / Threat Modeling](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats)). Her biri, bir güvenlik hedefinin ([CIA + ek](guvenlik-kontrolleri-matrisi.md)) ihlalidir:
 
 ```mermaid
 flowchart TD

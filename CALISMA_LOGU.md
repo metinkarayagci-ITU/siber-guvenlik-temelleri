@@ -61,5 +61,10 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Dış kaynaklar (satır-içi):** MITRE (attack.mitre.org), Lockheed Kill Chain, Bianco Pyramid of Pain orijinal blog, OASIS STIX/TAXII.
 - **Not:** Modül zaten iç-çapraz bağlantıları güçlüydü (4 çerçeve birbirine + SOC/pentest'e bağlı); ana katkı doğru atıf/kaynak.
 
-### 08-grc-yonetisim-risk-uyum
+### 08-grc-yonetisim-risk-uyum ✅
+- **Değişen dosyalar:** `cerceveler-nist-iso.md`, `stride-tehdit-modelleme.md`, `risk-yonetimi.md` (+ Modül 04'te OWASP A06 düzeltmesi yapılmıştı)
+- **Dış kaynaklar (satır-içi):** NIST CSF 2.0 (Şubat 2024), ISO/IEC 27001:2022, Microsoft STRIDE, NIST SP 800-30 (risk).
+- **Not:** Modül zaten kontrol matrisi ↔ CIA ↔ kill chain ↔ OWASP bağlantılarıyla güçlüydü; ana katkı resmî kaynaklar.
+
+### 09-cloud-virtualizasyon
 - **Durum:** ⏳ sırada
