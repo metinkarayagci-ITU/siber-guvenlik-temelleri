@@ -34,6 +34,8 @@ flowchart TD
 
 > 📌 `/etc/passwd` **okunabilir** (kullanıcı listesi), ama parola hash'leri `/etc/shadow`'da tutulur ve yalnızca root okur. Bu ayrım, eski Unix'lerdeki "passwd herkese açık" zafiyetinin (parola hash'lerini çevrimdışı kırma) çözümüdür.
 
+> **Kesişim — parola hash'leri nasıl saklanır ve neden önemli:** Linux, parolayı düz metin değil, tuzlanmış (salt'lı) bir hash olarak `/etc/shadow`'da saklar (`$6$` = SHA-512, `$y$` = yescrypt gibi). Hash'in ne olduğu ve neden tek yönlü/geri döndürülemez olduğu [00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md) ve kriptografik olarak [05-kriptografi/temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)'de anlatılır; salt/pepper ve yavaş türetme fonksiyonlarının (Argon2/bcrypt) neden gerektiği de oradadır. Saldırgan tarafında ise bu hash'ler ele geçirilince John the Ripper / hashcat ile çevrimdışı kırılmaya çalışılır ([10-pentest-metodolojisi/somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md), pratik: [05-kriptografi/pratik-lab/hash_kirma_john_hashcat.md](../05-kriptografi/pratik-lab/hash_kirma_john_hashcat.md)). Windows'ta bu saklama yerinin karşılığı SAM veritabanı ve LSASS belleğidir ([windows-temelleri.md](windows-temelleri.md)) — aynı kavram, farklı işletim sisteminde.
+
 ---
 
 ## 2. İzinler (permissions) — rwx modeli

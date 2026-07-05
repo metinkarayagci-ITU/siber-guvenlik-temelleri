@@ -15,6 +15,11 @@ Windows'ta her güvenlik nesnesi (kullanıcı, grup) bir **SID** (Security Ident
 
 > **Kesişim:** Token'lar çalınabilir/taklit edilebilir (**token impersonation**, "pass-the-token"). Ele geçirilen bir makinede yüksek yetkili bir kullanıcının token'ını ödünç almak, AD yanal hareketinin klasik tekniğidir → [somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md).
 
+### Kimlik bilgisi saklama: SAM, LSASS ve NTLM hash'leri
+Windows, yerel kullanıcı parolalarını düz metin değil, **SAM** (Security Account Manager) veritabanında hash olarak saklar (tarihsel olarak NTLM hash'i). Oturum açmış kullanıcıların kimlik bilgileri ise **LSASS** (Local Security Authority Subsystem Service) sürecinin belleğinde tutulur. Bu, Linux'taki `/etc/shadow`'un ([linux-temelleri.md](linux-temelleri.md)) Windows karşılığıdır — aynı "parolayı hash olarak sakla" kavramı ([00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md), kriptografik derinlik: [05-kriptografi/temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)), farklı işletim sisteminde.
+
+> **Kesişim:** Saldırgan, LSASS belleğini boşaltarak (Mimikatz, `SeDebugPrivilege` ile — [kullanici-cekirdek-modu.md](../03-isletim-sistemi-ici/kullanici-cekirdek-modu.md)) veya SAM'i dökerek hash'leri elde eder; sonra bunları John/hashcat ile kırar ([10-pentest-metodolojisi/somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md), [05-kriptografi/pratik-lab/hash_kirma_john_hashcat.md](../05-kriptografi/pratik-lab/hash_kirma_john_hashcat.md)) **veya** hiç kırmadan doğrudan **Pass-the-Hash** ile kimlik taklidi yapar. NTLM hash'inin salt kullanmaması ([05-kriptografi/temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)) onu rainbow table saldırılarına Linux'un tuzlanmış `/etc/shadow`'undan daha savunmasız kılar. Savunma: LSASS koruması (Credential Guard), en az ayrıcalık.
+
 ---
 
 ## 2. NTFS ve ACL — dosya izinleri

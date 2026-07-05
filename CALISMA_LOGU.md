@@ -23,5 +23,11 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Dış kaynaklar (satır-içi):** TCP=RFC 9293, ARP=RFC 826, DHCP=RFC 2131, /31=RFC 3021, RFC 1918, CIDR=RFC 4632, DNS=RFC 1034/1035, HTTP=RFC 9110/9112.
 - **Sözlük:** MAC, ARP, DHCP, MITM eklendi.
 
-### 02-linux-windows
+### 02-linux-windows ✅
+- **Değişen dosyalar:** `linux-temelleri.md`, `windows-temelleri.md`, `terminoloji-sozlugu.md`
+- **Eklenen/genişletilen:** Linux parola hash saklama (`/etc/shadow`, `$6$`/`$y$`, salt); Windows kimlik saklama (SAM, LSASS, NTLM hash), Pass-the-Hash.
+- **Kurulan ilişkiler (task'ın "hash" örneği — 3 modül simetrik):** `/etc/shadow` ↔ SAM/LSASS ↔ hash tanımı (00) ↔ kripto salt/KDF (05) ↔ hashdump/John kırma (10) + hash_kirma lab (05). NTLM salt'sızlığı ↔ rainbow table (05). LSASS dump ↔ SeDebugPrivilege (03).
+- **Sözlük:** SAM/LSASS, NTLM hash, Pass-the-Hash eklendi.
+
+### 03-isletim-sistemi-ici
 - **Durum:** ⏳ sırada

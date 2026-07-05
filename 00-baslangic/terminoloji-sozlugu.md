@@ -127,6 +127,9 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **C2 (komuta-kontrol)** | Ele geçirilen makinelerle saldırganın haberleşme altyapısı. |
 | **Ters kabuk (reverse shell)** | Hedefin saldırgana doğru başlattığı kabuk bağlantısı (firewall'u atlatır). |
 | **Bind shell** | Hedefte bir portu dinleyen kabuk; saldırgan bağlanır. |
+| **SAM / LSASS** | Windows'ta parola hash'lerinin saklandığı veritabanı (SAM) ve oturum kimliklerinin bellekte tutulduğu süreç (LSASS). Linux karşılığı `/etc/shadow`. Bkz. [windows-temelleri.md](../02-linux-windows/windows-temelleri.md). |
+| **NTLM hash** | Windows'un parola hash biçimi; salt kullanmaz, bu yüzden rainbow table'a görece açıktır. Pass-the-Hash ile doğrudan kullanılabilir. |
+| **Pass-the-Hash (PtH)** | Parolayı bilmeden, ele geçirilen NTLM hash'iyle kimlik doğrulama; AD yanal hareketinin klasik tekniği. Bkz. [somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md). |
 
 ## SOC / savunma araçları
 
