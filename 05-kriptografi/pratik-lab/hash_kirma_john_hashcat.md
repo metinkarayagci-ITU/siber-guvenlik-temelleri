@@ -117,7 +117,7 @@ Bu lab'ın asıl dersi tablo hâlinde:
 | bcrypt/Argon2 çok yavaş kırıldı | Yavaş, ayarlanabilir KDF kullan (Argon2 önerilen) |
 | rockyou'daki parola anında düştü | Parola politikası + parola yöneticisi + MFA |
 
-> Bu, [temel-kavramlar.md](../temel-kavramlar.md) §6 (salt/pepper/KDF) ve [A02 Cryptographic Failures](../../04-web-guvenligi/owasp-top10-tam-rehber.md) savunmasının **neden** var olduğunu deneyimsel olarak kanıtlar.
+> Bu, [temel-kavramlar.md](../temel-kavramlar.md) §6 (salt/pepper/KDF) ve [A04 Cryptographic Failures](../../04-web-guvenligi/owasp-top10-tam-rehber.md) (OWASP Top 10:2025) savunmasının **neden** var olduğunu deneyimsel olarak kanıtlar.
 
 ---
 

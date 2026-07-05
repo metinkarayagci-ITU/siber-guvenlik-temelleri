@@ -2,7 +2,7 @@
 
 Tehdit modelleme, bir sistemi **tasarım aşamasında** inceleyip "burada ne ters gidebilir?" sorusunu sistematik sormaktır. Bu, güvenliği koda dökülmeden önce düşünmek (**shift-left**) demektir — bir zafiyeti üretimde bulmaktan çok daha ucuzdur. STRIDE, Microsoft'un bu iş için geliştirdiği en yaygın çerçevedir.
 
-> İlgili: [insecure design (A04)](../04-web-guvenligi/owasp-top10-tam-rehber.md), [mitre-attck.md](../07-tehdit-modelleme-cerceveler/mitre-attck.md) (STRIDE potansiyeli, ATT&CK gözlemi türetir).
+> İlgili: [insecure design (OWASP Top 10:2025 A06)](../04-web-guvenligi/owasp-top10-tam-rehber.md), [mitre-attck.md](../07-tehdit-modelleme-cerceveler/mitre-attck.md) (STRIDE potansiyeli, ATT&CK gözlemi türetir).
 
 ---
 
@@ -19,7 +19,7 @@ flowchart LR
     style P fill:#ff6b6b
 ```
 
-Tehdit modelleme, güvenliği **tasarım aşamasına** taşır (shift-left → [devsecops-ssdlc.md](../13-guvenli-kodlama-devsecops/devsecops-ssdlc.md)). Bir tasarım hatasını (ör. hız sınırı olmayan şifre sıfırlama) diagram üzerinde bulmak, üretimde istismar edilmesini beklemekten kat kat ucuzdur. Bu, [OWASP A04 Insecure Design](../04-web-guvenligi/owasp-top10-tam-rehber.md)'in doğrudan panzehiridir.
+Tehdit modelleme, güvenliği **tasarım aşamasına** taşır (shift-left → [devsecops-ssdlc.md](../13-guvenli-kodlama-devsecops/devsecops-ssdlc.md)). Bir tasarım hatasını (ör. hız sınırı olmayan şifre sıfırlama) diagram üzerinde bulmak, üretimde istismar edilmesini beklemekten kat kat ucuzdur. Bu, [OWASP A06 Insecure Design](../04-web-guvenligi/owasp-top10-tam-rehber.md)'in doğrudan panzehiridir.
 
 ---
 

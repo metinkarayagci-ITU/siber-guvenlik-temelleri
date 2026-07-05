@@ -2,7 +2,7 @@
 
 SQL Injection, saldırganın bir uygulamanın veritabanı sorgularına müdahale etmesine izin veren bir enjeksiyon zafiyetidir. En eski, en bilinen ve hâlâ en yıkıcı web zafiyetlerindendir — çünkü doğrudan verinin (kullanıcılar, parolalar, kartlar) kalbine ulaşır.
 
-> Aile bağlamı: [enjeksiyon-aileleri.md](enjeksiyon-aileleri.md) (ortak kök neden). OWASP: [A03 Injection](../owasp-top10-tam-rehber.md).
+> Aile bağlamı: [enjeksiyon-aileleri.md](enjeksiyon-aileleri.md) (ortak kök neden). OWASP Top 10:2025: [A05 Injection](../owasp-top10-tam-rehber.md).
 
 ---
 

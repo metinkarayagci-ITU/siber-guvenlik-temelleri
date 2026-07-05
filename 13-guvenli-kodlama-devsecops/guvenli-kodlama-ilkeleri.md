@@ -8,7 +8,7 @@ Güvenlik açıklarının çoğu, sömürüldükleri yerde değil, **yazıldıkl
 
 ## 1. Temel felsefe: güvenlik sonradan eklenmez
 
-> **Güvenlik bir özellik değil, bir kalitedir.** Bir uygulamaya sonradan "güvenlik ekleyemezsin" — güvenlik, her tasarım ve kodlama kararının içine örülür. Bu, [insecure design (A04)](../04-web-guvenligi/owasp-top10-tam-rehber.md) ve [shift-left](devsecops-ssdlc.md) fikirlerinin kod düzeyindeki karşılığıdır.
+> **Güvenlik bir özellik değil, bir kalitedir.** Bir uygulamaya sonradan "güvenlik ekleyemezsin" — güvenlik, her tasarım ve kodlama kararının içine örülür. Bu, [insecure design (OWASP Top 10:2025 A06)](../04-web-guvenligi/owasp-top10-tam-rehber.md) ve [shift-left](devsecops-ssdlc.md) fikirlerinin kod düzeyindeki karşılığıdır.
 
 Maliyet gerçeği ([stride-tehdit-modelleme.md](../08-grc-yonetisim-risk-uyum/stride-tehdit-modelleme.md)): bir zafiyeti kodlama aşamasında düzeltmek birkaç dakika; üretimde ise ihlal + itibar + yasal maliyet. Bu yüzden güvenli kodlama en yüksek getirili yatırımdır.
 
@@ -106,7 +106,7 @@ Sırlar asla kaynak kodda/git'te olmaz → `.gitignore` ([devsecops-ssdlc.md](de
 
 - **Kod gözden geçirme (code review):** Güvenlik gözüyle akran incelemesi — insan gözü otomatik araçların kaçırdığını yakalar.
 - **Güvenli varsayılanlar (secure defaults):** Framework'ün güvenli özelliklerini (ORM, otomatik CSRF token, çıktı kodlama) kullan; güvenliği kapatmak bilinçli bir karar olsun.
-- **Bağımlılık hijyeni:** Kullandığın kütüphaneleri güncel tut, zafiyet taraması yap ([A06](../04-web-guvenligi/owasp-top10-tam-rehber.md), [devsecops-ssdlc.md](devsecops-ssdlc.md)).
+- **Bağımlılık hijyeni:** Kullandığın kütüphaneleri güncel tut, zafiyet taraması yap ([OWASP Top 10:2025 A03 Tedarik Zinciri](../04-web-guvenligi/owasp-top10-tam-rehber.md), [devsecops-ssdlc.md](devsecops-ssdlc.md)).
 - **Tehdit modelleme:** Kod yazmadan önce "burada ne ters gidebilir?" ([stride-tehdit-modelleme.md](../08-grc-yonetisim-risk-uyum/stride-tehdit-modelleme.md)).
 
 ---

@@ -103,10 +103,10 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 
 | Terim | Tanım |
 |-------|-------|
-| **OWASP Top 10** | En kritik web zafiyetlerinin standart listesi. Bkz. [owasp-top10-tam-rehber.md](../04-web-guvenligi/owasp-top10-tam-rehber.md). |
-| **SQLi** | SQL enjeksiyonu — girdi ile veritabanı sorgusunu değiştirme. |
-| **XSS** | Siteler-arası betik çalıştırma (Cross-Site Scripting). |
-| **CSRF / SSRF** | Siteler-arası istek sahteciliği / sunucu-taraflı istek sahteciliği. |
+| **OWASP Top 10** | En kritik web zafiyetlerinin standart listesi; güncel sürüm **2025** (SSRF artık A01'e dahil, yeni A10 "Mishandling of Exceptional Conditions"). Bkz. [owasp-top10-tam-rehber.md](../04-web-guvenligi/owasp-top10-tam-rehber.md). |
+| **SQLi** | SQL enjeksiyonu — girdi ile veritabanı sorgusunu değiştirme. OWASP 2025: A05. |
+| **XSS** | Siteler-arası betik çalıştırma (Cross-Site Scripting). Enjeksiyon (A05) ailesinin tarayıcı-tarafı üyesi. |
+| **CSRF / SSRF** | Siteler-arası istek sahteciliği / sunucu-taraflı istek sahteciliği. SSRF, OWASP 2025'te A01 (Broken Access Control) altındadır. |
 | **IDOR** | Güvensiz doğrudan nesne referansı — yetki kontrolü eksik ID erişimi. |
 | **SOP / CORS** | Aynı köken politikası ve onu gevşeten paylaşım mekanizması. |
 | **CSP** | İçerik güvenlik politikası (Content Security Policy) — XSS azaltma başlığı. |

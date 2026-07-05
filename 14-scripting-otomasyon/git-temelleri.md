@@ -87,7 +87,7 @@ flowchart LR
 - **Sır sızdıysa:** (1) Sırrı **hemen iptal et/döndür** (rotate) — geçmişten silmek yetmez, çünkü zaten klonlanmış olabilir. (2) Sonra geçmişten temizle (`git filter-repo` / BFG). **Önce iptal, sonra temizlik.**
 - **Pre-commit hook:** Commit öncesi otomatik sır/kalite kontrolü.
 
-> **Kesişim:** Saldırganlar GitHub'ı **açık sır** (exposed secrets) için sürekli tarar — bir AWS anahtarı public commit'e sızdığında, botlar dakikalar içinde bulup kötüye kullanır ([A02, A05](../04-web-guvenligi/owasp-top10-tam-rehber.md)). Bu, [tehdit istihbaratının](../07-tehdit-modelleme-cerceveler/tehdit-istihbarati-ioc-ioa.md) ve otomatik keşfin gerçek bir örneğidir.
+> **Kesişim:** Saldırganlar GitHub'ı **açık sır** (exposed secrets) için sürekli tarar — bir AWS anahtarı public commit'e sızdığında, botlar dakikalar içinde bulup kötüye kullanır (OWASP Top 10:2025 [A02 Misconfiguration + A04 Cryptographic Failures](../04-web-guvenligi/owasp-top10-tam-rehber.md)). Bu, [tehdit istihbaratının](../07-tehdit-modelleme-cerceveler/tehdit-istihbarati-ioc-ioa.md) ve otomatik keşfin gerçek bir örneğidir.
 
 ---
 

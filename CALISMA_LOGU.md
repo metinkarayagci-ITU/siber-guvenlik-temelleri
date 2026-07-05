@@ -35,5 +35,12 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Dış kaynak:** CISA/NSA "Memory Safe Roadmaps" satır-içi alıntılandı.
 - **Not:** Modül zaten derindi; ana katkı simetrik ters bağlantılar ve kaynak.
 
-### 04-web-guvenligi
+### 04-web-guvenligi ✅
+- **Önemli düzeltme:** `owasp-top10-tam-rehber.md` **OWASP Top 10:2025**'e göre baştan yazıldı (önceki 2021 idi). Yeni sıralama, 2021→2025 değişim tablosu, yeni A10 (Mishandling of Exceptional Conditions), SSRF'in A01'e taşınması, A03 Supply Chain. Resmî kaynak (owasp.org/Top10/2025) satır-içi alıntılandı.
+- **Repo genelinde tutarlılık:** Eski OWASP numaraları düzeltildi — sqli (A03→A05), temel-kavramlar+hash_kirma (A02→A04), stride+guvenli-kodlama (A04→A06), devsecops+container+guvenli-kodlama (A06→A03 supply chain), git-temelleri+juice-shop (A02/A05→A02/A04). 8 dosyada güncelleme.
+- **Kurulan ilişki (simetrik):** csrf-ssrf'te SSRF↔A01 açıklaması güncellendi (SSRF = erişim kontrolü ihlali). Enjeksiyon↔buffer overflow (03) kök neden bağı A05 bölümünde pekiştirildi.
+- **Sözlük:** OWASP Top 10 / SQLi / XSS / SSRF girişleri 2025'e güncellendi.
+- **Not:** Web deep-dive dosyaları (sqli/xss/csrf-ssrf/idor/enjeksiyon) zaten PoC+önleme koduyla derindi; içerik korundu, yalnızca OWASP eşlemesi güncellendi.
+
+### 05-kriptografi
 - **Durum:** ⏳ sırada

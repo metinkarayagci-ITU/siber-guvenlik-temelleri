@@ -58,7 +58,7 @@ DevSecOps'un motoru, CI/CD boru hattına gömülü **otomatik güvenlik araçlar
 ```mermaid
 flowchart TD
     Code["Kaynak kod"] --> SAST["SAST<br/>kodu oku, zafiyet deseni bul<br/>(ör. string birleştirmeli SQL)"]
-    Dep["Bağımlılıklar"] --> SCA["SCA<br/>bilinen CVE'li kütüphane var mı?<br/>(→ A06, Log4Shell)"]
+    Dep["Bağımlılıklar"] --> SCA["SCA<br/>bilinen CVE'li kütüphane var mı?<br/>(→ A03 tedarik zinciri, Log4Shell)"]
     Running["Çalışan uygulama"] --> DAST["DAST<br/>gerçek saldırı istekleri gönder<br/>(→ Burp otomasyonu gibi)"]
     SAST & SCA & DAST --> Gate{"Güvenlik kapısı<br/>kritik bulgu var mı?"}
     Gate -->|"evet"| Fail["Build başarısız → düzelt"]
@@ -79,7 +79,7 @@ flowchart TD
 
 ## 4. Tedarik zinciri güvenliği (supply chain security)
 
-Modern uygulamaların kodunun büyük kısmı **üçüncü taraf bağımlılıklardan** gelir. Bu, devasa bir güven ve saldırı yüzeyi yaratır — son yılların en kritik tehdit alanı ([A06, A08](../04-web-guvenligi/owasp-top10-tam-rehber.md)).
+Modern uygulamaların kodunun büyük kısmı **üçüncü taraf bağımlılıklardan** gelir. Bu, devasa bir güven ve saldırı yüzeyi yaratır — son yılların en kritik tehdit alanı (OWASP Top 10:2025'te [A03 Software Supply Chain Failures](../04-web-guvenligi/owasp-top10-tam-rehber.md) olarak öne çıkarıldı).
 
 ```mermaid
 flowchart TD

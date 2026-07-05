@@ -150,7 +150,7 @@ saklanan = ph.hash("kullanici_parolasi")   # salt otomatik, yavaş, güçlü
 ph.verify(saklanan, "kullanici_parolasi")  # doğrulama
 ```
 
-> **Kesişim:** Bir DB sızıntısında parolaların nasıl saklandığı her şeyi belirler: düz metin → felaket; MD5 → dakikalar içinde kırılır; Argon2 + salt → pratikte güvenli. Bu, [hash kırma lab'ının](pratik-lab/hash_kirma_john_hashcat.md) saldırgan tarafını ve [A02 Cryptographic Failures](../04-web-guvenligi/owasp-top10-tam-rehber.md)'in savunma tarafını birleştirir.
+> **Kesişim:** Bir DB sızıntısında parolaların nasıl saklandığı her şeyi belirler: düz metin → felaket; MD5 → dakikalar içinde kırılır; Argon2 + salt → pratikte güvenli. Bu, [hash kırma lab'ının](pratik-lab/hash_kirma_john_hashcat.md) saldırgan tarafını ve [A04 Cryptographic Failures](../04-web-guvenligi/owasp-top10-tam-rehber.md)'in (OWASP Top 10:2025) savunma tarafını birleştirir.
 
 ---
 

@@ -70,7 +70,7 @@ Her alıştırmada: **teori dosyasını aç → Burp'te dene → sonucu belgele.
 - [ ] Zayıf parola sıfırlama / güvenlik sorusu akışını test et.
 
 ### 3.5 Hassas veri ifşası / yapılandırma
-> Teori: [../owasp-top10-tam-rehber.md](../owasp-top10-tam-rehber.md) (A02, A05)
+> Teori: [../owasp-top10-tam-rehber.md](../owasp-top10-tam-rehber.md) (OWASP Top 10:2025 A02 Misconfiguration + A04 Cryptographic Failures)
 - [ ] Açıkta kalmış dosyaları/dizinleri ara (`/ftp`, yedekler, `.md` dosyaları).
 - [ ] Hata mesajları çok mu bilgi sızdırıyor?
 

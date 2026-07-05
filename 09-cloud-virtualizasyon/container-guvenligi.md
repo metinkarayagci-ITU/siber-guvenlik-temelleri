@@ -136,6 +136,6 @@ docker run \
 
 - **İzolasyon ödünleşmesi:** Konteynerler hız/yoğunluk için izolasyondan feda eder. Yüksek güvenlik gereken çok-kiracılı senaryolarda VM (veya gVisor/Kata gibi güçlendirilmiş çalışma zamanları) tercih edilebilir. Mimari karar risk temelli olmalı ([risk-yonetimi.md](../08-grc-yonetisim-risk-uyum/risk-yonetimi.md)).
 - **`--privileged` = kapı açık:** Konteyner kaçışlarının çoğu yanlış yapılandırmadan (privileged, soket montajı, aşırı capability) kaynaklanır — exotic exploit değil. En az ayrıcalık burada da hayat kurtarır.
-- **Tedarik zinciri:** Konteyner imajları dış kaynaklardan gelir → zafiyetli/kötü imaj riski ([A06/A08](../04-web-guvenligi/owasp-top10-tam-rehber.md)). İmaj tarama ve imzalama, DevSecOps'un ([devsecops-ssdlc.md](../13-guvenli-kodlama-devsecops/devsecops-ssdlc.md)) zorunlu parçası.
+- **Tedarik zinciri:** Konteyner imajları dış kaynaklardan gelir → zafiyetli/kötü imaj riski (OWASP Top 10:2025 [A03 Software Supply Chain Failures](../04-web-guvenligi/owasp-top10-tam-rehber.md)). İmaj tarama ve imzalama, DevSecOps'un ([devsecops-ssdlc.md](../13-guvenli-kodlama-devsecops/devsecops-ssdlc.md)) zorunlu parçası.
 
 > **Modül 09 tamamlandı.** Sonraki: [10-pentest-metodolojisi/metodoloji-ve-rules-of-engagement.md](../10-pentest-metodolojisi/metodoloji-ve-rules-of-engagement.md).

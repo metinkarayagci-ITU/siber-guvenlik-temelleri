@@ -2,7 +2,7 @@
 
 İsimleri benzese de bu iki zafiyet tamamen farklıdır. **CSRF** kurbanın *tarayıcısını* kötüye kullanır (istemci-taraflı güveni istismar). **SSRF** ise *sunucuyu* kötüye kullanır (sunucunun iç ağa erişimini istismar). İkisini bir arada işliyoruz çünkü "forgery" (sahtecilik) kavramını ve tam olarak *kimin kandırıldığını* karşılaştırmak öğreticidir.
 
-> Bağlam: [web-mimarisi.md](../web-mimarisi.md) (SOP/CORS). OWASP: CSRF tarihsel olarak listede, SSRF = A10.
+> Bağlam: [web-mimarisi.md](../web-mimarisi.md) (SOP/CORS). OWASP Top 10:2025 haritası: [owasp-top10-tam-rehber.md](../owasp-top10-tam-rehber.md). CSRF tarihsel olarak listede yer aldı; SSRF ise 2021'de ayrı bir kategoriyken (A10) **2025'te A01 Broken Access Control altına alındı** — çünkü SSRF de özünde sunucunun erişmemesi gereken bir kaynağa eriştirilmesidir (bir erişim kontrolü ihlali).
 
 ---
 
