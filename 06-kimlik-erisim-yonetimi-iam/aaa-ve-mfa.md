@@ -66,10 +66,10 @@ flowchart TD
 - **TOTP** (Time-based OTP): Zaman tabanlı. Kod her 30 saniyede değişir (`HMAC(gizli, zaman)`). Authenticator uygulamalarının kullandığı budur. Sunucu ve uygulama aynı gizli anahtarı paylaşır ([anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md) HMAC).
 
 ### FIDO2 / WebAuthn — phishing'e dayanıklı altın standart
-FIDO2, parola yerine **açık anahtar kriptografisi** ([temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)) kullanır:
-- Cihazda bir anahtar çifti üretilir; özel anahtar **cihazdan hiç çıkmaz** (güvenli donanımda).
-- Giriş, bir kriptografik meydan-okuma/imza (challenge-response) ile yapılır — paylaşılan bir sır yok.
-- **Neden phishing'e dayanıklı:** İmza, kökene (origin) bağlıdır. Sahte site (`bank-login.evil.com`) kimlik bilgisini "yakalayamaz" çünkü tarayıcı imzayı yanlış kökene vermez. TOTP kodunu kullanıcı sahte siteye girebilir; FIDO2 imzasını giremez. **Passkey'ler** bunun tüketici dostu hâlidir.
+FIDO2, parola yerine **açık anahtar kriptografisi** ([temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)) kullanır. Tarayıcı-taraflı bileşeni **WebAuthn**, W3C tarafından standartlaştırılmıştır (kaynak: [W3C WebAuthn](https://www.w3.org/TR/webauthn-2/)):
+- Cihazda bir anahtar çifti üretilir; özel anahtar **cihazdan hiç çıkmaz** — güvenli bir donanım öğesinde (secure element / TPM) saklanır. Bu, özel anahtarı donanımda koruma ilkesinin ta kendisidir ve [00-baslangic/bilgisayar-temelleri.md](../00-baslangic/bilgisayar-temelleri.md)'de anlatılan **TPM**'in disk şifreleme anahtarını koruması ile aynı fikri paylaşır: anahtar hiç açığa çıkmazsa çalınamaz.
+- Giriş, bir kriptografik meydan-okuma/imza (challenge-response) ile yapılır — paylaşılan bir sır yok. Bu, dijital imzanın ([05-kriptografi/anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md)) kimlik doğrulamaya uygulanmış hâlidir: özel anahtar sahibi olduğunu, anahtarı ifşa etmeden kanıtlar.
+- **Neden phishing'e dayanıklı:** İmza, kökene (origin) bağlıdır. Sahte site (`bank-login.evil.com`) kimlik bilgisini "yakalayamaz" çünkü tarayıcı imzayı yanlış kökene vermez. TOTP kodunu kullanıcı sahte siteye girebilir; FIDO2 imzasını giremez. Bu, [12-sosyal-muhendislik-phishing/phishing-analizi.md](../12-sosyal-muhendislik-phishing/phishing-analizi.md)'deki gerçek-zamanlı (AiTM) phishing'e karşı en güçlü savunmadır. **Passkey'ler** bunun tüketici dostu hâlidir.
 
 ---
 

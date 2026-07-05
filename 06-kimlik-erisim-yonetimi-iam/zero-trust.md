@@ -79,7 +79,7 @@ Zero Trust'ın ağ tarafındaki uygulaması **mikro-segmentasyondur**: ağı gen
 - **"Zero Trust bir ürün":** Hayır — bir **mimari/felsefedir**, satın alınan tek bir kutu değil. Satıcılar "Zero Trust ürünü" satar ama gerçek ZT, kimlik+cihaz+ağ+veri+izleme katmanlarının bir yolculuğudur.
 - **"VPN'i kaldırınca Zero Trust olur":** Hayır — ZTNA VPN'in yerini alabilir ama ZT çok daha geniştir (kimlik, en az ayrıcalık, segmentasyon, izleme).
 - **"Zero Trust = hiç kimseye güvenme, kullanışsız":** Hayır — "güvenme" konum/örtük güvene karşıdır; **doğrulanmış** kimliğe elbette erişim verilir. Amaç güvenliği artırırken kullanılabilirliği (adaptive: düşük riskte sürtünmesiz, yüksek riskte ek doğrulama) korumaktır.
-- **Bir yolculuk, anahtar değil:** Kuruluşlar ZT'ye kademeli geçer (önce MFA + kimlik, sonra segmentasyon, sonra sürekli değerlendirme). NIST SP 800-207 referans çerçevedir.
+- **Bir yolculuk, anahtar değil:** Kuruluşlar ZT'ye kademeli geçer (önce MFA + kimlik, sonra segmentasyon, sonra sürekli değerlendirme). Sıfır güven mimarisinin resmî referans çerçevesi NIST SP 800-207'dir (kaynak: [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final)).
 
 ---
 

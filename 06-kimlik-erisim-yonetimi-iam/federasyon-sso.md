@@ -29,7 +29,7 @@ flowchart LR
 
 ## 2. OAuth 2.0 vs OIDC vs SAML — kritik ayrım
 
-En çok karıştırılan üçlü. **Tek cümlelik ayrım:**
+En çok karıştırılan üçlü. **Tek cümlelik ayrım** (OAuth 2.0 çerçevesi [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749)'da tanımlıdır):
 
 | Protokol | Ne yapar | Analoji |
 |----------|----------|---------|
@@ -72,7 +72,7 @@ XML tabanlı, kurumsal SSO'nun uzun süredir standardı. IdP bir imzalı **SAML 
 
 ## 3. JWT (JSON Web Token) — taşıyıcı token
 
-**JWT**, taraflar arasında bilgiyi (talep/claim) güvenli taşıyan, imzalı bir token formatıdır. OIDC ID token'ları ve birçok API kimlik doğrulaması JWT kullanır.
+**JWT**, taraflar arasında bilgiyi (talep/claim) güvenli taşıyan, imzalı bir token formatıdır (kaynak: [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)). OIDC ID token'ları ve birçok API kimlik doğrulaması JWT kullanır. JWT'nin sağladığı güvence, üzerindeki dijital imzadır ([05-kriptografi/anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md)) — imza, payload'ın değiştirilmediğini kanıtlar ama içeriği gizlemez.
 
 ### Yapı: üç parça (nokta ile ayrılı)
 ```

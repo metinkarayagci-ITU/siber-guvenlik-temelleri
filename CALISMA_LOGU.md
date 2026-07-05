@@ -49,5 +49,11 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Kurulan ilişkiler (simetrik, 00 ile tamamlandı):** Dijital imza ↔ Secure Boot (00) [iki yönlü]; PKI güven zinciri ↔ Secure Boot güven zinciri (00); firmware imzalama ↔ CNSA 2.0 öncelik; TLS 1.3 forward secrecy ↔ HNDL.
 - **Sözlük:** ML-KEM/ML-DSA/SLH-DSA, Shor/Grover, HNDL eklendi; PQC/crypto-agility güncellendi.
 
-### 06-kimlik-erisim-yonetimi-iam
+### 06-kimlik-erisim-yonetimi-iam ✅
+- **Değişen dosyalar:** `aaa-ve-mfa.md`, `federasyon-sso.md`, `zero-trust.md`
+- **Kurulan ilişkiler (simetrik, 00/05/12 ile):** FIDO2 özel anahtar donanımda saklama ↔ TPM (00) [iki yönlü, 00'daki TPM notu FIDO2'ye işaret ediyordu]; FIDO2 challenge-response ↔ dijital imza (05); FIDO2 phishing direnci ↔ AiTM phishing (12); JWT güvencesi ↔ dijital imza (05).
+- **Dış kaynaklar (satır-içi):** WebAuthn=W3C, OAuth 2.0=RFC 6749, JWT=RFC 7519, Zero Trust=NIST SP 800-207.
+- **Not:** Modül zaten derindi (OAuth akış diyagramı, RBAC/ABAC karşılaştırması mevcut); ana katkı simetrik bağlantı + kaynak.
+
+### 07-tehdit-modelleme-cerceveler
 - **Durum:** ⏳ sırada
