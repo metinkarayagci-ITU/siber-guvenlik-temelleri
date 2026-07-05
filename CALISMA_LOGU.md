@@ -72,5 +72,11 @@ Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kur
 - **Kurulan ilişki (simetrik):** Cloud shared responsibility ↔ SSRF (04) [iki yönlü]; SSRF metadata ↔ A01 gerekçesi (04).
 - **Not:** Konteyner izolasyonu ↔ OS namespaces/cgroups (03) bağı zaten mevcuttu.
 
-### 10-pentest-metodolojisi
+### 10-pentest-metodolojisi ✅
+- **Değişen dosyalar:** `somuru-ve-sonrasi.md`, `kesif-enumerasyon.md`, `metodoloji-ve-rules-of-engagement.md`
+- **Dış kaynaklar (satır-içi):** CVSS=FIRST.org (v4.0), Nmap=nmap.org, PTES/OSSTMM/OWASP WSTG.
+- **Kurulan ilişkiler (simetrik):** Nmap ↔ TCP handshake/port (01) + CIDR/RoE kapsam (01); CVSS ↔ risk önceliklendirme (08). Privesc/lateral ↔ SUID/sudo (02)/Kerberos (02) bağları zaten mevcuttu.
+- **Not:** Modül zaten shell diyagramları, privesc enumerasyonu ile derindi.
+
+### 11-soc-mavi-takim
 - **Durum:** ⏳ sırada
