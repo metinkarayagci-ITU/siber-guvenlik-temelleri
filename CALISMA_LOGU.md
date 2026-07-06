@@ -12,7 +12,15 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 
 **Bilinen boşluklar (Bölüm 2 — doldurulacak):** Moniker Link/CVE-2024-21413, Hydra (online brute-force), Digital Forensics çekirdeği, Malware analiz araç/akışı, IR tam yaşam döngüsü (PICERL), zafiyet tarayıcıları (Nessus/OpenVAS/Qualys).
 
+**Tur 2 çıktı özeti:** 4 yeni dosya (dijital-forensics, malware-analiz, olay-mudahale-ir, zafiyet-tarama), Bölüm 2'nin tüm boşlukları dolduruldu, 27 ekran görüntüsü yer tutucusu metne çevrildi (repo görsele bağımsız), sqli/mitre persona düzeyine derinleştirildi, ~26 yeni sözlük terimi, ~10 yeni kaynak. İçerik dosyası 64→68, diyagram 122→129. Tüm iç linkler geçerli, mojibake yok. Savunma tarafı (forensics/malware/IR) saldırıyla dengelendi.
+
 ### Tur 2 ilerleme
+
+**Persona-düzeyi derinleştirme ✅ (Bölüm 3)**
+- `sqli.md`: UNION-based (information_schema keşfi), blind SQLi (boolean + time-based, somut `SUBSTRING`/`SLEEP`/`IF` payload'ları), out-of-band (DNS sızdırma), WAF atlatma temel mantığı (case/comment/encoding/eşdeğer) eklendi — task'ın kalibrasyon örneği. WAF atlatma ↔ kara liste eleştirisi (enjeksiyon) + UTF-8 atlatma (00) + DNS tünelleme (01) simetrik.
+- `mitre-attck.md`: T1003.001 (LSASS dumping) uçtan uca örneği (prosedür→tespit/Sysmon Event 10→azaltma/Credential Guard) + D3FEND — ATT&CK'i "katalog"dan "kullanılabilir araç"a taşıdı. LSASS ↔ 02 (kimlik saklama) + 11 (tespit).
+
+**Bölüm 2 boşlukları — DURUM: tümü dolduruldu ✅** (Moniker Link, Hydra, forensics, malware analiz, IR/PICERL, zafiyet tarayıcıları).
 
 **11-soc-mavi-takim — savunma genişletmesi ✅**
 - **Yeni dosyalar:** `dijital-forensics.md`, `malware-analiz.md`, `olay-mudahale-ir.md` (savunma tarafındaki en büyük boşluklar).

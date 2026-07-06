@@ -20,8 +20,8 @@ Bu belge, deponun modüllerini önerilen okuma sırasıyla, tahmini sürelerle v
 | 07 | [Tehdit Modelleme](07-tehdit-modelleme-cerceveler/mitre-attck.md) | 5-7 saat | Temel |
 | 08 | [GRC](08-grc-yonetisim-risk-uyum/guvenlik-kontrolleri-matrisi.md) | 6-8 saat | Temel |
 | 09 | [Cloud & Sanallaştırma](09-cloud-virtualizasyon/temel-kavramlar.md) | 4-6 saat | Temel |
-| 10 | [Pentest Metodolojisi](10-pentest-metodolojisi/metodoloji-ve-rules-of-engagement.md) | 8-10 saat | Temel |
-| 11 | [SOC / Mavi Takım](11-soc-mavi-takim/siem-edr-soar.md) | 6-8 saat | Temel |
+| 10 | [Pentest Metodolojisi](10-pentest-metodolojisi/metodoloji-ve-rules-of-engagement.md) | 10-12 saat | Temel |
+| 11 | [SOC / Mavi Takım](11-soc-mavi-takim/siem-edr-soar.md) | 10-14 saat | Temel |
 | 12 | [Sosyal Mühendislik](12-sosyal-muhendislik-phishing/phishing-analizi.md) | 3-4 saat | Temel |
 | 13 | [Güvenli Kodlama & DevSecOps](13-guvenli-kodlama-devsecops/guvenli-kodlama-ilkeleri.md) | 4-6 saat | Temel |
 | 14 | [Scripting & Otomasyon](14-scripting-otomasyon/python-guvenlik-icin.md) | 6-8 saat | Temel |

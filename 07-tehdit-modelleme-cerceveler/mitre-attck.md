@@ -70,6 +70,15 @@ flowchart LR
 - **Tehdit profilleme:** "APT29 şu teknikleri kullanır" → o gruba karşı öncelikli savunma.
 - **Mor takım tatbikatı:** Kırmızı takım bir tekniği uygular, mavi takım tespit edebiliyor mu diye ölçer, boşluk kapatılır.
 
+### Bir tekniği uçtan uca izlemek — örnek: T1003 (OS Credential Dumping)
+Soyut bir katalog yerine tek bir tekniği somut izlemek, ATT&CK'in nasıl "kullanılan" bir araç olduğunu gösterir. **T1003.001 — LSASS Memory** tekniğini ele alalım (Credential Access taktiği):
+
+- **Prosedür (saldırgan ne yapar):** Bir saldırgan `SeDebugPrivilege` ile LSASS sürecinin belleğini boşaltıp içindeki kimlik bilgilerini çalar ([../02-linux-windows/windows-temelleri.md](../02-linux-windows/windows-temelleri.md)) — klasik araç Mimikatz `sekurlsa::logonpasswords`, veya `procdump -ma lsass.exe lsass.dmp` ile bellek dökümü alıp offline işleme.
+- **Tespit (savunmacı ne arar):** LSASS'a **anormal erişim** — Sysmon Event ID 10 (ProcessAccess) ile hedefi `lsass.exe` olan, `procdump`/beklenmedik bir süreçten gelen `GrantedAccess` maskesi (ör. `0x1010`, `0x1410`) ([../11-soc-mavi-takim/log-analizi.md](../11-soc-mavi-takim/log-analizi.md)). Bu bir **davranış** (IOA) tespitidir → aracın adı (Mimikatz) değişse bile "LSASS'a şüpheli erişim" davranışı kalır ([pyramid-of-pain-diamond-model.md](pyramid-of-pain-diamond-model.md)).
+- **Azaltma (mitigation):** Credential Guard (LSASS'ı izole eder), en az ayrıcalık, `SeDebugPrivilege` kısıtlama.
+
+Aynı teknik için "prosedür → tespit → azaltma" üçlüsünü çıkarabilmek, ATT&CK'in gerçek değeridir: her teknik, savunmacıya somut bir tespit kuralı ve azaltma yolu verir. ATT&CK'in savunma-odaklı kardeşi **MITRE D3FEND**, bu azaltma/karşı-önlemleri ayrıca kataloglar.
+
 ---
 
 ## 4. Nüans
