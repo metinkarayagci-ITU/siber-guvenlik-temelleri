@@ -29,6 +29,12 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 - **Kaynaklar (satır-içi):** THC-Hydra, Greenbone/OpenVAS.
 - **Sözlük:** 7 yeni terim (Hydra, online/offline, spraying, credential stuffing, zafiyet tarama, auth/unauth).
 
+**12-phishing — Moniker Link ✅**
+- **Değişen dosyalar:** `phishing-analizi.md` (yeni bölüm), `windows-temelleri.md` (simetrik).
+- **Eklenen kavram:** Moniker Link / CVE-2024-21413 (Outlook, `file://...!` ile Protected View atlatma → SMB'ye zorunlu bağlantı → NTLMv2 hash sızması → offline kırma / NTLM relay). Coerced authentication genel kavramı.
+- **Kurulan ilişkiler (simetrik):** Moniker Link ↔ NTLM/SAM (02) [iki yönlü — windows-temelleri'ne coerced auth bölümü eklendi]; NTLM sızması ↔ offline kırma (05) + online/offline ayrımı (10 §1.5) + Pass-the-Hash/relay (02); phishing süreç zinciri ↔ log Senaryo B (11).
+- **⚠️ Doğrulama:** CVE-2024-21413 CVSS puanı ve tam exploit string biçimi bu oturumda WebSearch limiti nedeniyle canlı teyit edilemedi — dosyada "doğrulanmalı" notu bırakıldı, aşağıdaki listeye eklendi.
+
 ---
 
 ## ✅ TUR 1 tamamlandı — genel özet
@@ -147,3 +153,11 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 - **Kurulan ilişki (simetrik):** Prompt injection ↔ enjeksiyon ailesi kök nedeni (04) [iki yönlü — hem 15'te hem 04'te açıklandı]; AI Security ↔ enjeksiyon refleksi transferi.
 - **Dış kaynak (satır-içi):** OWASP GenAI/LLM Top 10.
 - **Not:** PQC→Architect yol haritası zaten 05'e derinlemesine bağlıydı.
+
+---
+
+## ⚠️ Doğrulanması gereken noktalar
+
+Bu liste, tüm araştırmaya rağmen kesin/canlı kaynakla teyit edilemeyen (veya oturum kısıtları nedeniyle ertelenen) noktaları toplar. İçerikte de yanında "doğrulanmalı" notu vardır.
+
+- **CVE-2024-21413 (Moniker Link):** Çekirdek mekanizma (Outlook `file://...!` ile Protected View atlatma → SMB → NTLMv2 sızması), kâşif (Check Point) ve yama ayı (Şubat 2024) bilgime dayanır; ancak **kesin CVSS taban puanı (9.8 olarak yazıldı)** ve **tam exploit string biçimi** bu oturumda WebSearch oturum limiti nedeniyle canlı teyit edilemedi. Resmî kaynak: NVD (nvd.nist.gov/vuln/detail/CVE-2024-21413) ve Check Point Research yazısı ile doğrulanmalı. Yer: `12-sosyal-muhendislik-phishing/phishing-analizi.md`.

