@@ -47,7 +47,14 @@ grep "Failed password" auth.log | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | sort 
 **Müdahale:** IP'yi engelle (fail2ban), `deploy` hesabını dondur, root shell sonrası ne yapıldığını araştır (`.bash_history`, yeni dosyalar `find -mtime -1`), kök neden: zayıf parola → parola politikası + SSH anahtar + MFA.
 </details>
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: Kendi lab VM'inde `grep`+`sort`+`uniq` ile saldırgan IP'sini bulduğun terminal.
+**Analiz komutunun çıktısı:**
+```text
+$ grep "Failed password" auth.log | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | sort | uniq -c | sort -rn
+    340 45.83.x.12
+      3 192.168.1.50
+      1 10.0.0.8
+```
+`340` başarısız deneme yapan `45.83.x.12`, gürültüden anında sıyrılır — saldırgan kaynağı budur. Diğer IP'lerin 1-3 denemesi normal kullanıcı hatasıdır (yanlış parola). Bu "sayıp sıralama" tekniği, log analizinin en temel refleksidir.
 
 ---
 
@@ -124,7 +131,7 @@ Gerçek log üretmek ve analiz etmek için:
 3. **Wazuh** veya **ELK** (açık kaynak SIEM → [../siem-edr-soar.md](../siem-edr-soar.md)) kurup logları merkezîleştir, kendi korelasyon kuralını yaz.
 4. Bir TryHackMe "SOC/Blue Team" odası ([../../10-pentest-metodolojisi/pratik-lab/tryhackme-oda-notlari-sablonu.md](../../10-pentest-metodolojisi/pratik-lab/tryhackme-oda-notlari-sablonu.md)) çöz.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: Kendi kurduğun SIEM'de (Wazuh/ELK) bir uyarı paneli.
+**Ne gözlemlenir:** Wazuh/ELK panelinde, ürettiğin test aktiviteleri kurallarla eşleşip uyarı (alert) olarak listelenir — ör. "Multiple authentication failures" (kural seviyesi 10, kaynak IP, zaman) veya "Windows: New user created" (Event 4720). SIEM'in değeri budur: tek tek loglar yerine, korelasyon kurallarının ürettiği önceliklendirilmiş uyarıları görürsün ([../siem-edr-soar.md](../siem-edr-soar.md)).
 
 ---
 

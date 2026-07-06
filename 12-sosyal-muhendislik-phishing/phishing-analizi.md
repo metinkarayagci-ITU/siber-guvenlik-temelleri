@@ -122,7 +122,18 @@ Return-Path: ...        → gerçek dönüş adresi (from ile uyuşuyor mu?)
 Authentication-Results: → SPF / DKIM / DMARC sonuçları (aşağıda!)
 ```
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: Bir phishing örneğinin ham başlıkları — `Authentication-Results` satırında `spf=fail` veya `dmarc=fail`.
+**Bir phishing e-postasının ham başlıklarında görülen tipik sinyaller:**
+```text
+Return-Path: <bounce@spam-relay.ru>
+Received: from unknown (HELO mail.spam-relay.ru) (185.220.x.x)
+From: "Banka Güvenlik" <security@banka.com>      <-- görünen adres taklit
+Authentication-Results: mx.google.com;
+       spf=fail (google.com: domain of bounce@spam-relay.ru does not
+             designate 185.220.x.x as permitted sender);
+       dkim=none;
+       dmarc=fail (p=REJECT) header.from=banka.com
+```
+`spf=fail` + `dkim=none` + `dmarc=fail` üçlüsü net bir sahtecilik göstergesidir: gönderen `banka.com` görünüyor ama `Return-Path` ve gönderen IP başka; alan adının SPF kaydı bu IP'yi yetkilendirmiyor ve DMARC politikası `REJECT` olduğu için bu e-posta aslında reddedilmeliydi. `From` başlığındaki görünen ad her zaman sahtelenebilir — gerçek kimlik bu başlıklardadır ([dns-derinlemesine.md](../01-ag-networking/dns-derinlemesine.md) SPF/DKIM/DMARC DNS kayıtları).
 
 ---
 

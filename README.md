@@ -147,7 +147,7 @@ Her modül klasörü, konuya özel `.md` dosyaları ve (çoğu modülde) bir `pr
 
 ## 🖼️ Ekran Görüntüleri Hakkında
 
-Bu repo bir yapay zeka tarafından üretildiği için gerçek araç ekran görüntüleri (Burp Suite, Wireshark, terminal çıktısı) içermiyor. `pratik-lab/` dosyalarında ekran görüntüsünün mantıklı olacağı yerler **açıkça işaretlendi** (`📸 EKRAN GÖRÜNTÜSÜ EKLENECEK` notlarıyla). Bu depoyu kullanarak lab'ları çözdükçe kendi görsellerini `assets/screenshots/` altına ekleyip ilgili dosyalardaki placeholder'ları güncelleyebilirsin.
+Repo **görsele bağımlı değildir**: pratik-lab dosyalarında ekran görüntüsü yerine, o çıktının **gerçekçi metinsel karşılığı** verilir (ör. örnek bir `nmap -sV` çıktısı, hashcat "Cracked" ekranı, SQL hata mesajı) — bir kod bloğu olarak, okunabilir ve aranabilir şekilde. Böylece her dosya tek başına tamdır. Yine de lab'ları kendin çözdükçe kendi ekran görüntülerini `assets/screenshots/` altına ekleyip içeriği zenginleştirebilirsin (`.gitkeep` ile hazır bekliyor).
 
 ---
 

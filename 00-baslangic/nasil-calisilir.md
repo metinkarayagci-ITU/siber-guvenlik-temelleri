@@ -49,7 +49,7 @@ flowchart LR
 Modüllerin çoğunda bir `pratik-lab/` klasörü veya `pratik-scriptler/` bulunur. Buradaki dosyalar **okumak için değil, yapmak için** vardır:
 
 1. Dosyadaki adımları kendi makinende (veya bir VM'de) uygula.
-2. Ekran görüntüsü istenen yerlerde (`> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK` notu) kendi çıktını al, `assets/screenshots/` altına koy ve markdown linkini güncelle.
+2. Pratik dosyalarda örnek çıktılar (kod bloğu olarak) verilmiştir; kendi çalışmanda aldığın çıktıları/ekran görüntülerini `assets/screenshots/` altına ekleyip notlarını zenginleştirebilirsin.
 3. `.py` scriptlerini çalıştır, kırıp yeniden yaz, genişlet. `15-projeler/` bunların portföy-kalite versiyonlarını üretmeni öneriyor.
 
 > **Güvenlik/etik hatırlatması:** Tarama, sömürü ve şifre kırma araçlarını **yalnızca kendine ait veya açıkça izin verilmiş sistemlerde** kullan. Detay için [10-pentest-metodolojisi/metodoloji-ve-rules-of-engagement.md](../10-pentest-metodolojisi/metodoloji-ve-rules-of-engagement.md).

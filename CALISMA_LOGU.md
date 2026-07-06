@@ -29,6 +29,10 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 - **Kaynaklar (satır-içi):** THC-Hydra, Greenbone/OpenVAS.
 - **Sözlük:** 7 yeni terim (Hydra, online/offline, spraying, credential stuffing, zafiyet tarama, auth/unauth).
 
+**Ekran görüntüsü yer tutucuları → metinsel çıktı ✅ (Bölüm 8)**
+- **27 `📸 EKRAN GÖRÜNTÜSÜ EKLENECEK` yer tutucusunun tümü** gerçekçi metinsel çıktıyla değiştirildi (nmap -sV, gobuster, reverse shell/whoami, Meterpreter/getuid, SQL hata, XSS DOM, IDOR istek/yanıt, hashcat Cracked+hız, openssl verify, ss -tulnp, ufw/fail2ban, öncesi/sonrası nmap, phishing ham başlık spf/dkim/dmarc=fail, vb.). THM not şablonundaki yer tutucular "çıktı yapıştır" kod bloklarına çevrildi.
+- **Sonuç:** Repo artık görsele bağımlı değil; her dosya tek başına tam. README + nasil-calisilir güncellendi. 15 dosyada değişiklik.
+
 **12-phishing — Moniker Link ✅**
 - **Değişen dosyalar:** `phishing-analizi.md` (yeni bölüm), `windows-temelleri.md` (simetrik).
 - **Eklenen kavram:** Moniker Link / CVE-2024-21413 (Outlook, `file://...!` ile Protected View atlatma → SMB'ye zorunlu bağlantı → NTLMv2 hash sızması → offline kırma / NTLM relay). Coerced authentication genel kavramı.
@@ -38,11 +42,6 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 ---
 
 ## ✅ TUR 1 tamamlandı — genel özet
-
-**16/16 modül işlendi.** Öne çıkan sonuçlar:
-
-
-## ✅ Tur tamamlandı — genel özet
 
 **16/16 modül işlendi.** Öne çıkan sonuçlar:
 

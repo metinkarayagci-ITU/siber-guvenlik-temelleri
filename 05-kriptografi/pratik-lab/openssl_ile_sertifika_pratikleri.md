@@ -78,7 +78,17 @@ openssl dgst -sha256 -verify acik_rsa.pem -signature mesaj.imza gizli.txt
 ```
 > **Gözlem:** İmza, hem gönderen kimliğini hem bütünlüğü kanıtlar. Mesaj değişirse doğrulama çöker — yazılım imzalamanın ([A08](../../04-web-guvenligi/owasp-top10-tam-rehber.md)) neden tedarik zincirini koruduğu budur.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: "Verified OK" ve mesaj değişince "Verification Failure" çıktıları yan yana.
+**İki durumun çıktısı yan yana:**
+```text
+# Mesaj değişmemişken:
+$ openssl dgst -sha256 -verify acik_rsa.pem -signature mesaj.imza gizli.txt
+Verified OK
+
+# Mesaj değiştirildikten sonra (tek karakter bile):
+$ openssl dgst -sha256 -verify acik_rsa.pem -signature mesaj.imza gizli.txt
+Verification Failure
+```
+"Verified OK" hem gönderenin kimliğini (yalnızca özel anahtar sahibi imzalayabilir) hem bütünlüğü (mesaj değişmemiş) kanıtlar. Tek bir bit değişince "Verification Failure" — çünkü hash ([../temel-kavramlar.md](../temel-kavramlar.md)) tamamen değişir.
 
 ---
 
@@ -117,7 +127,18 @@ flowchart LR
 
 > **Gözlem:** Bu tam olarak bir gerçek CA'nın yaptığı iş. `verify` komutu, tarayıcının HTTPS'te yaptığı zincir doğrulamasının aynısı. Kök CA'ya güvenilmezse (senin kokCA.crt'in tarayıcıda yok) → "güvenilmeyen sertifika" uyarısı. Burp'ün kendi CA'sını neden tarayıcıya eklettiğini ([../pki-x509.md](../pki-x509.md)) şimdi tam anlıyorsun.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `openssl verify -CAfile kokCA.crt sunucu.crt` → "OK" çıktısı ve sertifika detayları.
+**Zincir doğrulama çıktısı:**
+```text
+$ openssl verify -CAfile kokCA.crt sunucu.crt
+sunucu.crt: OK
+
+$ openssl x509 -in sunucu.crt -noout -subject -issuer -dates
+subject=CN = test.lab, O = Lab, C = TR
+issuer=CN = Benim Kok CA, O = Lab, C = TR
+notBefore=Jul  2 12:00:00 2026 GMT
+notAfter=Jul  2 12:00:00 2027 GMT
+```
+`OK` = zincir geçerli: `sunucu.crt`'yi imzalayan `issuer` (Benim Kok CA), `-CAfile` ile verdiğin güvenilen köke ulaşıyor. Tarayıcının HTTPS'te yaptığı doğrulama tam olarak budur; fark, tarayıcının kök CA listesinin işletim sistemine gömülü olmasıdır ([../pki-x509.md](../pki-x509.md)).
 
 ---
 

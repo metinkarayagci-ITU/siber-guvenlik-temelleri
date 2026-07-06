@@ -24,7 +24,12 @@ cd juice-shop && npm install && npm start
 
 > ⚠️ **Yalnızca kendi makinende (localhost).** Juice Shop'u internete açık bir sunucuda çalıştırma — kasıtlı zafiyetli olduğu için anında ele geçirilir.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `docker run` sonrası açılan Juice Shop ana sayfası (localhost:3000).
+**Başarılı kurulum çıktısı:**
+```text
+$ docker run --rm -p 3000:3000 bkimminich/juice-shop
+info: Server listening on port 3000
+```
+`http://localhost:3000` adresine gidince renkli bir e-ticaret ("OWASP Juice Shop") arayüzü açılır — meyve/suyu satan, kasıtlı zafiyetli bir dükkân. Sağ üstte "Account" menüsü ve bir arama çubuğu vardır; bunlar ilk test hedeflerin olacak.
 
 ---
 
@@ -49,7 +54,7 @@ Her alıştırmada: **teori dosyasını aç → Burp'te dene → sonucu belgele.
 - [ ] Yönetici olarak giriş yapabildin mi? Neden çalıştı? (Sorgu yapısını [sqli.md](../zafiyet-siniflari/sqli.md)'deki gibi kâğıda çıkar.)
 - [ ] Burp Repeater'da giriş isteğini yakala, payload'ı orada da dene.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `' OR 1=1 --` ile admin oturumuna düşen giriş ekranı.
+**Ne gözlemlenir:** E-posta alanına `' OR 1=1 --` yazıp herhangi bir parolayla giriş yapınca, uygulama seni **ilk kullanıcı olarak** (genelde admin) içeri alır — sağ üstte "admin@juice-sh.op" belirir. Sorgu `SELECT * FROM Users WHERE email='' OR 1=1 --' AND password='...'` hâline geldiği için `1=1` tüm satırları döndürdü, `--` parola kontrolünü yorumladı ([../zafiyet-siniflari/sqli.md](../zafiyet-siniflari/sqli.md)).
 
 ### 3.2 IDOR / Bozuk Erişim Kontrolü
 > Teori: [../zafiyet-siniflari/idor-erisim-kontrolu.md](../zafiyet-siniflari/idor-erisim-kontrolu.md)
@@ -89,7 +94,7 @@ Her bulgu için (pentest raporu alışkanlığı → [../../10-pentest-metodoloj
 | **Etki** | Ne elde edildi (veri, hesap, RCE)? |
 | **Öneri** | Nasıl düzeltilir (teori dosyasındaki savunma) |
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: Çözülen bir zorluğun Score Board'da "solved" olarak işaretlendiği an.
+**Ne gözlemlenir:** Bir zorluğu çözdüğünde Juice Shop anlık bir bildirim gösterir ("Well done...") ve `http://localhost:3000/#/score-board` sayfasında ilgili satır yeşil "solved" durumuna geçer. Score Board, hangi zafiyet sınıflarını denediğini ve ilerlemeni takip etmenin yoludur.
 
 ---
 

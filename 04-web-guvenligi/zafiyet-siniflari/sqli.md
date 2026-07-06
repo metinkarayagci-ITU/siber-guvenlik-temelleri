@@ -96,7 +96,12 @@ flowchart TD
    sqlmap -u "http://localhost/urun?id=1" --dbs --batch
    ```
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `'` girdisiyle dönen SQL hata mesajı ve ardından `' OR '1'='1` ile başarılı giriş.
+**Tek tırnak (`'`) girildiğinde dönen tipik hata** (error-based SQLi sinyali):
+```text
+You have an error in your SQL syntax; check the manual that corresponds to
+your MySQL server version for the right syntax to use near ''' AND password='' at line 1
+```
+Bu hata, girdinin doğrudan sorguya gittiğinin (parametreleştirilmediğinin) kanıtıdır — tek tırnak sorgunun sözdizimini bozdu. Ardından `' OR '1'='1' -- ` ile giriş "Login successful — Welcome admin" döner. Not: ayrıntılı SQL hatasının kullanıcıya dönmesi ayrıca bir bilgi ifşası zafiyetidir (OWASP 2025 A02/A10 → [../owasp-top10-tam-rehber.md](../owasp-top10-tam-rehber.md)); üretimde hata mesajları gizlenir ama saldırgana da yol gösterir.
 
 ---
 

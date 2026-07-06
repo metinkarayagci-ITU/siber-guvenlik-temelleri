@@ -31,7 +31,7 @@ flowchart LR
    - Veya sistem/Firefox proxy ayarını `127.0.0.1:8080` yap (FoxyProxy eklentisi pratiktir).
 4. **HTTPS için CA sertifikası ekle:** Tarayıcıda `http://burp` adresine git → CA sertifikasını indir → tarayıcıya güvenilen otorite olarak ekle. Aksi hâlde HTTPS siteleri sertifika hatası verir (çünkü Burp trafiği araya girer → [pki-x509.md](../05-kriptografi/pki-x509.md)).
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `Proxy → Options` dinleyici ayarı ve tarayıcıya eklenmiş Burp CA sertifikası.
+**Doğru kurulumun kontrolü:** `Proxy → Proxy settings` altında dinleyicinin `Running` durumda ve `127.0.0.1:8080` adresinde olduğunu görmelisin. Sertifika doğru kuruluysa, `http://burp` adresine gidip CA'yı indirip tarayıcıya eklediğinde, artık HTTPS sitelerinde sertifika uyarısı **çıkmaz** ve `HTTP history` sekmesinde şifreli trafiğin (443) içeriği düz metin olarak görünür. Uyarı hâlâ çıkıyorsa, CA sertifikası tarayıcının güvenilen otoriteler deposuna eklenmemiş demektir.
 
 ---
 

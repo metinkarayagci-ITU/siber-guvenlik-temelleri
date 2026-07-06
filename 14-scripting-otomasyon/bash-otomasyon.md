@@ -125,7 +125,16 @@ find / -xdev -type f -perm -0002 2>/dev/null | head -5 | sed 's/^/      /'
 echo "=== Denetim tamamlandı ==="
 ```
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `hardening_kontrol.sh` çıktısı (kendi lab VM'inde).
+**Örnek çıktı:**
+```text
+=== Basit Sertleştirme Denetimi ===
+  [+] Root SSH girişi kapalı
+  [-] Birden fazla UID 0 hesap: root yedekadmin ← incele!
+  [i] Dünya-yazılabilir dosyalar (örnek):
+      /tmp/paylasim.txt
+=== Denetim tamamlandı ===
+```
+`[+]` geçen kontrol, `[-]` dikkat gerektiren bulgu. Burada `yedekadmin` adında ikinci bir UID 0 (root eşdeğeri) hesabı çıktı — bu, ya bir yanlış yapılandırma ya da bir saldırganın kalıcılık için açtığı backdoor hesabı olabilir ([../02-linux-windows/windows-temelleri.md](../02-linux-windows/windows-temelleri.md) benzer kalıcılık).
 
 ---
 

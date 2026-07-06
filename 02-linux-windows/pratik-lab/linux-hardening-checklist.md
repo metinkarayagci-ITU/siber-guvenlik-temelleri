@@ -16,7 +16,14 @@ Sertleştirmeden önce sistemi **tanı**. Neyi kapatacağını bilmek için önc
   ```bash
   sudo ss -tulnp
   ```
-  > 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `ss -tulnp` çıktısı — hangi servislerin hangi portları dinlediği.
+  **Örnek çıktı:**
+  ```text
+  Netid State  Local Address:Port  Process
+  tcp   LISTEN 0.0.0.0:22          users:(("sshd",pid=812))
+  tcp   LISTEN 0.0.0.0:80          users:(("apache2",pid=1033))
+  tcp   LISTEN 127.0.0.1:3306      users:(("mysqld",pid=1188))
+  ```
+  Bu çıktıyı okumak sertleştirmenin temelidir: SSH (22) ve Apache (80) tüm arayüzlerde (`0.0.0.0`) dinliyor — dışarıya açık. MySQL (3306) yalnızca `127.0.0.1`'de — iyi, dışarıdan erişilemez. Amaç: gereksiz her `0.0.0.0` dinleyiciyi ya kapatmak ya `127.0.0.1`'e çekmektir.
 
 - [ ] **Çalışan servisleri gör:**
   ```bash
@@ -61,7 +68,12 @@ Sertleştirmeden önce sistemi **tanı**. Neyi kapatacağını bilmek için önc
   ```
 - [ ] **Kullanılmayan/servis hesaplarına shell verme:** `usermod -s /usr/sbin/nologin <hesap>`.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `sshd_config` değişiklikleri sonrası parola ile bağlanma denemesinin reddedildiği terminal.
+**Parola kimlik doğrulaması kapatıldıktan sonra, anahtarsız bağlanma denemesi:**
+```text
+$ ssh kullanici@sunucu-ip
+kullanici@sunucu-ip: Permission denied (publickey).
+```
+`Permission denied (publickey)` = sunucu artık yalnızca anahtar kabul ediyor, parola denemesini bile reddediyor. Bu, SSH brute-force'u ([../../10-pentest-metodolojisi/somuru-ve-sonrasi.md](../../10-pentest-metodolojisi/somuru-ve-sonrasi.md) §1.5) tümüyle etkisiz kılar.
 
 ---
 
@@ -96,7 +108,23 @@ Sertleştirmeden önce sistemi **tanı**. Neyi kapatacağını bilmek için önc
   sudo fail2ban-client status sshd
   ```
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: `ufw status verbose` ve `fail2ban-client status sshd` çıktıları.
+**Örnek çıktılar:**
+```text
+$ sudo ufw status verbose
+Status: active
+Default: deny (incoming), allow (outgoing)
+To          Action      From
+22/tcp      ALLOW IN    10.0.99.0/24
+
+$ sudo fail2ban-client status sshd
+Status for the jail: sshd
+|- Filter
+|  `- Currently failed: 2
+`- Actions
+   |- Currently banned: 1
+   `- Banned IP list:   45.83.x.12
+```
+`ufw`: gelen her şey reddedilir, yalnızca yönetim ağından (10.0.99.0/24) SSH açık. `fail2ban`: 45.83.x.12 çok sayıda başarısız denemeden sonra otomatik yasaklandı — brute-force'a canlı savunma.
 
 ---
 
@@ -148,7 +176,17 @@ Sertleştirmenin işe yaradığını **kanıtla**:
 - [ ] Parola ile SSH bağlanmayı dene — reddediliyor mu?
 - [ ] `fail2ban`'ı test et: kasıtlı 5 yanlış SSH denemesi yap, IP'nin yasaklandığını gör.
 
-> 📸 EKRAN GÖRÜNTÜSÜ EKLENECEK: Sertleştirme öncesi vs sonrası `nmap` çıktısı yan yana (açık port sayısındaki düşüş).
+**Sertleştirme öncesi vs sonrası `nmap -sV` — açık yüzeyin daralması:**
+```text
+# ÖNCE:                              # SONRA:
+22/tcp   open  ssh                   22/tcp  open  ssh   (yalnızca yönetim ağından)
+23/tcp   open  telnet                (kapatıldı)
+80/tcp   open  http                  80/tcp  open  http
+139/tcp  open  netbios-ssn           (kapatıldı)
+445/tcp  open  microsoft-ds          (kapatıldı)
+3306/tcp open  mysql                 (127.0.0.1'e çekildi — dışarıdan görünmez)
+```
+Saldırı yüzeyi 6 açık servisten 2'ye düştü; telnet (düz metin) ve dışa açık MySQL gibi yüksek riskli noktalar kapandı. "Kendini nmap'le" bir savunma pratiğidir ([../../10-pentest-metodolojisi/kesif-enumerasyon.md](../../10-pentest-metodolojisi/kesif-enumerasyon.md)).
 
 ---
 
