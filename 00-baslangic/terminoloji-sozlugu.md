@@ -144,7 +144,16 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **IDS / IPS** | Saldırı tespit / önleme sistemi. |
 | **TP / FP / FN / TN** | Doğru pozitif / yanlış pozitif / yanlış negatif / doğru negatif. Bkz. [log-analizi.md](../11-soc-mavi-takim/log-analizi.md). |
 | **Sysmon** | Windows için ayrıntılı olay günlüğü aracı. |
-| **IR (olay müdahalesi)** | Incident Response — bir güvenlik olayına yapılandırılmış yanıt. |
+| **IR (olay müdahalesi)** | Incident Response — bir güvenlik olayına yapılandırılmış yanıt (PICERL / NIST). Bkz. [olay-mudahale-ir.md](../11-soc-mavi-takim/olay-mudahale-ir.md). |
+| **PICERL** | SANS olay müdahale döngüsü: Prepare, Identify, Contain, Eradicate, Recover, Lessons Learned. |
+| **Chain of custody (delil zinciri)** | Bir kanıtın toplanmadan mahkemeye kadar kim/ne zaman/nasıl kaydı; bütünlük hash ile kanıtlanır. Bkz. [dijital-forensics.md](../11-soc-mavi-takim/dijital-forensics.md). |
+| **Order of volatility (uçuculuk sırası)** | Kanıtı en uçucudan (RAM) en kalıcıya (disk/yedek) doğru toplama sırası (RFC 3227). |
+| **Disk imaging / write blocker** | Diskin bit-bit forensic kopyası / kaynağı değiştirmeden yalnızca-okuma sağlayan aygıt. Bkz. [dijital-forensics.md](../11-soc-mavi-takim/dijital-forensics.md). |
+| **Volatility** | RAM imajından süreç/ağ/enjekte-kod çıkaran bellek forensics aracı. |
+| **Statik / dinamik analiz** | Zararlıyı çalıştırmadan (statik) vs izole ortamda çalıştırarak (dinamik) inceleme. Bkz. [malware-analiz.md](../11-soc-mavi-takim/malware-analiz.md). |
+| **Sandbox** | Şüpheli örneği izole edip davranışını otomatik gözleyen analiz ortamı. |
+| **YARA** | Zararlıyı string/byte kalıplarıyla tanımlayıp tespit eden kural dili ("zararlı için regex"). |
+| **CyberChef / CAPA / REMnux / FLARE-VM** | Sırasıyla: kodlama/veri dönüşüm aracı, yetenek→ATT&CK eşleyici, Linux malware analiz dağıtımı, Windows analiz ortamı. |
 
 ## Yönetişim, risk, uyum (GRC)
 

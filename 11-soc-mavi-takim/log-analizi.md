@@ -113,32 +113,11 @@ flowchart TD
 
 ---
 
-## 6. Olay müdahalesi (Incident Response) yaşam döngüsü
+## 6. Log analizinden olay müdahalesine
 
-Bir olay onaylandığında, yapılandırılmış bir müdahale süreci işler. İki yaygın referans: NIST SP 800-61 (kaynak: [NIST SP 800-61](https://csrc.nist.gov/pubs/sp/800/61/r2/final)) ve SANS'ın PICERL modeli:
+Bir uyarı "gerçek olay" olarak onaylandığında (TP), iş log analizinden **yapılandırılmış olay müdahalesine** (incident response) geçer. Kısaca: bir olay Hazırlık → Tanımlama → Sınırlama → Yok Etme → Kurtarma → Dersler döngüsünden geçer (SANS PICERL / NIST SP 800-61). En kritik nüans, log/kanıt açısından şudur: **sınırlama sırasında makineyi kapatmak, RAM'deki uçucu kanıtı ([surecler-ve-bellek.md](../03-isletim-sistemi-ici/surecler-ve-bellek.md)) yok eder** — doğru sıra "önce bellek imajı, sonra ağdan izolasyon"dur.
 
-```mermaid
-stateDiagram-v2
-    [*] --> Hazırlık: Preparation (önceden)
-    Hazırlık --> Tespit: Identification (olay fark edildi)
-    Tespit --> Sınırlama: Containment (yayılmayı durdur)
-    Sınırlama --> YokEtme: Eradication (tehdidi temizle)
-    YokEtme --> Kurtarma: Recovery (normale dön)
-    Kurtarma --> Dersler: Lessons Learned (iyileştir)
-    Dersler --> Hazırlık: (döngü kapanır)
-    Dersler --> [*]
-```
-
-| Aşama | Ne yapılır |
-|-------|-----------|
-| **Hazırlık (Preparation)** | Plan, araç, ekip, iletişim önceden hazır ([NIST CSF](../08-grc-yonetisim-risk-uyum/cerceveler-nist-iso.md)) |
-| **Tespit (Identification)** | Olayı doğrula, kapsamını belirle |
-| **Sınırlama (Containment)** | Yayılmayı durdur (host'u izole et) — [zero-trust](../06-kimlik-erisim-yonetimi-iam/zero-trust.md) segmentasyonu burada değerli |
-| **Yok Etme (Eradication)** | Zararlıyı/erişimi temizle, kök nedeni gider |
-| **Kurtarma (Recovery)** | Sistemleri güvenli şekilde geri getir (RTO/RPO → [risk-yonetimi.md](../08-grc-yonetisim-risk-uyum/risk-yonetimi.md)) |
-| **Dersler (Lessons Learned)** | Ne öğrendik? Savunmayı nasıl güçlendiririz? |
-
-> **Nüans — "önce fişi çekme":** Sınırlama sırasında acele edip makineyi kapatmak, RAM'deki uçucu kanıtı ([surecler-ve-bellek.md](../03-isletim-sistemi-ici/surecler-ve-bellek.md)) yok eder. Doğru sıra: **önce kanıt topla (bellek imajı), sonra izole et.** Ağdan izolasyon (fişi çekmek yerine) yayılmayı durdurur ama kanıtı korur.
+> Tam müdahale yaşam döngüsü, her aşamanın nüansları (kısa/uzun vadeli containment, yeniden kurulum vs temizleme, out-of-band iletişim, yasal bildirim) ayrı bir dosyada işlenir → **detay: [olay-mudahale-ir.md](olay-mudahale-ir.md)**. Olay ciddiyse kanıt toplama [dijital-forensics.md](dijital-forensics.md), şüpheli dosya analizi [malware-analiz.md](malware-analiz.md) devreye girer.
 
 ---
 

@@ -1,10 +1,33 @@
-# 📋 Çalışma Logu (Derinleştirme ve Bağlama Turu)
+# 📋 Çalışma Logu
 
-Bu dosya, reponun "tam kapsamlı hale getirme ve kavramlar arası bağlantı kurma" turunun ilerleme kaydını tutar. Her modül işlendiğinde: hangi dosyalar değişti, hangi kavramlar eklendi/genişletildi, hangi ilişkiler kuruldu, hangi dış kaynaklar doğrulandı.
+Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tutar. Her aşamada: hangi dosyalar değişti, hangi kavramlar eklendi/derinleştirildi, hangi ilişkiler kuruldu, hangi kaynaklar doğrulandı, hangi hatalar düzeltildi.
 
-**Çalışma prensibi:** Modüller README sırasıyla (00 → 15) işlenir, her modül sonunda ayrı commit atılır. Kavramlar arası bağlantı düzyazı içinde ve simetriktir (X↔Y hem X'te hem Y'de). Dış iddialar satır-içi kaynakla doğrulanır.
+**Çalışma prensibi:** Kavramlar arası bağlantı düzyazı içinde ve simetriktir (X↔Y hem X'te hem Y'de). Dış iddialar satır-içi kaynakla doğrulanır. İş kesilirse bu logdan kaldığı yer görülüp sürdürülebilir.
 
 ---
+
+## 🔶 TUR 2 — Uzman-öncesi hacker düzeyine genişletme (devam ediyor)
+
+**Amaç:** Persona = sistemi gerçekten anlayan, sahada öğrenmiş hacker (script kiddie üstü, tek-alan uzmanı altı). Kapsam ölçütü THM değil, bu persona. Savunma tarafı (SOC/forensics/IR/malware) saldırıya göre zayıftı — dengeleniyor.
+
+**Bilinen boşluklar (Bölüm 2 — doldurulacak):** Moniker Link/CVE-2024-21413, Hydra (online brute-force), Digital Forensics çekirdeği, Malware analiz araç/akışı, IR tam yaşam döngüsü (PICERL), zafiyet tarayıcıları (Nessus/OpenVAS/Qualys).
+
+### Tur 2 ilerleme
+
+**11-soc-mavi-takim — savunma genişletmesi ✅**
+- **Yeni dosyalar:** `dijital-forensics.md`, `malware-analiz.md`, `olay-mudahale-ir.md` (savunma tarafındaki en büyük boşluklar).
+- **Eklenen kavramlar:** chain of custody, order of volatility (RFC 3227), disk imaging + write blocker, canlı vs ölü analiz, Volatility bellek forensics, MAC times + timestomping (anti-forensics), file carving; statik vs dinamik malware analizi, packing/entropi, PE imports, CAPA, YARA, sandbox, INetSim/FakeNet, CyberChef/REMnux/FLARE-VM; PICERL + NIST 800-61 tam IR döngüsü (kısa/uzun containment, yeniden kurulum, out-of-band iletişim, yasal bildirim).
+- **Tekrar önleme:** `log-analizi.md`'deki IR bölümü özete indirilip `olay-mudahale-ir.md`'ye işaret edildi (tam anlatım tek yerde).
+- **Kurulan ilişkiler (simetrik):** forensics hash ↔ bütünlük (00/05); order of volatility ↔ RAM uçuculuğu (03); LSASS bellek kanıtı ↔ Mimikatz (02); Volatility pstree ↔ Sysmon süreç ağacı (11 log); CyberChef ↔ kodlama≠şifreleme (00) + `-enc` yükü (11 log); CAPA/YARA ↔ ATT&CK (07) + Pyramid of Pain (07); IR ↔ Kill Chain (07) + NIST CSF Respond/Recover (08) + yanal hareket (10) + zero-trust segmentasyon (06). siem-edr-soar ↔ yeni üçlü [iki yönlü].
+- **Kaynaklar (satır-içi):** RFC 3227, NIST SP 800-61, Mandiant CAPA/FLARE-VM, REMnux, CyberChef (GCHQ).
+- **Sözlük:** 12 yeni savunma terimi eklendi.
+
+---
+
+## ✅ TUR 1 tamamlandı — genel özet
+
+**16/16 modül işlendi.** Öne çıkan sonuçlar:
+
 
 ## ✅ Tur tamamlandı — genel özet
 

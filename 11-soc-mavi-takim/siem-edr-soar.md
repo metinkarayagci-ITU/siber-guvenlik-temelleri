@@ -120,4 +120,6 @@ flowchart TD
 - **Kill chain'i erken kır:** SOC'un hedefi, saldırganı zincirin ([cyber-kill-chain.md](../07-tehdit-modelleme-cerceveler/cyber-kill-chain.md)) mümkün olan en erken aşamasında yakalamaktır — veri sızmadan (Exfiltration) önce.
 - **Mor takım döngüsü:** Kırmızı takım ([10-pentest](../10-pentest-metodolojisi/metodoloji-ve-rules-of-engagement.md)) saldırır, mavi takım tespit eder, boşluklar kapatılır — savunma böyle olgunlaşır.
 
-> **Sonraki:** [log-analizi.md](log-analizi.md).
+Bir uyarı gerçek bir olaya dönüştüğünde, SIEM/EDR/SOAR ile tespit bittiği yerde **olay müdahalesi** başlar: kanıtı bozmadan toplama [dijital-forensics.md](dijital-forensics.md), şüpheli örneği analiz etme [malware-analiz.md](malware-analiz.md) ve tüm süreci yönetme [olay-mudahale-ir.md](olay-mudahale-ir.md). Bu üçü, bu modüldeki tespit araçlarının doğal devamıdır — tespit olmadan müdahale kör, müdahale olmadan tespit değersizdir.
+
+> **Sonraki:** [log-analizi.md](log-analizi.md) → [dijital-forensics.md](dijital-forensics.md) → [malware-analiz.md](malware-analiz.md) → [olay-mudahale-ir.md](olay-mudahale-ir.md).
