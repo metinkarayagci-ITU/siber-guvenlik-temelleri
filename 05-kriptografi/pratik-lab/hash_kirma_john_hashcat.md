@@ -20,6 +20,8 @@ flowchart LR
 
 Bu yüzden savunma "hash'i tersine çevrilemez yapmak" değil (zaten öyle), **tahmini pahalı yapmaktır**: salt (ön-hesaplamayı engeller) + yavaş KDF (saniyede milyar yerine bin deneme).
 
+> **Bu lab offline kırmadır — online'dan farkını bil:** Burada bir **hash** üzerinde çalışıyorsun; yani parolayı denemeyi kendi makinende, hedefin göremeyeceği şekilde, GPU hızında yapıyorsun. Bunun karşıtı **online** parola saldırısıdır (canlı bir SSH/RDP/web formuna Hydra ile deneme): yavaş, gürültülü ve hesap kilitleme/rate-limit ile durdurulabilir. Saldırganın offline'ı tercih etme nedeni ve iki yöntemin tam karşılaştırması → [../../10-pentest-metodolojisi/somuru-ve-sonrasi.md](../../10-pentest-metodolojisi/somuru-ve-sonrasi.md) (§1.5). Offline'ın hedefin kilitleme kontrollerini atlaması, savunmanın neden **salt + yavaş KDF**'ye (bu lab'ın dersi) muhtaç olduğunu gösterir.
+
 ---
 
 ## 2. Saldırı türleri

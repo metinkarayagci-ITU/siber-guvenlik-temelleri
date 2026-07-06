@@ -22,6 +22,13 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 - **Kaynaklar (satır-içi):** RFC 3227, NIST SP 800-61, Mandiant CAPA/FLARE-VM, REMnux, CyberChef (GCHQ).
 - **Sözlük:** 12 yeni savunma terimi eklendi.
 
+**10-pentest — saldırı boşlukları ✅**
+- **Yeni dosya:** `zafiyet-tarama.md` (Nessus/OpenVAS/Qualys, tarama≠sömürü/yanlış pozitif, authenticated vs unauthenticated, zafiyet yönetimi döngüsü, CISA KEV önceliklendirme).
+- **Eklenen kavram:** Hydra (online brute-force) + online vs offline parola saldırısı ayrımı (§1.5 somuru-ve-sonrasi), password spraying.
+- **Kurulan ilişkiler (simetrik):** online (Hydra) ↔ offline kırma (05 hash lab) [iki yönlü]; offline sessizliği ↔ salt/KDF savunması (05); NTLM çalma ↔ Moniker Link (12, sıradaki); zafiyet tarama ↔ CVE/CVSS (10) + risk önceliklendirme (08) + SCA (13) + web tarayıcı (04); tarama gürültüsü ↔ log tespiti (11).
+- **Kaynaklar (satır-içi):** THC-Hydra, Greenbone/OpenVAS.
+- **Sözlük:** 7 yeni terim (Hydra, online/offline, spraying, credential stuffing, zafiyet tarama, auth/unauth).
+
 ---
 
 ## ✅ TUR 1 tamamlandı — genel özet
