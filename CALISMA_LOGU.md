@@ -22,6 +22,11 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 
 **Bölüm 2 boşlukları — DURUM: tümü dolduruldu ✅** (Moniker Link, Hydra, forensics, malware analiz, IR/PICERL, zafiyet tarayıcıları).
 
+**Ek persona boşlukları (Bölüm 1 kapsam kuralı) — devam ediyor:**
+- **Privesc derinlemesine ✅** (kalibrasyonun açık isteği "privesc/enumerasyon derinlemesine"): yeni `10/privilege-escalation.md` — Linux (SUID/GTFOBins, sudo/LD_PRELOAD/Baron Samedit, cron wildcard/PATH, capabilities, yazılabilir /etc/passwd, NFS no_root_squash, kernel exploit) + Windows (unquoted service path, weak service perms, SeImpersonate/Potato, SeBackup/SeDebug, AlwaysInstallElevated, DLL hijacking) — her vektörün *neden* çalıştığı. somuru-ve-sonrasi §3 → bu dosyaya işaret (tekrar önleme). Simetrik: SUID/sudo/PATH ↔ 02, token/servis ↔ 02, kernel ↔ 03, savunma ↔ hardening lab.
+- **Active Directory saldırıları ✅** (persona, forest tasarımı hariç): yeni `10/active-directory-saldirilari.md` — Kerberos temelli Kerberoasting/AS-REP (offline kırma bağı 05), PtH/PtT/Overpass, DCSync, Golden Ticket, BloodHound; her birinin mekanizması + savunma + tespit. Simetrik: windows-temelleri Kerberos ↔ bu dosya [iki yönlü]; Golden Ticket ↔ imza anahtarı (05); AD yanal hareket ↔ zero-trust gerekçesi (06); Moniker Link NTLM ↔ PtH.
+- **Sözlük:** GTFOBins/LOLBins, unquoted service path, SeImpersonate/Potato, Kerberoasting, AS-REP, PtT, DCSync/Golden Ticket, BloodHound (9 terim).
+
 **11-soc-mavi-takim — savunma genişletmesi ✅**
 - **Yeni dosyalar:** `dijital-forensics.md`, `malware-analiz.md`, `olay-mudahale-ir.md` (savunma tarafındaki en büyük boşluklar).
 - **Eklenen kavramlar:** chain of custody, order of volatility (RFC 3227), disk imaging + write blocker, canlı vs ölü analiz, Volatility bellek forensics, MAC times + timestomping (anti-forensics), file carving; statik vs dinamik malware analizi, packing/entropi, PE imports, CAPA, YARA, sandbox, INetSim/FakeNet, CyberChef/REMnux/FLARE-VM; PICERL + NIST 800-61 tam IR döngüsü (kısa/uzun containment, yeniden kurulum, out-of-band iletişim, yasal bildirim).

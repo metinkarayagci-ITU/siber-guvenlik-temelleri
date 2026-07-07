@@ -139,6 +139,14 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **Credential stuffing** | Başka bir sızıntıdan çalınan kullanıcı adı+parola çiftlerini başka serviste deneme (parola tekrarını istismar). |
 | **Zafiyet tarama (vulnerability scanning)** | Bilinen zafiyetleri otomatik listeleme (Nessus/OpenVAS/Qualys); tarama ≠ sömürü, yanlış pozitif üretir. Bkz. [zafiyet-tarama.md](../10-pentest-metodolojisi/zafiyet-tarama.md). |
 | **Authenticated / unauthenticated tarama** | Kimlikle içeriden (derin, doğru) vs kimliksiz dışarıdan (saldırgan bakışı) zafiyet tarama. |
+| **GTFOBins / LOLBins** | SUID/sudo ile root'a çevrilebilen Unix ikilileri (GTFOBins) / meşru Windows ikililerinin kötüye kullanımı (LOLBins). Bkz. [privilege-escalation.md](../10-pentest-metodolojisi/privilege-escalation.md). |
+| **Unquoted service path** | Tırnaksız+boşluklu Windows servis yolu; ara yola yazılabilirse SYSTEM privesc. |
+| **SeImpersonate / Potato** | Bir Windows token ayrıcalığı ve onu SYSTEM'e çeviren istismar ailesi (JuicyPotato/PrintSpoofer). Bkz. [privilege-escalation.md](../10-pentest-metodolojisi/privilege-escalation.md). |
+| **Kerberoasting** | AD servis hesabının TGS biletini alıp offline kırma (zayıf servis parolası). Bkz. [active-directory-saldirilari.md](../10-pentest-metodolojisi/active-directory-saldirilari.md). |
+| **AS-REP roasting** | Pre-auth kapalı AD hesabının hash'ini kimlik doğrulamadan alıp offline kırma. |
+| **Pass-the-Ticket (PtT)** | Çalınan Kerberos biletini enjekte edip kimliğe bürünme (PtH'nin Kerberos karşılığı). |
+| **DCSync / Golden Ticket** | DC'yi taklit edip tüm hash'leri çekme (DCSync) / krbtgt hash'iyle sahte TGT üretip kalıcı domain hakimiyeti (Golden Ticket). Bkz. [active-directory-saldirilari.md](../10-pentest-metodolojisi/active-directory-saldirilari.md). |
+| **BloodHound** | AD nesne/ilişkilerini grafik olarak haritalayıp Domain Admin'e giden yolu bulan araç. |
 
 ## SOC / savunma araçları
 

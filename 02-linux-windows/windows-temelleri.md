@@ -90,7 +90,7 @@ NTFS, bir dosyaya görünmez "ek akışlar" (alternate data streams) iliştirmey
 | **Forest / Tree** | Domain'lerin hiyerarşik/güven ilişkili üst yapısı. |
 
 ### Kimlik doğrulama: Kerberos
-AD, kimlik doğrulama için ağırlıklı olarak **Kerberos** kullanır (bilet tabanlı). Bir kullanıcı giriş yapınca DC'den bir **TGT** (Ticket Granting Ticket) alır; bununla servislere erişim biletleri (TGS) ister. Kerberos akışının detayı ve saldırıları (Kerberoasting, Golden Ticket) [somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md)'de.
+AD, kimlik doğrulama için ağırlıklı olarak **Kerberos** kullanır (bilet tabanlı). Bir kullanıcı giriş yapınca DC'den bir **TGT** (Ticket Granting Ticket) alır; bununla servislere erişim biletleri (TGS) ister. Bu bilet sisteminin tam mekanizması ve üzerine kurulu saldırılar (Kerberoasting, AS-REP roasting, Pass-the-Ticket, DCSync, Golden Ticket, BloodHound) → **detay: [active-directory-saldirilari.md](../10-pentest-metodolojisi/active-directory-saldirilari.md)**.
 
 ```mermaid
 sequenceDiagram
@@ -105,7 +105,7 @@ sequenceDiagram
     S->>K: 6. Erişim ver
 ```
 
-> **Kesişim:** DC'yi ele geçiren, tüm domain'i ele geçirir ("domain admin"). Bu yüzden AD saldırıları (parola püskürtme, Kerberoasting, DCSync, Pass-the-Hash) red team'in ana konusudur; savunmada Tiered Admin modeli, LAPS, ve saldırı yollarını haritalayan BloodHound analizleri kullanılır.
+> **Kesişim:** DC'yi ele geçiren, tüm domain'i ele geçirir ("domain admin"). Bu yüzden AD saldırıları (parola püskürtme, Kerberoasting, DCSync, Pass-the-Hash) red team'in ana konusudur; savunmada Tiered Admin modeli, LAPS, ve saldırı yollarını haritalayan BloodHound analizleri kullanılır. Bu saldırıların her birinin mekanizması → [active-directory-saldirilari.md](../10-pentest-metodolojisi/active-directory-saldirilari.md).
 
 ---
 
