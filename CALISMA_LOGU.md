@@ -12,7 +12,7 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 
 **Bilinen boşluklar (Bölüm 2 — doldurulacak):** Moniker Link/CVE-2024-21413, Hydra (online brute-force), Digital Forensics çekirdeği, Malware analiz araç/akışı, IR tam yaşam döngüsü (PICERL), zafiyet tarayıcıları (Nessus/OpenVAS/Qualys).
 
-**Tur 2 çıktı özeti:** 4 yeni dosya (dijital-forensics, malware-analiz, olay-mudahale-ir, zafiyet-tarama), Bölüm 2'nin tüm boşlukları dolduruldu, 27 ekran görüntüsü yer tutucusu metne çevrildi (repo görsele bağımsız), sqli/mitre persona düzeyine derinleştirildi, ~26 yeni sözlük terimi, ~10 yeni kaynak. İçerik dosyası 64→68, diyagram 122→129. Tüm iç linkler geçerli, mojibake yok. Savunma tarafı (forensics/malware/IR) saldırıyla dengelendi.
+**Tur 2 çıktı özeti:** 7 yeni dosya (dijital-forensics, malware-analiz, olay-mudahale-ir, zafiyet-tarama, privilege-escalation, active-directory-saldirilari, paket-analizi-wireshark), Bölüm 2'nin tüm boşlukları + ek persona boşlukları (privesc, AD, packet analysis, pivoting) dolduruldu, 27 ekran görüntüsü yer tutucusu metne çevrildi (repo görsele bağımsız), sqli/mitre persona düzeyine derinleştirildi, ~39 yeni sözlük terimi, ~12 yeni kaynak. İçerik dosyası 64→71, diyagram 122→134. Tüm iç linkler geçerli, mojibake yok. Savunma tarafı (forensics/malware/IR) saldırıyla dengelendi; offensive derinleşti (privesc/AD/pivoting/packet).
 
 ### Tur 2 ilerleme
 
