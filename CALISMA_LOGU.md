@@ -6,7 +6,17 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 
 ---
 
-## 🔶 TUR 2 — Uzman-öncesi hacker düzeyine genişletme (devam ediyor)
+## ✅ TUR 2 — Uzman-öncesi hacker düzeyine genişletme (TAMAMLANDI)
+
+**Son denetim (audit) sonuçları:**
+- İç `.md` link kontrolü: **75 dosya, 0 kırık link.**
+- Bozuk karakter (mojibake) / Türkçe karakter: **temiz.**
+- Yeni 8 dosyanın tümü **4-7 farklı dosyadan referanslı** (öksüz yok, simetrik entegre).
+- Python scriptleri (subnet_calculator, port_tarayici): **çalışıyor, doğrulandı.**
+- Açık "doğrulanması gereken" nokta: **kalmadı** (CVE-2024-21413 son denetimde teyit edildi — CVSS 9.8, MkParseDisplayName API). Kalan 2 "doğrulanmalı" notu hızla-değişen-alan yönlendirmesidir (OQS sürümü, sudo-CVE), bilinmeyen değil.
+- Home dizini deposu kazası (working-directory sıfırlanması): **zararsız** — hiçbir şey stage edilmedi, hassas home dosyaları (.ssh vb.) etkilenmedi; sonraki tüm commit'ler açık `cd` ile iç depoda.
+
+
 
 **Amaç:** Persona = sistemi gerçekten anlayan, sahada öğrenmiş hacker (script kiddie üstü, tek-alan uzmanı altı). Kapsam ölçütü THM değil, bu persona. Savunma tarafı (SOC/forensics/IR/malware) saldırıya göre zayıftı — dengeleniyor.
 
@@ -174,6 +184,8 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 
 ## ⚠️ Doğrulanması gereken noktalar
 
-Bu liste, tüm araştırmaya rağmen kesin/canlı kaynakla teyit edilemeyen (veya oturum kısıtları nedeniyle ertelenen) noktaları toplar. İçerikte de yanında "doğrulanmalı" notu vardır.
+Bu liste, tüm araştırmaya rağmen kesin/canlı kaynakla teyit edilemeyen noktaları toplar. İçerikte de yanında "doğrulanmalı" notu vardır.
 
-- **CVE-2024-21413 (Moniker Link):** Çekirdek mekanizma (Outlook `file://...!` ile Protected View atlatma → SMB → NTLMv2 sızması), kâşif (Check Point) ve yama ayı (Şubat 2024) bilgime dayanır; ancak **kesin CVSS taban puanı (9.8 olarak yazıldı)** ve **tam exploit string biçimi** bu oturumda WebSearch oturum limiti nedeniyle canlı teyit edilemedi. Resmî kaynak: NVD (nvd.nist.gov/vuln/detail/CVE-2024-21413) ve Check Point Research yazısı ile doğrulanmalı. Yer: `12-sosyal-muhendislik-phishing/phishing-analizi.md`.
+- ✅ **ÇÖZÜLDÜ — CVE-2024-21413 (Moniker Link):** Son denetimde WebSearch ile doğrulandı — CVSS **9.8 Kritik**, 13 Şubat 2024 yamandı, Haifei Li/Check Point Research, kök neden güvensiz `MkParseDisplayName` API'si. NVD ve Check Point Research kaynakları dosyaya satır-içi eklendi, "doğrulanmalı" notu kaldırıldı. (Kaynaklar: [NVD](https://nvd.nist.gov/vuln/detail/CVE-2024-21413), [Check Point](https://research.checkpoint.com/2024/the-risks-of-the-monikerlink-bug-in-microsoft-outlook-and-the-big-picture/).)
+
+**Şu an açık (doğrulanmalı) kalan başka bir nokta yoktur.** İçerikte birkaç yerde "doğrulanmalı" notu, hızla değişen alanlar (ör. sudo sürüm-CVE eşlemesi, PQC güncel durum) için okuyucuyu resmî kaynağa yönlendirme amaçlıdır — bunlar bilinmeyen değil, "kritik karar öncesi güncel teyit et" uyarılarıdır.
