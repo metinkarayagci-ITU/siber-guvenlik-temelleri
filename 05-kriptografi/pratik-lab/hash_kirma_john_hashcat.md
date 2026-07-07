@@ -145,7 +145,7 @@ Bu lab'ın asıl dersi tablo hâlinde:
 | 3200 | bcrypt | Yavaş, **iyi** (parola için) |
 | 1800 | sha512crypt | Linux `/etc/shadow` ($6$) |
 | 1000 | NTLM | Windows |
-| 22000 | WPA-PBKDF2 | Wi-Fi el sıkışması |
+| 22000 | WPA-PBKDF2 | Wi-Fi el sıkışması → [../../01-ag-networking/kablosuz-guvenlik.md](../../01-ag-networking/kablosuz-guvenlik.md) |
 
 ```bash
 # Linux /etc/shadow formatını kırma (kendi lab hesabın!)

@@ -72,6 +72,9 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **pcap** | Yakalanmış ağ trafiği dosya formatı; forensics ve analiz girdisi. |
 | **Sniffing (dinleme)** | Ağ trafiğini yakalayıp okuma; şifresiz protokollerde düz metin kimlik bilgilerini ele verir. |
 | **Capture / display filter** | Yakalama sırasında (BPF) vs sonrasında (Wireshark) trafik süzme — karıştırılmamalı. |
+| **WPA2 / WPA3** | Wi-Fi güvenlik protokolleri; WPA2 (handshake yakalama + offline kırmaya açık) → WPA3 (SAE, offline'a dayanıklı). Bkz. [kablosuz-guvenlik.md](../01-ag-networking/kablosuz-guvenlik.md). |
+| **4-way handshake / deauth** | WPA2 bağlanma el sıkışması (yakalanıp offline kırılır) / istemciyi koparan (kimliksiz yönetim çerçevesi) saldırı. |
+| **Evil twin** | Meşru ağla aynı SSID'yi yayınlayan sahte AP; MITM/parola toplama için. Bkz. [kablosuz-guvenlik.md](../01-ag-networking/kablosuz-guvenlik.md). |
 
 ## Kriptografi
 

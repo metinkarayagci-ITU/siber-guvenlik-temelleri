@@ -25,7 +25,7 @@ Bu karmaşayı yönetmek için ağ **katmanlara** bölünür. Her katman yalnız
 | **Switch (anahtar)** | 2 (veri bağı) | MAC adresine göre yalnızca doğru porta iletir. | MAC tablosu taşırma (CAM overflow) ile hub gibi davranmaya zorlanabilir. |
 | **Router (yönlendirici)** | 3 (ağ) | Farklı ağlar arasında IP'ye göre yol bulur. | ACL ve firewall'un doğal yeri; ağ segmentasyonunun kalbi. |
 | **Firewall (güvenlik duvarı)** | 3–7 | Trafiği kurallara göre geçirir/engeller. | Bkz. [routing-nat-vpn.md](routing-nat-vpn.md). |
-| **Access Point (AP)** | 2 | Kablosuz cihazları kablolu ağa bağlar. | Sahte AP (evil twin), WPA saldırıları. |
+| **Access Point (AP)** | 2 | Kablosuz cihazları kablolu ağa bağlar. | Sahte AP (evil twin), WPA saldırıları → [kablosuz-guvenlik.md](kablosuz-guvenlik.md). |
 
 ---
 
