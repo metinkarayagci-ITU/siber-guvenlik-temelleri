@@ -68,6 +68,10 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **DNS** | Alan adı → IP çözümleme sistemi. Bkz. [dns-derinlemesine.md](../01-ag-networking/dns-derinlemesine.md). |
 | **VLAN** | Sanal LAN — tek fiziksel ağı mantıksal bölme. |
 | **VPN** | Sanal özel ağ — güvenilmeyen ağ üzerinden şifreli tünel. |
+| **Wireshark / tcpdump** | Paket yakalama/analiz araçları (GUI / CLI). Bkz. [paket-analizi-wireshark.md](../01-ag-networking/pratik-lab/paket-analizi-wireshark.md). |
+| **pcap** | Yakalanmış ağ trafiği dosya formatı; forensics ve analiz girdisi. |
+| **Sniffing (dinleme)** | Ağ trafiğini yakalayıp okuma; şifresiz protokollerde düz metin kimlik bilgilerini ele verir. |
+| **Capture / display filter** | Yakalama sırasında (BPF) vs sonrasında (Wireshark) trafik süzme — karıştırılmamalı. |
 
 ## Kriptografi
 

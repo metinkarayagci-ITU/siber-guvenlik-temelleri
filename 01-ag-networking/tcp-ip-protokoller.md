@@ -54,6 +54,8 @@ sequenceDiagram
 - **SYN flood (DoS):** Saldırgan binlerce SYN gönderip hiç ACK göndermez; sunucunun yarı-açık bağlantı tablosu dolar ve meşru bağlantı kabul edemez. Savunma: **SYN çerezleri (SYN cookies)**, hız sınırlama.
 - **TCP bayrakları (flags):** `SYN, ACK, FIN, RST, PSH, URG`. Farklı bayrak kombinasyonları farklı tarama türlerini (FIN, XMAS, NULL tarama) ve firewall atlatmayı mümkün kılar.
 
+> **Telde görmek:** Bu el sıkışmayı ve bayrakları gerçek paketlerde okumak (ve bir taramayı/SYN flood'u pcap'te tanımak) için → [pratik-lab/paket-analizi-wireshark.md](pratik-lab/paket-analizi-wireshark.md). Teoriyi Wireshark'ta doğrulamak, protokolü "anlamak" ile "ezberlemek" arasındaki farktır.
+
 ---
 
 ## 3. ICMP — ağın tanı protokolü
