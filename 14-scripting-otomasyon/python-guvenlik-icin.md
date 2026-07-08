@@ -185,7 +185,8 @@ subprocess.run(["ping", "-c", "1", kullanici_girdisi], shell=False, timeout=5)
 # ❌ KÖTÜ — eval/exec ile kullanıcı girdisi (kod çalıştırma)
 eval(kullanici_girdisi)                     # ASLA
 
-# ❌ KÖTÜ — güvensiz deserialization (→ A08)
+# ❌ KÖTÜ — güvensiz deserialization (→ A08, mekanizma+Log4Shell vakası:
+# ../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md)
 import pickle
 pickle.loads(guvenilmeyen_veri)             # RCE riski; JSON kullan
 ```

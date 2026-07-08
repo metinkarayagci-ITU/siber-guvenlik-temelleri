@@ -61,7 +61,7 @@
 ## A03 — Software Supply Chain Failures (Yazılım Tedarik Zinciri Hataları)
 
 **Ne:** 2021'in "Vulnerable and Outdated Components" kategorisinin genişlemiş hâli. Yalnızca zafiyetli kütüphaneleri değil, **tüm yazılım tedarik zincirini** kapsar: bağımlılıklar, build sistemleri, CI/CD boru hatları ve dağıtım altyapısı. Modern uygulamaların kodunun büyük kısmı üçüncü taraf bileşenlerden gelir.
-**Klasik örnekler:** **Log4Shell (CVE-2021-44228)** — Log4j'deki tek zafiyet milyonlarca uygulamayı uzaktan kod çalıştırmaya açtı; **SolarWinds** — build sürecine enjekte edilen kodun binlerce kuruma yayılması.
+**Klasik örnekler:** **Log4Shell (CVE-2021-44228)** — Log4j'deki tek zafiyet milyonlarca uygulamayı uzaktan kod çalıştırmaya açtı (mekanizmanın tam vaka çalışması: [zafiyet-siniflari/enjeksiyon-aileleri.md](zafiyet-siniflari/enjeksiyon-aileleri.md)); **SolarWinds** — build sürecine enjekte edilen kodun binlerce kuruma yayılması.
 **Önleme:** **SCA** (Software Composition Analysis), bağımlılık tarama (Dependabot, `npm audit`), SBOM (yazılım malzeme listesi), imzalı build/güncelleme ([anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md) dijital imza), CI/CD sertleştirme.
 ➡️ **[devsecops-ssdlc.md](../13-guvenli-kodlama-devsecops/devsecops-ssdlc.md)** (tedarik zinciri güvenliği)
 
@@ -102,7 +102,7 @@
 
 ## A08 — Software or Data Integrity Failures (Bütünlük Hataları)
 
-**Ne:** Yazılım veya verinin bütünlüğünün doğrulanmaması. İki alt tema: (1) **güvensiz deserialization** (serileştirilmiş nesneye güvenip kod çalıştırma), (2) doğrulanmamış güncelleme/eklenti. Tedarik zinciri boyutu 2025'te büyük ölçüde A03'e taşındı; A08 daha çok bütünlük doğrulaması eksikliğine odaklanır.
+**Ne:** Yazılım veya verinin bütünlüğünün doğrulanmaması. İki alt tema: (1) **güvensiz deserialization** — serileştirilmiş nesneye güvenip kod çalıştırma; mekanizması ve Log4Shell vaka çalışması [zafiyet-siniflari/enjeksiyon-aileleri.md](zafiyet-siniflari/enjeksiyon-aileleri.md)'nde, (2) doğrulanmamış güncelleme/eklenti. Tedarik zinciri boyutu 2025'te büyük ölçüde A03'e taşındı; A08 daha çok bütünlük doğrulaması eksikliğine odaklanır.
 **Önleme:** Dijital imzayla güncelleme/veri doğrulama ([anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md)), güvenli serileştirme (JSON, imzalı token).
 ➡️ **[devsecops-ssdlc.md](../13-guvenli-kodlama-devsecops/devsecops-ssdlc.md)**, [guvenli-kodlama-ilkeleri.md](../13-guvenli-kodlama-devsecops/guvenli-kodlama-ilkeleri.md)
 

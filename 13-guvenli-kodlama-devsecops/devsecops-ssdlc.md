@@ -92,7 +92,7 @@ flowchart TD
 ```
 
 ### Klasik dersler
-- **Log4Shell (2021):** Yaygın bir loglama kütüphanesindeki tek zafiyet, milyonlarca uygulamayı uzaktan kod çalıştırmaya açtı → SCA ve hızlı yama neden kritik.
+- **Log4Shell (2021):** Yaygın bir loglama kütüphanesindeki tek zafiyet, milyonlarca uygulamayı uzaktan kod çalıştırmaya açtı → SCA ve hızlı yama neden kritik. Tam mekanizma (JNDI lookup → deserialization → RCE) ve enjeksiyon ailesiyle ilişkisi → [../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md).
 - **SolarWinds (2020):** Saldırganlar bir yazılım satıcısının **build sürecine** kod enjekte etti; imzalı, "güvenilir" güncelleme binlerce kuruma zararlı kod taşıdı → güncelleme bütünlüğü ([anahtar-degisimi-ve-imza.md](../05-kriptografi/anahtar-degisimi-ve-imza.md) imza) ve CI/CD güvenliği.
 
 ### Savunmalar

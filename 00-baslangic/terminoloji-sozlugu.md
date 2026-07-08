@@ -118,6 +118,8 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **XSS** | Siteler-arası betik çalıştırma (Cross-Site Scripting). Enjeksiyon (A05) ailesinin tarayıcı-tarafı üyesi. |
 | **CSRF / SSRF** | Siteler-arası istek sahteciliği / sunucu-taraflı istek sahteciliği. SSRF, OWASP 2025'te A01 (Broken Access Control) altındadır. |
 | **IDOR** | Güvensiz doğrudan nesne referansı — yetki kontrolü eksik ID erişimi. |
+| **Deserialization (güvensiz)** | Serileştirilmiş veriyi geri okurken saklanan tür bilgisine güvenip kod çalıştırma; enjeksiyon ailesinin bir üyesi. Bkz. [enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md). |
+| **Log4Shell (CVE-2021-44228)** | Log4j'nin `${jndi:...}` log lookup'ının JNDI üzerinden uzaktan kod çalıştırmaya (RCE) açılması; deserialization tabanlı zafiyetlerin ders kitabı vakası. |
 | **SOP / CORS** | Aynı köken politikası ve onu gevşeten paylaşım mekanizması. |
 | **CSP** | İçerik güvenlik politikası (Content Security Policy) — XSS azaltma başlığı. |
 | **WAF** | Web uygulama güvenlik duvarı. |

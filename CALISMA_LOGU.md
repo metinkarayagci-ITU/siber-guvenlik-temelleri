@@ -19,6 +19,12 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 - **Kaynaklar (satır-içi):** shodan.io, exploit-db.com/google-hacking-database.
 - **Sözlük:** OSINT, CT logs, Google dorking, Shodan/Censys (4 terim).
 
+**Deserialization / Log4Shell uçtan uca vaka çalışması ✅**
+- **Değişen dosya:** `04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md` — deserialization ailenin üyesi olarak eklendi (pickle vs JSON: "kodlar vs çalıştırır" ayrımı), Log4Shell (CVE-2021-44228) tam mekanizma sequence diyagramıyla (JNDI lookup → LDAP → kötü niyetli sınıf → deserialize → RCE), neden bu kadar yıkıcı olduğu, savunma.
+- **Tekrar önleme:** Log4Shell 6 farklı dosyada (owasp-top10 A03/A08, devsecops-ssdlc, python-guvenlik-icin, somuru-ve-sonrasi) yalnızca isim olarak geçiyordu — hepsi artık tam anlatıma işaret ediyor.
+- **Kurulan ilişkiler (simetrik):** deserialization ↔ kodlama≠şifreleme≠çalıştırma (00); Log4Shell ↔ A03 Supply Chain (04 owasp); pickle ↔ python-guvenlik-icin (14) [iki yönlü].
+- **Sözlük:** Deserialization, Log4Shell (2 terim).
+
 ---
 
 ## ✅ TUR 2 — Uzman-öncesi hacker düzeyine genişletme (TAMAMLANDI)
