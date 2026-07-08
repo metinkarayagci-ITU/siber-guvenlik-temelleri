@@ -130,6 +130,10 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **Mavi takım (blue team)** | Savunmacı rolü — tespit ve müdahale. Bkz. [11-soc](../11-soc-mavi-takim/siem-edr-soar.md). |
 | **Mor takım (purple team)** | Kırmızı+mavi işbirliği. |
 | **Recon (keşif)** | Hedef hakkında bilgi toplama (pasif/aktif). |
+| **OSINT** | Açık kaynak istihbaratı — hedefe dokunmadan herkese açık kaynaklardan bilgi toplama. Bkz. [osint-kesif.md](../10-pentest-metodolojisi/osint-kesif.md). |
+| **Sertifika şeffaflığı (CT logs)** | Yayınlanan tüm TLS sertifikalarının kalıcı kaydı; yan etki olarak alt alan keşfinin en güçlü pasif kaynağı. |
+| **Google dorking** | Arama motoru özel operatörleriyle (site:, filetype:, inurl:) hedefli/hassas içerik bulma. |
+| **Shodan / Censys** | İnternete açık tüm cihazları sürekli tarayıp arama motoru gibi sunan servisler. |
 | **Enumerasyon** | Servis/kullanıcı/paylaşım gibi detayları aktif olarak listeleme. |
 | **Ayrıcalık yükseltme (privilege escalation)** | Düşük yetkiden yüksek yetkiye geçiş (dikey) veya eş seviyede yayılma (yatay). |
 | **Yanal hareket (lateral movement)** | Ele geçirilen bir makineden ağdaki diğerlerine geçme. |

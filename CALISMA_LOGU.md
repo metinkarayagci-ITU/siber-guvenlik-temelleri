@@ -6,6 +6,21 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 
 ---
 
+## 🔷 TUR 3 — Orta-değerli persona alanları (devam ediyor)
+
+**Amaç:** Tur 2 kapanışında tespit edilen ama o turda ele alınmayan iki orta-öncelikli boşluk: OSINT keşif derinliği (theHarvester/Shodan/dorking şu an sadece adı geçiyor, mekanizması yok) ve deserialization/Log4Shell uçtan uca somut örnek (enjeksiyon ailesinde kavramsal olarak var ama vaka çalışması yok). Bölüm 1.1 fren testine tabi.
+
+### Tur 3 ilerleme
+
+**OSINT keşif derinliği ✅**
+- **Yeni dosya:** `10-pentest-metodolojisi/osint-kesif.md` — DNS/WHOIS, sertifika şeffaflığı ile alt alan keşfi (crt.sh, neden CT logları güçlü bir pasif kaynak), Google dorking (GHDB), Shodan/Censys arama söz dizimi, theHarvester/e-posta desen tespiti, kimlik sızıntıları (HIBP), GitHub sızıntı dorking, pasif→aktif geçiş sınırı.
+- **Tekrar önleme:** `kesif-enumerasyon.md`'deki pasif keşif bölümü özete indirildi, yeni dosyaya işaret edildi.
+- **Kurulan ilişkiler (simetrik):** CT logları ↔ PKI/sertifika (05) ["şeffaflık savunma amaçlı ama keşif aracı" ödünleşmesi]; theHarvester çıktısı ↔ phishing hedef listesi (12) [iki yönlü — spear phishing'in girdisi]; GitHub dorking ↔ git-temelleri sızmış sır (14) [aynı olgunun saldırgan tarafı]; Shodan ↔ hardening checklist (02).
+- **Kaynaklar (satır-içi):** shodan.io, exploit-db.com/google-hacking-database.
+- **Sözlük:** OSINT, CT logs, Google dorking, Shodan/Censys (4 terim).
+
+---
+
 ## ✅ TUR 2 — Uzman-öncesi hacker düzeyine genişletme (TAMAMLANDI)
 
 **Son denetim (audit) sonuçları:**
