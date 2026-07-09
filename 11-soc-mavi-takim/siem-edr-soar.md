@@ -62,7 +62,29 @@ flowchart LR
 - **Müdahale yeteneği:** Şüpheli makineyi ağdan izole edebilir, süreci sonlandırabilir, kanıt toplayabilir.
 - **XDR** (Extended Detection and Response): EDR'i ağ, e-posta, bulut, kimlik ile birleştirip **çapraz katman** korelasyon sağlar.
 
-> **Kesişim:** Pentest/red team'in ([10-pentest](../10-pentest-metodolojisi/somuru-ve-sonrasi.md)) sömürü sonrası davranışları (Meterpreter, Mimikatz, PowerShell indir-çalıştır) tam olarak EDR'in avladığı şeylerdir. Bu yüzden saldırganlar EDR atlatma (evasion) teknikleri geliştirir; savunmacılar tespiti güçlendirir — sonu gelmeyen bir yarış.
+> **Kesişim:** Pentest/red team'in ([10-pentest](../10-pentest-metodolojisi/somuru-ve-sonrasi.md)) sömürü sonrası davranışları (Meterpreter, Mimikatz, PowerShell indir-çalıştır) tam olarak EDR'in avladığı şeylerdir. Bu yüzden saldırganlar **EDR atlatma** ([../10-pentest-metodolojisi/av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md)) teknikleri geliştirir; savunmacılar tespiti güçlendirir — sonu gelmeyen bir yarış.
+
+---
+
+## 3.5. NIDS / NIPS ve NSM — ağ katmanında tespit
+
+EDR uç noktayı (endpoint) izler; ama bir ajan kurulamayan cihazlar (IoT, yazıcı, eski sunucu, misafir cihaz) ve **cihazlar arası trafik** için ağın kendisini dinleyen bir katman gerekir. Bu, **ağ tabanlı tespit**tir:
+
+- **NIDS (Network IDS) — pasif:** Trafiğin bir **kopyasını** (SPAN portu / ağ TAP'i) dinler, kötü niyetli deseni görünce **uyarır** ama akışa müdahale etmez. Görünürlük verir, gecikme yaratmaz.
+- **NIPS (Network IPS) — satır-içi (inline):** Trafiğin **tam ortasında** durur; kötü paketi yalnızca görmez, **düşürür/engeller**. Güçlüdür ama yanlış pozitif meşru trafiği keser ve tek hata noktası olabilir — bu, bir [firewall](../01-ag-networking/routing-nat-vpn.md)'ın "izin ver/engelle" mantığının içerik-farkında (deep packet inspection) hâlidir.
+
+**İki tespit felsefesi** (tıpkı endpoint'teki gibi):
+- **İmza tabanlı (signature) — Snort / Suricata:** Bilinen kötü kalıpları eşler; bir kural, "şu porta şu byte dizisi giderse uyar" der. Bu, [malware-analiz.md](malware-analiz.md)'deki **YARA** ve [av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md)'deki **AV imzası** ile *tam aynı fikrin* ağ katmanındaki hâlidir — aynı güç (bilineni kesin yakalar) ve aynı zayıflık (yeni/değiştirilmiş saldırıyı kaçırır). Örnek Suricata kuralı okunabilir:
+  ```
+  alert tcp any any -> $HOME_NET 445 (msg:"Şüpheli SMB exploit denemesi"; content:"|ff|SMB"; sid:1000001;)
+  ```
+- **Anomali tabanlı (anomaly):** Önce "normal"in bir temel çizgisini (baseline) öğrenir, sapmayı işaretler. Bu, [av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md)'deki **beaconing**'in zayıf noktasını avlayan yaklaşımdır: insan trafiği düzensiz, C2 beacon'ı istatistiksel bir ritim gösterir.
+
+**Zeek (eski adı Bro) — NSM'nin farklı yaklaşımı:** İmza aramaz; her bağlantı için **zengin metadata/log** üretir (kim, kiminle, ne kadar, hangi protokol, hangi sertifika). Bu, "imza yerine görünürlük" felsefesidir — sonradan avlama ve forensics için altın madenidir ([dijital-forensics.md](dijital-forensics.md) network forensics).
+
+> **Kesişim — şifreleme IDS'i kör eder:** Payload TLS ile şifreliyse ([../05-kriptografi/temel-kavramlar.md](../05-kriptografi/temel-kavramlar.md)), imza tabanlı NIDS içeriği **göremez** — bu yüzden modern C2 443/HTTPS kullanır ([av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md)). Savunmanın cevabı ya **TLS inspection** (kurumsal MITM proxy, gizlilik/performans bedeliyle) ya da içeriği çözmeden **meta-veriye bakmaktır**: JA3/JA4 TLS parmak izi, sertifika anomalisi, bağlantı ritmi. Diğer klasik atlatma, paket **parçalama (fragmentation)** ile imzayı bölmektir; bu yüzden iyi IDS trafiği yeniden birleştirir (reassembly). Bu beceri, tek pakette [paket-analizi-wireshark.md](../01-ag-networking/pratik-lab/paket-analizi-wireshark.md)'de yaptığın şeyin ölçekli/otomatik hâlidir.
+
+Tüm bu ağ sensörleri, uyarılarını ve loglarını yine **SIEM'e** besler (§2) — endpoint (EDR), ağ (NIDS) ve merkez (SIEM) birbirini tamamlar.
 
 ---
 

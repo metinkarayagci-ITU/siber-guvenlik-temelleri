@@ -118,6 +118,8 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **XSS** | Siteler-arası betik çalıştırma (Cross-Site Scripting). Enjeksiyon (A05) ailesinin tarayıcı-tarafı üyesi. |
 | **CSRF / SSRF** | Siteler-arası istek sahteciliği / sunucu-taraflı istek sahteciliği. SSRF, OWASP 2025'te A01 (Broken Access Control) altındadır. |
 | **IDOR** | Güvensiz doğrudan nesne referansı — yetki kontrolü eksik ID erişimi. |
+| **XXE (XML External Entity)** | XML ayrıştırıcısının dış entity'leri çözmesini kötüye kullanma → yerel dosya okuma / SSRF / OOB sızdırma; enjeksiyon ailesinin XML üyesi. Bkz. [enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md). |
+| **Web shell** | Sunucuya yüklenen, web üzerinden komut çalıştıran script (`<?php system($_GET['cmd']);?>`); kontrolsüz dosya yüklemenin tipik sonucu, bir RCE/persistence yoludur. Bkz. [dosya-yukleme-webshell.md](../04-web-guvenligi/zafiyet-siniflari/dosya-yukleme-webshell.md). |
 | **Deserialization (güvensiz)** | Serileştirilmiş veriyi geri okurken saklanan tür bilgisine güvenip kod çalıştırma; enjeksiyon ailesinin bir üyesi. Bkz. [enjeksiyon-aileleri.md](../04-web-guvenligi/zafiyet-siniflari/enjeksiyon-aileleri.md). |
 | **Log4Shell (CVE-2021-44228)** | Log4j'nin `${jndi:...}` log lookup'ının JNDI üzerinden uzaktan kod çalıştırmaya (RCE) açılması; deserialization tabanlı zafiyetlerin ders kitabı vakası. |
 | **SOP / CORS** | Aynı köken politikası ve onu gevşeten paylaşım mekanizması. |
@@ -173,7 +175,7 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **SIEM** | Güvenlik olay ve bilgi yönetimi — log toplama+korelasyon. |
 | **EDR / XDR** | Uç nokta / genişletilmiş tespit ve müdahale. |
 | **SOAR** | Güvenlik orkestrasyon, otomasyon ve müdahale. |
-| **IDS / IPS** | Saldırı tespit / önleme sistemi. |
+| **IDS / IPS** | Saldırı tespit (pasif, uyarır) / önleme (satır-içi, engeller) sistemi; ağ tabanlısı NIDS/NIPS (Snort/Suricata/Zeek), imza veya anomali tabanlı. Bkz. [siem-edr-soar.md](../11-soc-mavi-takim/siem-edr-soar.md) §3.5. |
 | **TP / FP / FN / TN** | Doğru pozitif / yanlış pozitif / yanlış negatif / doğru negatif. Bkz. [log-analizi.md](../11-soc-mavi-takim/log-analizi.md). |
 | **Sysmon** | Windows için ayrıntılı olay günlüğü aracı. |
 | **IR (olay müdahalesi)** | Incident Response — bir güvenlik olayına yapılandırılmış yanıt (PICERL / NIST). Bkz. [olay-mudahale-ir.md](../11-soc-mavi-takim/olay-mudahale-ir.md). |
