@@ -160,6 +160,11 @@ Bu dosya, tüm repodaki teknik terimlerin **tek merkezî tanım kaynağıdır**.
 | **Pass-the-Ticket (PtT)** | Çalınan Kerberos biletini enjekte edip kimliğe bürünme (PtH'nin Kerberos karşılığı). |
 | **DCSync / Golden Ticket** | DC'yi taklit edip tüm hash'leri çekme (DCSync) / krbtgt hash'iyle sahte TGT üretip kalıcı domain hakimiyeti (Golden Ticket). Bkz. [active-directory-saldirilari.md](../10-pentest-metodolojisi/active-directory-saldirilari.md). |
 | **BloodHound** | AD nesne/ilişkilerini grafik olarak haritalayıp Domain Admin'e giden yolu bulan araç. |
+| **Shell stabilizasyonu** | Ele geçirilen "dumb" (TTY'siz) shell'i tam etkileşimli hale getirme (`python pty.spawn`, `stty raw -echo`); `sudo`/`vi` gibi PTY isteyen araçlar için gerekir. Bkz. [somuru-ve-sonrasi.md](../10-pentest-metodolojisi/somuru-ve-sonrasi.md). |
+| **AMSI** | Antimalware Scan Interface — Windows'ta bir script'i (PowerShell/VBA/.NET) yorumlamadan önce, çözülmüş halini AV'ye taratan arayüz. Bkz. [av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md). |
+| **LOLBAS / LOLBin** | Meşru, imzalı Windows ikililerinin (certutil, mshta, regsvr32) kötüye kullanımı; kendi ikilini düşürmeden AV imzasını atlatma. Windows karşılığı GTFOBins'tir. Bkz. [av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md). |
+| **Packer / crypter** | Yükü sıkıştırıp/şifreleyip çalışma anında bellekte açan sarmalayıcı; statik imzayı bozar ama yüksek entropi kendisi bir bayraktır. Bkz. [av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md). |
+| **Beaconing** | Modern C2 implantının sürekli açık bağlantı yerine periyodik (sleep + jitter) "görev var mı?" uğraması; normal trafiğe benzeyerek tespitten kaçar. Bkz. [av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md). |
 
 ## SOC / savunma araçları
 

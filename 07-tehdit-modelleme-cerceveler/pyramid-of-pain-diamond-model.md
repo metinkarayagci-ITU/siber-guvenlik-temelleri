@@ -56,6 +56,8 @@ flowchart TD
 
 Bu, [MITRE ATT&CK](mitre-attck.md)'in neden bu kadar değerli olduğunu açıklar: ATT&CK **TTP seviyesinde** (piramidin tepesi) savunma kurmayı sağlar. "IP engelle" taktik bir kazanç; "davranış tespit et" stratejik bir kazançtır.
 
+> **Saldırgan cephesinden aynı piramit:** Bir saldırganın AV/EDR atlatma çabası tam olarak bu piramide göre ölçeklenir — hash/imza (dip) değiştirmek ucuz ve kolayken, davranışı (TTP, tepe) gizlemek pahalı ve kırılgandır. Bu yüzden imza atlatmak (encoder/packer) basit, EDR'in davranışsal tespitini atlatmak zordur → [../10-pentest-metodolojisi/av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md).
+
 ---
 
 ## 2. Diamond Model — olay analizi çerçevesi

