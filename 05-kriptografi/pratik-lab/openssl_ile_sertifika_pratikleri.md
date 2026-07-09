@@ -176,6 +176,6 @@ Bu lab'la şu teori dosyalarını elinle kanıtladın:
 - **PKI güven zinciri** ([pki-x509.md](../pki-x509.md)) — kendi CA'nı kurup sertifika imzaladın, doğruladın.
 - **Anahtar boyutu farkı** ([zorluk-varsayimlari.md](../zorluk-varsayimlari.md)) — RSA vs EC dosya boyutunu gördün.
 
-> **İleri PQC pratiği:** OpenSSL 3.5+ veya **Open Quantum Safe (liboqs/oqs-provider)** ile ML-KEM/ML-DSA anahtarları üretip aynı akışı post-kuantum algoritmalarla dene — [post-kuantum-kriptografi.md](../post-kuantum-kriptografi.md) ile birleştir. *(Sürüm/kurulum doğrulanmalı.)*
+> **İleri PQC pratiği:** **OpenSSL 3.5.0** (8 Nisan 2025, LTS) artık üç NIST standardını — ML-KEM (FIPS 203), ML-DSA (FIPS 204), SLH-DSA (FIPS 205) — harici kütüphane olmadan **yerel (native)** destekler; TLS 1.3'te varsayılan anahtar paylaşımı hibrit `X25519MLKEM768`'e döner (kaynak: [OpenSSL 3.5 blog](https://openssl-library.org/post/2025-04-08-openssl-35-final-release/)). Bu sürümle `openssl genpkey -algorithm ML-DSA-65` gibi komutlarla PQC anahtarı üretip yukarıdaki imza/doğrulama akışını post-kuantum algoritmalarla tekrarla. Daha eski OpenSSL'de aynı şeyi **Open Quantum Safe (liboqs/oqs-provider)** sağlayıcısıyla yaparsın (kurulum sürümüne göre değişir). Detay için → [post-kuantum-kriptografi.md](../post-kuantum-kriptografi.md).
 
 > **Modül 05 tamamlandı.** Sonraki: [06-kimlik-erisim-yonetimi-iam/aaa-ve-mfa.md](../../06-kimlik-erisim-yonetimi-iam/aaa-ve-mfa.md).

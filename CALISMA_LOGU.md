@@ -25,6 +25,20 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 - **Kurulan ilişkiler (simetrik):** deserialization ↔ kodlama≠şifreleme≠çalıştırma (00); Log4Shell ↔ A03 Supply Chain (04 owasp); pickle ↔ python-guvenlik-icin (14) [iki yönlü].
 - **Sözlük:** Deserialization, Log4Shell (2 terim).
 
+### Tur 3 — devam oturumu (format sonrası; önceki sohbet geçmişi yok, repo + git + log sağlam)
+
+**Adım 0 — durum doğrulama:** `git log` ile önceki iki tur teyit edildi (32 commit, son commit `1d24a62`). Working tree temizdi → önceki oturumun commit'lenmemiş README değişikliği format ile kaybolmuştu (sadece commit'li iş sağ kaldı), yeniden yapıldı.
+
+**Adım 1 — yarım kalan README düzeltmesi ✅ (değerler doğrulanarak):**
+- Mermaid diyagram sayısı badge: `136+` → **`139+`**. Doğrulama: repo genelinde tüm `​```mermaid` blokları sayıldı = **139** (136 + OSINT dosyası 2 + Log4Shell/deserialization sequence diyagramı 1). README (modül haritası) ve ROADMAP (paralel çalışma akışı) dahil tüm dosyalar sayıldı.
+- Modül 10 satırına **"OSINT keşif"** eklendi (dosya `10-pentest-metodolojisi/osint-kesif.md` gerçekten var, diğer modül-10 dosyalarından linkli — teyit edildi).
+- Repo yapısı satırı: `~72` → **`~73`** içerik dosyası (glob: 76 `.md` − 3 kök doküman = 73).
+
+**Adım 2 — "doğrulanmalı" notlarının taranması ve kesinleştirilmesi ✅:**
+- Repo genelinde `doğrulanmalı` geçen tüm yerler tarandı. Çoğu ya normal ilke cümlesi (`web-mimarisi.md`: "güvenlik sunucuda doğrulanmalıdır"), ya meta-konvansiyon açıklaması (`nasil-calisilir.md`, `README.md`) — bunlar bilgi eksikliği değil, olduğu gibi kaldı.
+- **`10-pentest-metodolojisi/privilege-escalation.md` (sudo CVE) — ÇÖZÜLDÜ:** CVE-2021-3156 / Baron Samedit sürüm eşlemesi resmî kaynakla doğrulandı ve satır-içi eklendi — etkilenen: legacy **1.8.2–1.8.31p2** + stable **1.9.0–1.9.5p1**, yama **1.9.5p2**; Ocak 2021, Qualys keşfi. "doğrulanmalı" hedge'i kaldırıldı. (Kaynak: [Qualys](https://blog.qualys.com/vulnerabilities-threat-research/2021/01/26/cve-2021-3156-heap-based-buffer-overflow-in-sudo-baron-samedit), [NVD](https://nvd.nist.gov/vuln/detail/CVE-2021-3156).)
+- **`05-kriptografi/pratik-lab/openssl_ile_sertifika_pratikleri.md` (PQC pratiği) — KESİNLEŞTİRİLDİ:** OpenSSL 3.5.0 (8 Nisan 2025, LTS) ML-KEM/ML-DSA/SLH-DSA'yı native destekliyor, TLS 1.3 varsayılanı hibrit `X25519MLKEM768`; somut `openssl genpkey -algorithm ML-DSA-65` örneği + kaynak eklendi. Belirsiz "sürüm/kurulum doğrulanmalı" hedge'i kaldırıldı; yalnızca liboqs/oqs-provider'ın (eski OpenSSL yolu) sürüme-bağlı olduğu bilgisi kaldı. (Kaynak: [OpenSSL 3.5 blog](https://openssl-library.org/post/2025-04-08-openssl-35-final-release/).)
+
 ---
 
 ## ✅ TUR 2 — Uzman-öncesi hacker düzeyine genişletme (TAMAMLANDI)
@@ -209,4 +223,7 @@ Bu liste, tüm araştırmaya rağmen kesin/canlı kaynakla teyit edilemeyen nokt
 
 - ✅ **ÇÖZÜLDÜ — CVE-2024-21413 (Moniker Link):** Son denetimde WebSearch ile doğrulandı — CVSS **9.8 Kritik**, 13 Şubat 2024 yamandı, Haifei Li/Check Point Research, kök neden güvensiz `MkParseDisplayName` API'si. NVD ve Check Point Research kaynakları dosyaya satır-içi eklendi, "doğrulanmalı" notu kaldırıldı. (Kaynaklar: [NVD](https://nvd.nist.gov/vuln/detail/CVE-2024-21413), [Check Point](https://research.checkpoint.com/2024/the-risks-of-the-monikerlink-bug-in-microsoft-outlook-and-the-big-picture/).)
 
-**Şu an açık (doğrulanmalı) kalan başka bir nokta yoktur.** İçerikte birkaç yerde "doğrulanmalı" notu, hızla değişen alanlar (ör. sudo sürüm-CVE eşlemesi, PQC güncel durum) için okuyucuyu resmî kaynağa yönlendirme amaçlıdır — bunlar bilinmeyen değil, "kritik karar öncesi güncel teyit et" uyarılarıdır.
+- ✅ **ÇÖZÜLDÜ (Tur 3 devam oturumu) — sudo CVE-2021-3156 (Baron Samedit):** Sürüm eşlemesi resmî kaynakla doğrulandı (legacy 1.8.2–1.8.31p2 + stable 1.9.0–1.9.5p1; yama 1.9.5p2) ve `privilege-escalation.md`'ye satır-içi eklendi; "doğrulanmalı" hedge'i kaldırıldı.
+- ✅ **KESİNLEŞTİRİLDİ (Tur 3 devam oturumu) — OpenSSL 3.5 PQC pratiği:** OpenSSL 3.5.0'ın native ML-KEM/ML-DSA/SLH-DSA desteği doğrulandı, somut komut + kaynak eklendi; belirsiz "sürüm/kurulum doğrulanmalı" notu kaldırıldı.
+
+**Şu an açık (doğrulanmalı) kalan somut bir nokta yoktur.** İçerikte kalan "doğrulanmalı" ifadeleri ya normal ilke cümleleridir (ör. `web-mimarisi.md`: "güvenlik sunucuda doğrulanmalıdır"), ya da meta-konvansiyon açıklamalarıdır (`nasil-calisilir.md`, `README.md`) — bilgi eksikliği değildir. Hızla değişen alanlar (PQC standart durumu) için kalan uyarılar, "kritik karar öncesi güncel resmî kaynağı teyit et" yönlendirmeleridir.
