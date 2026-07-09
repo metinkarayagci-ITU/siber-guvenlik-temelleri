@@ -24,6 +24,7 @@ flowchart LR
     INT -->|"LDAP"| LDAP["LDAP Injection"]
     INT -->|"şablon motoru"| SSTI["Template Injection (SSTI)"]
     INT -->|"dosya yolu"| LFI["LFI/RFI, Path Traversal"]
+    INT -->|"XML ayrıştırıcı"| XXE["XXE (XML External Entity)"]
     style INT fill:#ff6b6b
 ```
 
@@ -61,11 +62,30 @@ Uygulama, kullanıcı girdisiyle **dosya yolu** oluşturursa:
 
 **Önleme:** Dosya adını **allow-list**'ten seç (kullanıcı girdisini yola koyma), `../` normalize et, taban dizini zorla.
 
+> **Kesişim — LFI + dosya yükleme = RCE:** LFI tek başına dosya *okur*; ama saldırgan önce içine PHP kodu gömülü bir "resim" **yükleyip** ([dosya-yukleme-webshell.md](dosya-yukleme-webshell.md)) sonra o dosyayı LFI ile `include` ettirirse, okuma çalıştırmaya döner — iki orta-şiddetli kusurun zincirlenip RCE ürettiği klasik örnek.
+
 ### LDAP / NoSQL / XPath Injection
 Aynı desen farklı yorumlayıcılarda:
 - **NoSQL (MongoDB):** `{"user": {"$ne": null}}` ile kimlik atlatma.
 - **LDAP:** `*)(uid=*` ile filtre manipülasyonu.
 - **XPath:** XML sorgusu manipülasyonu.
+
+### XXE (XML External Entity)
+XML formatı, belge içinde **entity** (varlık — bir tür kısaltma/değişken) tanımlamaya izin verir; dahası, bir entity'nin değerini **dış bir kaynaktan** (`SYSTEM`) çekebilir. Bir uygulama, kullanıcının gönderdiği XML'i **dış entity çözümlemesi açık** bir ayrıştırıcıyla işlerse, saldırgan ayrıştırıcıyı kendi lehine yönlendirir — yine aynı tema: veri (XML gövdesi), ayrıştırıcı için **komuta** dönüşür.
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+<stok><urun>&xxe;</urun></stok>
+<!-- Ayrıştırıcı &xxe;'yi /etc/passwd içeriğiyle değiştirir → yerel dosya okuma -->
+```
+
+Etki üç yöne açılır:
+- **Yerel dosya okuma:** `file:///etc/passwd`, config, kaynak kodu — yukarıdaki **LFI**'nin XML ayrıştırıcı üzerinden akrabası (aynı sonuç, farklı yorumlayıcı).
+- **SSRF'e dönüşme:** `SYSTEM "http://169.254.169.254/latest/meta-data/..."` ile ayrıştırıcıyı **iç ağa/bulut meta-veri servisine** bağlatma — doğrudan [SSRF](csrf-ssrf.md) (Server-Side Request Forgery) yüzeyi; Capital One tarzı bulut kimlik bilgisi hırsızlığına köprü.
+- **Blind/OOB XXE:** Çıktı ekrana dönmese bile, harici bir DTD ile veriyi saldırganın sunucusuna **dışarı sızdırma** (out-of-band) — [sqli.md](sqli.md)'deki blind/OOB SQLi mantığının XML karşılığı.
+
+**Önleme:** Filtrelemeye çalışma; **dış entity ve DTD işlemesini ayrıştırıcıda tamamen kapat** (ör. Java'da `setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)`, Python'da `defusedxml`). Bu, Log4Shell'de `formatMsgNoLookups` ile aynı savunma refleksidir: **tehlikeli özelliği kapat**, girdiyi kovalama.
 
 ### SSTI (Server-Side Template Injection)
 Kullanıcı girdisi bir **şablon motoruna** (Jinja2, Twig) kod olarak geçerse:
@@ -150,7 +170,7 @@ flowchart TD
 ## 5. Özet
 
 - **Tek kök neden:** Saldırgan verisinin kod/komut olarak yorumlanması.
-- **Aile:** SQLi, command injection, XSS, LFI/RFI, LDAP/NoSQL/XPath, SSTI — hepsi aynı temanın farklı yorumlayıcılardaki hâli.
+- **Aile:** SQLi, command injection, XSS, LFI/RFI, LDAP/NoSQL/XPath, XXE, SSTI, deserialization — hepsi aynı temanın farklı yorumlayıcılardaki hâli.
 - **Ortak savunma:** Kod/veriyi **ayır** (parametreleme), **allow-list** ile doğrula, bağlama göre **kodla**, **en az ayrıcalıkla** çalıştır.
 - **Altın kural:** Kara liste değil, ayırma + izin listesi.
 

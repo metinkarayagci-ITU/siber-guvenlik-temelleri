@@ -101,6 +101,8 @@ Basit "iç IP'leri engelle" filtresi kolayca atlatılır:
 
 Bu yüzden kara liste değil, **izin listesi (allow-list)** temel savunmadır.
 
+> **Kesişim — SSRF'e giden başka bir kapı, XXE:** Sunucuyu iç kaynaklara bağlatmak için her zaman "URL çeken bir özellik" gerekmez; **XXE** (XML External Entity) bir XML ayrıştırıcısını `SYSTEM "http://169.254.169.254/..."` ile aynı iç hedeflere bağlatarak SSRF üretir → [enjeksiyon-aileleri.md](enjeksiyon-aileleri.md) (XXE). Yani "sunucu adıma istek yapıyor" yüzeyi, enjeksiyon ailesiyle örtüşür.
+
 ## 4. Önleme
 
 | Savunma | Nasıl |
