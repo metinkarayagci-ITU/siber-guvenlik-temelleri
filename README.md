@@ -7,7 +7,7 @@ A comprehensive, from-scratch cybersecurity knowledge base written in Turkish �
 ![Markdown](https://img.shields.io/badge/format-Markdown-blue?logo=markdown)
 ![Language](https://img.shields.io/badge/dil-T%C3%BCrk%C3%A7e-red)
 ![Modules](https://img.shields.io/badge/mod%C3%BCller-16-brightgreen)
-![Diagrams](https://img.shields.io/badge/mermaid%20diyagram-139%2B-orange)
+![Diagrams](https://img.shields.io/badge/mermaid%20diyagram-140%2B-orange)
 ![OWASP](https://img.shields.io/badge/OWASP%20Top%2010-2025-critical)
 ![License](https://img.shields.io/badge/lisans-MIT-yellow)
 ![Status](https://img.shields.io/badge/durum-aktif-success)
@@ -138,7 +138,7 @@ siber-guvenlik-temelleri/
 ├── assets/
 │   ├── diagrams/                ← Mermaid yedekleri
 │   └── screenshots/              ← kullanıcı lab görselleri (.gitkeep)
-├── 00-baslangic/ → 15-projeler/  ← 16 modül, ~73 içerik dosyası
+├── 00-baslangic/ → 15-projeler/  ← 16 modül, ~75 içerik dosyası
 ```
 
 Her modül klasörü, konuya özel `.md` dosyaları ve (çoğu modülde) bir `pratik-lab/` veya `pratik-scriptler/` alt klasörü içerir.

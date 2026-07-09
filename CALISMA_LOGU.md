@@ -39,6 +39,32 @@ Bu dosya, reponun derinleştirme/genişletme turlarının ilerleme kaydını tut
 - **`10-pentest-metodolojisi/privilege-escalation.md` (sudo CVE) — ÇÖZÜLDÜ:** CVE-2021-3156 / Baron Samedit sürüm eşlemesi resmî kaynakla doğrulandı ve satır-içi eklendi — etkilenen: legacy **1.8.2–1.8.31p2** + stable **1.9.0–1.9.5p1**, yama **1.9.5p2**; Ocak 2021, Qualys keşfi. "doğrulanmalı" hedge'i kaldırıldı. (Kaynak: [Qualys](https://blog.qualys.com/vulnerabilities-threat-research/2021/01/26/cve-2021-3156-heap-based-buffer-overflow-in-sudo-baron-samedit), [NVD](https://nvd.nist.gov/vuln/detail/CVE-2021-3156).)
 - **`05-kriptografi/pratik-lab/openssl_ile_sertifika_pratikleri.md` (PQC pratiği) — KESİNLEŞTİRİLDİ:** OpenSSL 3.5.0 (8 Nisan 2025, LTS) ML-KEM/ML-DSA/SLH-DSA'yı native destekliyor, TLS 1.3 varsayılanı hibrit `X25519MLKEM768`; somut `openssl genpkey -algorithm ML-DSA-65` örneği + kaynak eklendi. Belirsiz "sürüm/kurulum doğrulanmalı" hedge'i kaldırıldı; yalnızca liboqs/oqs-provider'ın (eski OpenSSL yolu) sürüme-bağlı olduğu bilgisi kaldı. (Kaynak: [OpenSSL 3.5 blog](https://openssl-library.org/post/2025-04-08-openssl-35-final-release/).)
 
+### Tur 3 — devam oturumu 2 (2026-07-09): AV/EDR atlatma, XXE, dosya yükleme, ağda tespit + Defender olayı
+
+Bu oturumdan önce loga işlenmemiş 3 commit vardı; hepsi burada kayıt altına alınıyor.
+
+**AV / EDR / AMSI atlatma + post-exploitation derinleştirme ✅ (`a413d79`)**
+- **Yeni dosya:** `10-pentest-metodolojisi/av-edr-atlatma.md` — üç ayrı savunma katmanının *ayrı mantığı* (AV = disk/imza, AMSI = bellekteki script'i tarama, EDR = davranış), imza atlatmanın sınırı, AMSI'nin ne yakaladığı, EDR'in neden en zor katman olduğu, ağ katmanında gizlenme (beaconing/C2 mantığı). Kavramsal — çalıştırılabilir atlatma reçetesi değil.
+- **Değişen dosya:** `somuru-ve-sonrasi.md` (+87) — post-exploitation derinleştirildi.
+- **Kurulan ilişkiler (simetrik):** AV imza ↔ YARA/malware-analiz (11) ve NIDS imzası (11 §3.5); beaconing ↔ anomali tespiti (11); AMSI/EDR ↔ Sysmon süreç zinciri (03/11); pyramid-of-pain (07) ve windows-komut-referansi (02) bağlandı.
+- **Sözlük:** 5 terim (AMSI, EDR atlatma, beaconing, imza vs davranış vb.).
+
+**XXE + dosya yükleme / web shell ✅ (`be1af3f`)**
+- **Değişen dosya:** `enjeksiyon-aileleri.md` (+22) — **XXE (XML External Entity)** ailenin üyesi olarak eklendi: dış entity (`SYSTEM "file:///etc/passwd"`) ile yerel dosya okuma; "veri → ayrıştırıcı için komuta" ortak teması, LFI'nin XML ayrıştırıcı üzerinden akrabası olduğu vurgusu. `csrf-ssrf.md` (+2) bağ.
+- **Yeni dosya:** `dosya-yukleme-webshell.md` — web shell tanımı ve hedefi, "güvenilmez üçlü" (dosya adı/uzantı/içerik türü), zayıf filtre atlatma teknikleri, katmanlı savunma (allow-list + içerik doğrulama + güvenli ad + webroot dışı). 3 dosyadan referanslı: terminoloji (Web shell terimi), enjeksiyon-aileleri (LFI + yükleme = RCE zinciri), somuru-ve-sonrasi (web shell → reverse shell).
+
+**NIDS / NIPS ve NSM (ağda tespit) §3.5 + çapraz referanslar ✅ (`faa9c81`)**
+- **Değişen dosya:** `11-soc-mavi-takim/siem-edr-soar.md` — yeni **§3.5**: NIDS (pasif, uyarır) vs NIPS (satır-içi, düşürür); iki tespit felsefesi (imza — Snort/Suricata vs anomali) uç-nokta AV mantığıyla *aynı fikir* olarak bağlandı; Zeek/NSM "imza yerine görünürlük" yaklaşımı; **şifrelemenin IDS'i kör etmesi** (TLS → JA3/JA4, meta-veri, C2'nin 443 kullanması) ve fragmentation/reassembly atlatması. Tüm ağ sensörleri → SIEM (§2) besler.
+- **Kurulan ilişkiler (simetrik):** paket-analizi-wireshark labı (01) → §3.5 [elle paket okuma işinin ölçekli/otomatik hâli]; terminoloji IDS/IPS girişi → §3.5; av-edr-atlatma (10) beaconing/443/imza konularıyla iki yönlü.
+
+**⚠️ Olay — Windows Defender yanlış pozitifi (bu oturumda teşhis + kurtarma):**
+- `dosya-yukleme-webshell.md` içindeki eğitim amaçlı web shell tek satırı (`<?php system($_GET['cmd']);?>`) Windows Defender tarafından **`Backdoor:PHP/Perhetshell.B!dha`** olarak algılanıp çalışma ağacından **tekrar tekrar** karantinaya alınıyordu (her geri getirişten saniyeler sonra). Aynı imza, dosyanın içeriğini yakalayan **Claude oturum transcript'i (`.jsonl`) ve bash çıktı dosyalarını** da sildiriyordu → başta "another process deleted it (EUNKNOWN)" ve `git add: Function not implemented` hataları buradan geliyordu.
+- **Sonuç zinciri:** Önceki `faa9c81` commit'i, NIDS işini işlerken (`git add -A`) Defender'ın o an sildiği dosyanın silinmesini de yanlışlıkla kapsamıştı → **`5b69ed0`** ile dosya geri getirildi. Depo geçmişi (`be1af3f`) her zaman sağlamdı; içerik kaybı yok.
+- **Kalıcı not:** Bu repo gerçek payload örnekleri (web shell, ileride başkaları) içerdiğinden AV false-positive üretebilir. Çözüm seçenekleri: repo klasörünü AV taramasından hariç tutmak **veya** örneği "defang" etmek. Kullanıcı bu oturumda Defender'ı geçici kapattı; **iş bitince yeniden açıp yalnızca bu repoya klasör istisnası eklemek önerilir** (tamamen kapalı bırakmak yerine).
+
+**Bütünlük denetimi ✅:** 78 `.md`, **1253 iç link → 0 kırık**, mojibake temiz.
+**README güncellendi:** mermaid diyagram badge `139+ → 140+`; repo yapısı `~73 → ~75` içerik dosyası (78 `.md` − 3 kök doküman).
+
 ---
 
 ## ✅ TUR 2 — Uzman-öncesi hacker düzeyine genişletme (TAMAMLANDI)
