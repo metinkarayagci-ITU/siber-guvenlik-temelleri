@@ -49,3 +49,10 @@ scans/
 *.nmap
 *.gnmap
 *.tmp
+
+# ==== Anki deste üretimi (ara dosyalar; deliverable'lar hariç) ====
+.anki-build/
+Siber Güvenlik.apkg
+
+# Anki deste çıktısı (regenerate edilebilir; teslim)
+siber_guvenlik_temelleri.apkg

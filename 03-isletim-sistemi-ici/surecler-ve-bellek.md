@@ -144,10 +144,28 @@ Bu yüzden kriptografi kütüphaneleri hassas belleği kullandıktan sonra **kas
 
 ---
 
-## 7. Saldırı–savunma kesişimi (özet)
+## 7. TOCTOU (time-of-check to time-of-use) yarışı
+
+Bir program bir kaynağı (dosya, izin, bakiye) önce **kontrol eder** (check), sonra **kullanır** (use). Bu iki adım atomik değilse, arada küçük bir **zaman penceresi** açılır; saldırgan tam o pencerede kaynağı değiştirirse, program artık kontrol ettiği şeyi değil, saldırganın koyduğu şeyi kullanır. Bu, bir **yarış koşulunun** (race condition) klasik biçimidir: sonuç, olayların zamanlamasına bağlıdır.
+
+**Klasik örnek — sembolik link (symlink) yarışı:** Ayrıcalıklı (ör. SUID) bir program bir dosyanın sahibini kontrol edip "senin, yazılabilir" der; kontrol ile açma arasında saldırgan o yolu `/etc/passwd`'a işaret eden bir symlink ile değiştirir. Program artık root yetkisiyle saldırganın hedeflediği dosyaya yazar → **yerel yetki yükseltme** ([../10-pentest-metodolojisi/privilege-escalation.md](../10-pentest-metodolojisi/privilege-escalation.md)).
+
+**Neden zor bir sınıf:** Yarış penceresi mikrosaniyelerdir ve deterministik değildir — saldırgan yarışı "kazanmak" için binlerce kez dener. Bu, tespiti de zorlaştırır: tek bir başarılı deneme, gürültünün içinde kaybolur.
+
+**Savunma — pencereyi kapat:**
+- **Atomiklik:** Kontrol ve kullanımı tek, bölünemez adımda yap — yol (path) üzerinden değil dosya tanıtıcısı (file descriptor) üzerinden çalış (`open()` sonra `fstat`), `O_NOFOLLOW`/`openat` ile symlink takibini engelle.
+- **Yetki düşür (drop privileges):** Ayrıcalıklı program kullanıcı dosyasına erişirken kullanıcının yetkisine iner.
+- **Kilitleme/serileştirme:** Paylaşılan kaynağı kilitle; eşzamanlı erişimi serileştir.
+
+> **Kesişim — aynı kök, farklı katman:** Web'de aynı "kontrol-sonra-kullan penceresi", eşzamanlı isteklerle bir limitin aşılması (limit-overrun) olarak görülür → [../04-web-guvenligi/zafiyet-siniflari/race-condition.md](../04-web-guvenligi/zafiyet-siniflari/race-condition.md). OS'ta symlink yarışı, web'de çift-harcama; ikisi de "iki adımın atomik olmaması"dır.
+
+---
+
+## 8. Saldırı–savunma kesişimi (özet)
 
 - **İzolasyon savunmanın temeli:** Süreç/sanal bellek izolasyonu, sandbox ve konteyner güvenliğinin çekirdeğidir. Kırıldığında (Spectre, container escape) sonuçlar ağırdır.
 - **Bellek = kanıt deposu:** Çalışan bir sistemde kimlik bilgileri, şifreleme anahtarları, zararlı kod yalnızca RAM'de olabilir → IR'de "önce bellek imajı" kuralı.
 - **Stack/heap yapısı = exploit sahnesi:** Bellek zafiyetlerini ([bellek-zafiyetleri-giris.md](bellek-zafiyetleri-giris.md)) ve savunmalarını (ASLR/DEP/stack canary) anlamak, bu bölüm olmadan mümkün değildir.
+- **Zamanlama da bir saldırı yüzeyidir:** TOCTOU/yarış koşulu, "iki adımın atomik olmaması" kök nedeniyle OS'ta (symlink→privesc) ve web'de (limit-overrun→çift-harcama) aynı biçimde karşımıza çıkar.
 
 > **Sonraki:** [kullanici-cekirdek-modu.md](kullanici-cekirdek-modu.md).

@@ -24,6 +24,21 @@ Bu repo, o bilgiyi **yazılı, aranabilir, canlı bir referansa** dönüştürme
 
 > 📌 **Güncellik ve kaynak:** İçerik güncel standartlara göre doğrulanmıştır — OWASP Top 10:**2025**, PQC standartları (FIPS 203/204/205 + FIPS 206/HQC durumu), NIST CSF **2.0**. Teknik iddialar mümkün olan yerde ilgili cümlenin yanında resmî kaynağa (RFC, NIST, OWASP, W3C) satır-içi bağlanmıştır. Kavramlar dosyalar arasında düzyazı içinde ve çift yönlü (simetrik) bağlanır: bir kavramı okuduğunda, ilişkili olduğu diğer kavramlara neden/nasıl bağlı olduğunu da orada görürsün. Bu derinleştirme turunun ayrıntılı kaydı [CALISMA_LOGU.md](CALISMA_LOGU.md)'dedir.
 
+### 🧭 Persona / Motto
+
+Bu repo ve ona eşlik eden Anki destesi tek bir persona etrafında şekillenir: **sistemi gerçekten anlayan, sahada öğrenmiş bir hacker.** Bu, script kiddie'nin *üstündedir* (kopyala-çalıştır araç değil, işleyişin *mekanizması*) ama tek-alan uzmanının *altındadır* (henüz spesifikleşmemiş, geniş bir "ortak çekirdek"). Her kavram bu banda göre kalibre edilir: ezber-tanımın üstüne çıkar, uzman-alanı derinliğinin (silah hâline getirilmiş exploit, forest mimarisi tasarımı) altında kalır — repo boyunca bilinçli "kapsam freni" notları bu sınırı korur.
+
+Bu personanın operasyonel karşılığı, her önemli kavramı **dört katmanda** işlemektir:
+
+| Katman | Sorusu |
+|--------|--------|
+| **KAVRAM** | Ne? |
+| **NEDEN VAR** | Hangi problemi çözer? |
+| **NÜANS** | Acemiyi uzmandan ayıran ince ayrım nedir? |
+| **KESİŞİM** | Gerçek saldırı/savunmaya nasıl bağlanır? |
+
+Son iki katman (NÜANS ve KESİŞİM) personayı taşır: bir kavramı *bilmek* ile onu bir saldırı zincirinde *görebilmek* arasındaki farktır. Anki destesinin `Kategori` alanı da bu taksonomiyi kullanır.
+
 ---
 
 ## 📚 İçindekiler
