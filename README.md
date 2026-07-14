@@ -22,7 +22,7 @@ Bu repo, o bilgiyi **yazılı, aranabilir, canlı bir referansa** dönüştürme
 
 **Kimin için:** Sıfırdan başlayıp Security Analyst / Penetration Tester / Security Engineer / AI Security dallarından birine spesifikleşmek isteyen herkes için tasarlandı — sadece benim için değil.
 
-> 📌 **Güncellik ve kaynak:** İçerik güncel standartlara göre doğrulanmıştır — OWASP Top 10:**2025**, PQC standartları (FIPS 203/204/205 + FIPS 206/HQC durumu), NIST CSF **2.0**. Teknik iddialar mümkün olan yerde ilgili cümlenin yanında resmî kaynağa (RFC, NIST, OWASP, W3C) satır-içi bağlanmıştır. Kavramlar dosyalar arasında düzyazı içinde ve çift yönlü (simetrik) bağlanır: bir kavramı okuduğunda, ilişkili olduğu diğer kavramlara neden/nasıl bağlı olduğunu da orada görürsün. Bu derinleştirme turunun ayrıntılı kaydı [CALISMA_LOGU.md](CALISMA_LOGU.md)'dedir.
+> 📌 **Güncellik ve kaynak:** İçerik güncel standartlara göre doğrulanmıştır — OWASP Top 10:**2025**, PQC standartları (FIPS 203/204/205 + FIPS 206/HQC durumu), NIST CSF **2.0**. Teknik iddialar mümkün olan yerde ilgili cümlenin yanında resmî kaynağa (RFC, NIST, OWASP, W3C) satır-içi bağlanmıştır. Kavramlar dosyalar arasında düzyazı içinde ve çift yönlü (simetrik) bağlanır: bir kavramı okuduğunda, ilişkili olduğu diğer kavramlara neden/nasıl bağlı olduğunu da orada görürsün.
 
 ### 🧭 Persona / Motto
 
