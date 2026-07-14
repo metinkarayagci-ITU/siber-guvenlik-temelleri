@@ -148,7 +148,6 @@ graph TD
 siber-guvenlik-temelleri/
 ├── README.md                    ← şu an buradasın
 ├── ROADMAP.md                   ← önerilen sıra + THM eşlemesi
-├── CALISMA_LOGU.md              ← derinleştirme/bağlama turunun ilerleme kaydı
 ├── LICENSE (MIT)
 ├── assets/
 │   ├── diagrams/                ← Mermaid yedekleri
